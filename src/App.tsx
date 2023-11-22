@@ -41,16 +41,17 @@ export const darkThemeOptions: ThemeOptions = {
 function App() {
   let [pokemonList, setPokemonList] = useState([])
   
-  async function getData(){
+  async function getPokemonData(){
     const resp = await fetch('https://pokeapi.co/api/v2/pokemon')
     const pokemonListData = await resp.json();
     console.log('API', pokemonListData)
-    setPokemonList(pokemonListData.results)
-    pokemonList = pokemonListData
+    //setPokemonList(pokemonListData.results)
+    //pokemonList = pokemonListData
     console.log('LISTA', pokemonList)
   }
+
   useEffect(() => {
-    getData()
+    getPokemonData()
   },[])
 
   return (

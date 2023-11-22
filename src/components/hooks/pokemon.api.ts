@@ -4,7 +4,7 @@ export function usePokemonApi(){
 
     let [pokemonList, setPokemonList] = useState({})
           
-          async function getData(){
+          async function getPokemonList(){
               const resp = await fetch('https://pokeapi.co/api/v2/pokemon')
               const pokemonListData = await resp.json();
               console.log('API', pokemonListData)
@@ -16,7 +16,7 @@ export function usePokemonApi(){
 
             return {
                 actions:{
-                    getData
+                    getPokemonList
                 },
                 states: {pokemonList}
             }

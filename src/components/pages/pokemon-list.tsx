@@ -1,5 +1,5 @@
 import { PokemonCard } from "./pokemon-card";
-import { Pokemon } from "../../model/pokemon";
+import { Ability, Pokemon } from "../../model/pokemon";
 
 interface PokemonListProps {
   list: Pokemon[];
@@ -16,8 +16,6 @@ export function PokemonList(props: PokemonListProps) {
             <div >
               <PokemonCard 
                 name={capitaliseFirstLetter(pokemon.name)} 
-                art="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
-             
               />
             </div>
           ))}
