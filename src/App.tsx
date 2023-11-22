@@ -44,9 +44,9 @@ function App() {
   async function getData(){
     const resp = await fetch('https://pokeapi.co/api/v2/pokemon')
     const pokemonListData = await resp.json();
-    console.log('API', pokemonListData)
-    setPokemonList(pokemonListData)
-    pokemonList = pokemonListData
+    console.log('API', pokemonListData.results)
+    setPokemonList(pokemonListData.results)
+    pokemonList = pokemonListData.results
     console.log('LISTA', pokemonList)
   }
   useEffect(() => {

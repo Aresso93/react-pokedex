@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { usePokemonApi } from "../hooks/pokemon.api";
 import { PokemonCard } from "./pokemon-card";
 import { Pokemon } from "../../model/pokemon";
 
@@ -14,7 +12,7 @@ export function PokemonList(props: PokemonListProps){
         <div>
         LISTAAAAAAAAAAAAAAA
         <div>
-            {props.list.results.map((pokemon)=> (
+            {props.list.map((pokemon: Pokemon)=> (
                 <PokemonCard 
                 name={pokemon.name} 
                
