@@ -16,6 +16,7 @@ export function PokemonList(props: PokemonListProps) {
             <div >
               <PokemonCard 
                 name={capitaliseFirstLetter(pokemon.name)} 
+                
               />
             </div>
           ))}

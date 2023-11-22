@@ -4,6 +4,7 @@ import PokedexHeader from './components/single-components/header'
 import { ThemeProvider } from '@emotion/react';
 import { PokemonList } from './components/pages/pokemon-list';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 // export const lightThemeOptions: ThemeOptions = {
 //   palette: {
@@ -35,6 +36,11 @@ export const darkThemeOptions: ThemeOptions = {
   },
 };
 
+const instance = axios.create({
+  baseURL: 'https://pokeapi.co/api/v2/pokemon/',
+  timeout: 1000,
+  headers: {'X-Custom-Header': 'foobar'}
+});
 
 // let lightTheme = createTheme(lightThemeOptions)
 
@@ -42,13 +48,14 @@ function App() {
   let [pokemonList, setPokemonList] = useState([])
   
   async function getPokemonData(){
-    const resp = await fetch('https://pokeapi.co/api/v2/pokemon')
-    const pokemonListData = await resp.json();
-    console.log('API', pokemonListData)
-    //setPokemonList(pokemonListData.results)
-    //pokemonList = pokemonListData
-    console.log('LISTA', pokemonList)
+    axios.get('https://pokeapi.co/api/v2/pokemon/')
+    .then(response => {
+      console.log('AAAAAAA', response.data)
+      setPokemonList(response.data.results)
+    })
+   
   }
+
 
   useEffect(() => {
     getPokemonData()
