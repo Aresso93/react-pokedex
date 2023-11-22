@@ -12,5 +12,15 @@ export function usePokemonApi(){
               pokemonList = pokemonListData
               console.log('LISTA', pokemonList)
             }
+
+
+            return {
+                actions:{
+                    getData
+                },
+                states: {pokemonList}
+            }
+
+
 }
 

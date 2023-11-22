@@ -9,7 +9,6 @@ export function PokemonCard(props: CardProps){
     return (
         <>
         <div>{props.name}</div>
-        <div>{props.moves}</div>
  
         </>
     )
