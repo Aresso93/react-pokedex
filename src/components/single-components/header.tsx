@@ -70,7 +70,7 @@ export default function PokedexHeader() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            Viva i pokémon, tosti e prorompenti ecc.
           </Typography>
           <Search>
             <SearchIconWrapper>
