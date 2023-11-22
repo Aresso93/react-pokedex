@@ -5,20 +5,20 @@ import { ThemeProvider } from '@emotion/react';
 import { PokemonList } from './components/pages/pokemon-list';
 import { useEffect, useState } from 'react';
 
-export const lightThemeOptions: ThemeOptions = {
-  palette: {
-    mode: 'light',
-    primary: {
-      main: '#202976',
-    },
-    secondary: {
-      main: '#766d20',
-    },
-    background: {
-      default: '#ececec',
-    },
-  },
-};
+// export const lightThemeOptions: ThemeOptions = {
+//   palette: {
+//     mode: 'light',
+//     primary: {
+//       main: '#202976',
+//     },
+//     secondary: {
+//       main: '#766d20',
+//     },
+//     background: {
+//       default: '#ececec',
+//     },
+//   },
+// };
 
 export const darkThemeOptions: ThemeOptions = {
   palette: {
@@ -36,7 +36,7 @@ export const darkThemeOptions: ThemeOptions = {
 };
 
 
-let lightTheme = createTheme(lightThemeOptions)
+// let lightTheme = createTheme(lightThemeOptions)
 
 function App() {
   let [pokemonList, setPokemonList] = useState([])
@@ -55,12 +55,12 @@ function App() {
 
   return (
     <>
-    <ThemeProvider theme={lightTheme}>
+    {/* <ThemeProvider theme={lightTheme}> */}
     <PokedexHeader/>
     <PokemonList
     list={pokemonList}
     />
-    </ThemeProvider>
+    {/* </ThemeProvider> */}
     </>
   )
 }
