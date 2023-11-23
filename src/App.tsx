@@ -48,17 +48,17 @@ function App() {
 
   function getPokemonData(){
 
-    let detailPokemonArray = []
+    let detailPokemonArray: Pokemon[] = []
 
     axiosService.get('pokemon/')
     .then(response => {response.data.results.map((singlePokemon: Pokemon) => (
       axiosService({url: singlePokemon.url}).then(resp => {
         detailPokemonArray.push(resp.data)
         setPokemonList(response.data.results);
-        console.log('DETTAGLIONI', resp.data)
+        console.log('DETTAGLI QUELLO CHE MI SERVE', detailPokemonArray)
         setPokemonDetail(detailPokemonArray)
-        console.log('DETTAGLIIIIIII', pokemonDetail)
-        console.log('DETTAGLI', detailPokemonArray)
+        pokemonDetail = detailPokemonArray
+        console.log('HADOKEN', pokemonDetail)
       })
       ))
   })}
