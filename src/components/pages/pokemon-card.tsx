@@ -60,7 +60,7 @@ export function PokemonCard(props: CardProps) {
 
   return (
     <Card sx={{ maxWidth: 500 }}>
-      <CardHeader title={props.name} />
+      <CardHeader title={capitaliseFirstLetter(props.name)} />
       <CardMedia
         component="img"
         height="600"
@@ -71,7 +71,7 @@ export function PokemonCard(props: CardProps) {
           Abilities:
           {props.abilities.map((ability: Ability) => (
             <div key={ability.ability.name}> 
-              <span>{capitaliseFirstLetter(ability.ability.name)}</span>
+              <span>{capitaliseFirstLetter(ability.ability.name)}{ability.is_hidden === true ? ' (hidden ability)' : ''}</span>
             </div>
           ))}
       <CardContent>
