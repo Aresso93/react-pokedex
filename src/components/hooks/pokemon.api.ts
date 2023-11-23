@@ -1,24 +1,34 @@
 import { useState } from "react";
+import { Pokemon } from "../../model/pokemon";
+import { useAxios } from "../../services/axios-api";
 
 export function usePokemonApi(){
+    const axiosService = useAxios();
+    let [pokemonDetail, setPokemonDetail] = useState([]);
 
-    let [pokemonList, setPokemonList] = useState({})
-          
-          async function getPokemonList(){
-              const resp = await fetch('https://pokeapi.co/api/v2/pokemon')
-              const pokemonListData = await resp.json();
-              console.log('API', pokemonListData)
-              setPokemonList(pokemonListData)
-              pokemonList = pokemonListData
-              console.log('LISTA', pokemonList)
-            }
-
-
+    function listPokemonByID(a: Pokemon, b: Pokemon){
+        return a.id - b.id
+      }
+    
+      async function getPokemonData() {
+        const firstResponse = await axiosService("pokemon/");
+        let firstArray = firstResponse.data.results;
+        let detailPokemonArray: Pokemon[] = [];
+        firstArray.map(
+          async (singlePokemon: Pokemon) => await axiosService(singlePokemon.url)
+          .then((secondResponse) => {
+            detailPokemonArray.push(secondResponse.data)
+            const orderedArray = detailPokemonArray.sort(listPokemonByID)
+            setPokemonDetail(orderedArray);
+            return orderedArray
+          })
+          )
+      }
             return {
                 actions:{
-                    getPokemonList
+                    getPokemonData
                 },
-                states: {pokemonList}
+                states: {pokemonDetail}
             }
 
 

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Pokemon } from "./model/pokemon";
 import { useAxios } from "./services/axios-api";
+import { usePokemonApi } from "./components/hooks/pokemon.api";
 
 // export const lightThemeOptions: ThemeOptions = {
 //   palette: {
@@ -41,41 +42,22 @@ export const darkThemeOptions: ThemeOptions = {
 //fare file apposta per axios
 
 function App() {
-  let [pokemonList, setPokemonList] = useState([]);
-  let [pokemonDetail, setPokemonDetail] = useState([]);
-
-  const axiosService = useAxios();
-
-  function listPokemonByID(a: Pokemon, b: Pokemon){
-    return a.id - b.id
-  }
-
-  async function getPokemonData() {
-    const firstResponse = await axiosService("pokemon/");
-    let firstArray = firstResponse.data.results;
-    let detailPokemonArray: Pokemon[] = [];
-    firstArray.map(
-      async (singlePokemon: Pokemon) => await axiosService(singlePokemon.url)
-      .then((secondResponse) => {
-        detailPokemonArray.push(secondResponse.data)
-        const orderedArray = detailPokemonArray.sort(listPokemonByID)
-        setPokemonDetail(orderedArray);
-        return orderedArray
-      })
-      )
-  }
+ 
+ 
+  const pokemonApi = usePokemonApi()
+  
 
   useEffect(() => {
-    getPokemonData();
+    pokemonApi.actions.getPokemonData();
   }, []);
 
-  console.log("Dettagli!?", pokemonDetail)
+
 
   return (
     <>
       {/* <ThemeProvider theme={lightTheme}> */}
       <PokedexHeader />
-      <PokemonList detail={pokemonDetail} />
+      <PokemonList detail={pokemonApi.states.pokemonDetail} />
       {/* </ThemeProvider> */}
     </>
   );

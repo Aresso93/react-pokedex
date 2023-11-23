@@ -59,7 +59,9 @@ export function PokemonCard(props: CardProps) {
         <Typography variant="body2" color="text.secondary">
           Abilities:
           {props.abilities.map((ability: Ability) => (
-            <span>{ability.ability.name} </span>
+            <span key={ability.ability.name}>
+              <span>{ability.ability.name} </span>
+            </span>
           ))}
         </Typography>
       </CardContent>
