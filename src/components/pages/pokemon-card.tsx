@@ -45,18 +45,7 @@ export function PokemonCard(props: CardProps) {
   return (
     <Card sx={{ maxWidth: 500 }}>
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
         title={props.name}
-        subheader="September 14, 2016"
       />
       <CardMedia
         component="img"

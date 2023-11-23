@@ -5,6 +5,7 @@ import { ThemeProvider } from '@emotion/react';
 import { PokemonList } from './components/pages/pokemon-list';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Pokemon } from './model/pokemon';
 
 // export const lightThemeOptions: ThemeOptions = {
 //   palette: {
@@ -53,12 +54,11 @@ function App() {
       url: 'pokemon/',
       baseURL: 'https://pokeapi.co/api/v2/'
     })
-    .then(response => {console.log('AAAAAAA', response.data)
-    setPokemonList(response.data.results)
-    pokemonList = response.data.results
-    console.log('Listona', pokemonList);}
-    )
-  }
+    .then(response => {response.data.results.map((singlePokemon: Pokemon) => (
+      axios({url: singlePokemon.url}).then(resp => console.log(resp.data))
+    ))
+    setPokemonList(response.data.results);
+  })}
 
   useEffect(() => {
     getPokemonData()
