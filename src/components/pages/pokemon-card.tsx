@@ -6,14 +6,15 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
+
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
+
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+
+import { Ability, Mfe, Move } from "../../model/pokemon";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -33,6 +34,8 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 interface CardProps {
   name: string;
   art: string;
+  abilities: Ability[];
+  moves: Mfe[]
 }
 
 export function PokemonCard(props: CardProps) {
@@ -44,9 +47,7 @@ export function PokemonCard(props: CardProps) {
 
   return (
     <Card sx={{ maxWidth: 500 }}>
-      <CardHeader
-        title={props.name}
-      />
+      <CardHeader title={props.name} />
       <CardMedia
         component="img"
         height="600"
@@ -56,7 +57,10 @@ export function PokemonCard(props: CardProps) {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ullam magni nam, ex hic aliquam. Nihil dolore, tenetur maxime minima molestiae provident, atque nulla alias architecto odio perferendis voluptatibus modi.
+          Abilities:
+          {props.abilities.map((ability: Ability) => (
+            <span>{ability.ability.name} </span>
+          ))}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -77,16 +81,11 @@ export function PokemonCard(props: CardProps) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
+          <Typography paragraph>Moves:</Typography>
           <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-            set aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum est nam voluptatum, corrupti accusamus aspernatur sit tempore culpa vel dignissimos assumenda, nemo at rerum aperiam ratione totam illo ea necessitatibus.
-          </Typography>
-          <Typography paragraph>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam quibusdam fugit repudiandae aperiam mollitia eius iure quia. Ab ipsam delectus aut, accusamus autem a alias commodi modi aperiam, quas minus?
+          {props.moves.map((move: Mfe) => (
+            <span key={move.move.name}>{move.move.name} </span>
+          ))}
           </Typography>
           <Typography>
             Set aside off of the heat to let rest for 10 minutes, and then

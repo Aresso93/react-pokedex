@@ -46,41 +46,36 @@ function App() {
 
   const axiosService = useAxios();
 
+  function listPokemonByID(a: Pokemon, b: Pokemon){
+    return a.id - b.id
+  }
+
   async function getPokemonData() {
     const firstResponse = await axiosService("pokemon/");
-    let arrayScrauso = firstResponse.data.results;
-    console.log(arrayScrauso);
-
+    let firstArray = firstResponse.data.results;
     let detailPokemonArray: Pokemon[] = [];
-
-    arrayScrauso.map(
-      async (singlePokemon: Pokemon) =>
-        await axiosService(singlePokemon.url).then(
-          (secondResponse) => {
-            console.log(secondResponse.data);
-            detailPokemonArray.push(secondResponse.data);
-            setPokemonList(firstResponse.data.results);
-            console.log("DETTAGLI QUELLO CHE MI SERVE", detailPokemonArray);
-            setPokemonDetail(detailPokemonArray);
-            pokemonDetail = detailPokemonArray;
-            pokemonList = firstResponse.data.results
-            console.log("HADOKEN", pokemonDetail);
-            console.log('AAAAAAAAAAAA', pokemonDetail, 'NNNNNNNNNNNNN', pokemonList)
-          }
-        )
-    );
+    firstArray.map(
+      async (singlePokemon: Pokemon) => await axiosService(singlePokemon.url)
+      .then((secondResponse) => {
+        detailPokemonArray.push(secondResponse.data)
+        const orderedArray = detailPokemonArray.sort(listPokemonByID)
+        setPokemonDetail(orderedArray);
+        return orderedArray
+      })
+      )
   }
 
   useEffect(() => {
     getPokemonData();
   }, []);
 
+  console.log("Dettagli!?", pokemonDetail)
 
   return (
     <>
       {/* <ThemeProvider theme={lightTheme}> */}
       <PokedexHeader />
-      <PokemonList list={pokemonDetail} />
+      <PokemonList detail={pokemonDetail} />
       {/* </ThemeProvider> */}
     </>
   );
