@@ -6,18 +6,31 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
-
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
-import { Ability, Mfe, Move } from "../../model/pokemon";
+import { Ability, Mfe } from "../../model/pokemon";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
+}
+
+function capitaliseFirstLetter(string: string) {
+  if (string.includes("-")) {
+    let splitArray = string.split("-");
+    let newArray = [];
+    for (let i = 0; i < splitArray.length; i++) {
+      const arrayString = splitArray[i];
+      const newString =
+        arrayString.charAt(0).toUpperCase() + arrayString.slice(1);
+      newArray.push(newString);
+    }
+    return newArray.join(" ");
+  } else {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 }
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
@@ -35,7 +48,7 @@ interface CardProps {
   name: string;
   art: string;
   abilities: Ability[];
-  moves: Mfe[]
+  moves: Mfe[];
 }
 
 export function PokemonCard(props: CardProps) {
@@ -55,14 +68,14 @@ export function PokemonCard(props: CardProps) {
         image={props.art}
         alt="pokemon"
       />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
           Abilities:
           {props.abilities.map((ability: Ability) => (
-            <span key={ability.ability.name}>
-              <span>{ability.ability.name} </span>
-            </span>
+            <div key={ability.ability.name}> 
+              <span>{capitaliseFirstLetter(ability.ability.name)}</span>
+            </div>
           ))}
+      <CardContent>
+        <Typography variant="body2" color="text.secondary">
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -85,9 +98,9 @@ export function PokemonCard(props: CardProps) {
         <CardContent>
           <Typography paragraph>Moves:</Typography>
           <Typography paragraph>
-          {props.moves.map((move: Mfe) => (
-            <span key={move.move.name}>{move.move.name} </span>
-          ))}
+            {props.moves.map((move: Mfe) => (
+              <span key={move.move.name}>{move.move.name} </span>
+            ))}
           </Typography>
           <Typography>
             Set aside off of the heat to let rest for 10 minutes, and then

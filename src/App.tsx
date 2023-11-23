@@ -43,15 +43,12 @@ export const darkThemeOptions: ThemeOptions = {
 
 function App() {
  
- 
   const pokemonApi = usePokemonApi()
-  
-
   useEffect(() => {
     pokemonApi.actions.getPokemonData();
   }, []);
 
-
+console.log('IIIIIIIIIIII', pokemonApi.states.pokemonDetail)
 
   return (
     <>
