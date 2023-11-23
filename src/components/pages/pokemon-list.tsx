@@ -9,9 +9,8 @@ interface PokemonListProps {
 export function PokemonList(props: PokemonListProps) {
   return (
     <>
-      <div className="card-container">
+    
         {props.detail.map((pokemon: Pokemon) => (
-          <div key={pokemon.id}>
             <PokemonCard
               name={pokemon.name}
               art={pokemon.sprites.other["official-artwork"].front_default}
@@ -19,9 +18,8 @@ export function PokemonList(props: PokemonListProps) {
               moves={pokemon.moves}
               types={pokemon.types}
             />
-          </div>
         ))}
-      </div>
+     
     </>
   );
 }

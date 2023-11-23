@@ -5,6 +5,7 @@ import { useAxios } from "../../services/axios-api";
 export function usePokemonApi() {
   const axiosService = useAxios();
   let [pokemonDetail, setPokemonDetail] = useState([]);
+  let [genericData, setGenericData] = useState(0)
 
   function listPokemonByID(a: Pokemon, b: Pokemon) {
     return a.id - b.id;
@@ -24,10 +25,26 @@ export function usePokemonApi() {
         })
     );
   }
+
+  async function getMoveData(){
+    const movesResp = await axiosService("move/");
+    console.log('UUUUUU', movesResp.data)
+  }
+
+  async function getData(){
+    const response = await axiosService("pokemon/");
+    setGenericData(response.data.count)
+  }
+
   return {
     actions: {
       getPokemonData,
+      getMoveData,
+      getData
     },
-    states: { pokemonDetail },
+    states: {
+        pokemonDetail, 
+        genericData
+    },
   };
 }

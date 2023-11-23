@@ -1,11 +1,16 @@
 #root {
-  max-width: 1280px;
-  min-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  max-width: 1920px;
+  min-width: 1920px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
+html, body{
+  box-sizing: border-box;
 
+}
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
@@ -28,4 +33,10 @@
   flex-direction: column;
   align-items: center;
   padding: 0px;
+}
+
+.AAA{
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
 }

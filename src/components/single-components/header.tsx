@@ -7,6 +7,10 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import { usePokemonApi } from '../hooks/pokemon.api';
+import { useEffect } from 'react';
+
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -50,7 +54,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PokedexHeader() {
+interface PokedexHeaderProps{
+  count: number
+}
+
+export default function PokedexHeader(props: PokedexHeaderProps) {
+  const pokemonApi = usePokemonApi()
+  useEffect(() => {
+    pokemonApi.actions.getData()
+  }, [])
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -70,7 +83,7 @@ export default function PokedexHeader() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Viva i pokémon, tosti e prorompenti ecc.
+            Gotta catch 'em all! Browse {props.count} pokémon (and counting)!
           </Typography>
           <Search>
             <SearchIconWrapper>

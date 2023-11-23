@@ -47,13 +47,18 @@ function App() {
   useEffect(() => {
     pokemonApi.actions.getPokemonData();
   }, []);
+  useEffect(() => {
+    pokemonApi.actions.getData();
+  }, []);
 
 console.log('IIIIIIIIIIII', pokemonApi.states.pokemonDetail)
 
   return (
     <>
       {/* <ThemeProvider theme={lightTheme}> */}
-      <PokedexHeader />
+      <PokedexHeader 
+      count={pokemonApi.states.genericData}
+      />
       <PokemonList detail={pokemonApi.states.pokemonDetail} />
       {/* </ThemeProvider> */}
     </>

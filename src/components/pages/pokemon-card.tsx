@@ -49,7 +49,7 @@ interface CardProps {
   art: string;
   abilities: Ability[];
   moves: Mfe[];
-  types: Type[]
+  types: Type[];
 }
 
 export function PokemonCard(props: CardProps) {
@@ -60,9 +60,10 @@ export function PokemonCard(props: CardProps) {
   };
 
   return (
-    <Card sx={{ maxWidth: 500 }}>
+    <Card sx={{ maxWidth: 600}} className="AAA">
       <CardHeader title={capitaliseFirstLetter(props.name)} />
-      Type(s): {props.types.map((type: Type) => (
+      <h3>Type(s):</h3>
+      {props.types.map((type: Type) => (
         <div key={type.type.name}>
           <span>{capitaliseFirstLetter(type.type.name)}</span>
         </div>
@@ -74,15 +75,17 @@ export function PokemonCard(props: CardProps) {
         image={props.art}
         alt="pokemon"
       />
-          Abilities:
-          {props.abilities.map((ability: Ability) => (
-            <div key={ability.ability.name}> 
-              <span>{capitaliseFirstLetter(ability.ability.name)}{ability.is_hidden === true ? ' (hidden ability)' : ''}</span>
-            </div>
-          ))}
+      <h3>Abilities:</h3>
+      {props.abilities.map((ability: Ability) => (
+        <div key={ability.ability.name}>
+          <span>
+            {capitaliseFirstLetter(ability.ability.name)}
+            {ability.is_hidden === true ? " (hidden ability)" : ""}
+          </span>
+        </div>
+      ))}
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-        </Typography>
+        <Typography variant="body2" color="text.secondary"></Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
@@ -102,14 +105,17 @@ export function PokemonCard(props: CardProps) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Moves:</Typography>
-            {props.moves.map((move: Mfe) => (
-          <div>
+          <Typography paragraph>
+            <h3>Moves:</h3>
+          </Typography>
+          {props.moves.map((move: Mfe) => (
+            <div>
               <span key={move.move.name}>
-                {capitaliseFirstLetter(move.move.name)}{}  
+                {capitaliseFirstLetter(move.move.name)}
+                {}
               </span>
-          </div>
-            ))}
+            </div>
+          ))}
           <Typography>
             Set aside off of the heat to let rest for 10 minutes, and then
             serve.
