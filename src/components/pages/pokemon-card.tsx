@@ -50,6 +50,7 @@ interface CardProps {
   abilities: Ability[];
   moves: Mfe[];
   types: Type[];
+  pokedexNumber: number
 }
 
 export function PokemonCard(props: CardProps) {
@@ -62,6 +63,7 @@ export function PokemonCard(props: CardProps) {
   return (
     <Card sx={{ maxWidth: 600}} className="AAA">
       <CardHeader title={capitaliseFirstLetter(props.name)} />
+      <h3>Pokedex number: {props.pokedexNumber}</h3>
       <h3>Type(s):</h3>
       {props.types.map((type: Type) => (
         <div key={type.type.name}>
@@ -105,9 +107,9 @@ export function PokemonCard(props: CardProps) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>
+          
             <h3>Moves:</h3>
-          </Typography>
+         
           {props.moves.map((move: Mfe) => (
             <div>
               <span key={move.move.name}>

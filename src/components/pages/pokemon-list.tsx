@@ -13,6 +13,7 @@ export function PokemonList(props: PokemonListProps) {
         {props.detail.map((pokemon: Pokemon) => (
             <PokemonCard
               name={pokemon.name}
+              pokedexNumber={pokemon.id}
               art={pokemon.sprites.other["official-artwork"].front_default}
               abilities={pokemon.abilities}
               moves={pokemon.moves}

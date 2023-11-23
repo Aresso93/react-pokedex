@@ -5,14 +5,15 @@ import { useAxios } from "../../services/axios-api";
 export function usePokemonApi() {
   const axiosService = useAxios();
   let [pokemonDetail, setPokemonDetail] = useState([]);
-  let [genericData, setGenericData] = useState(0)
+  let [genericData, setGenericData] = useState(0);
+  let [moveData, setMoveData] = useState([])
 
   function listPokemonByID(a: Pokemon, b: Pokemon) {
     return a.id - b.id;
   }
 
   async function getPokemonData() {
-    const firstResponse = await axiosService("pokemon/");
+    const firstResponse = await axiosService("pokemon/?limit=10");
     let firstArray = firstResponse.data.results;
     let detailPokemonArray: Pokemon[] = [];
     firstArray.map(
@@ -28,7 +29,7 @@ export function usePokemonApi() {
 
   async function getMoveData(){
     const movesResp = await axiosService("move/");
-    console.log('UUUUUU', movesResp.data)
+    setMoveData(movesResp.data)
   }
 
   async function getData(){
@@ -44,7 +45,8 @@ export function usePokemonApi() {
     },
     states: {
         pokemonDetail, 
-        genericData
+        genericData,
+        moveData
     },
   };
 }
