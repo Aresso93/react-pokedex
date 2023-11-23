@@ -37,7 +37,8 @@ export const darkThemeOptions: ThemeOptions = {
 };
 
 const instance = axios.create({
-  baseURL: 'https://pokeapi.co/api/v2/pokemon/',
+  baseURL: 'https://pokeapi.co/api/v2/',
+  url: 'pokemon/',
   timeout: 1000,
   headers: {'X-Custom-Header': 'foobar'}
 });
