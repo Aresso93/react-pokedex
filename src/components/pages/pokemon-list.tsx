@@ -17,6 +17,7 @@ export function PokemonList(props: PokemonListProps) {
               art={pokemon.sprites.other["official-artwork"].front_default}
               abilities={pokemon.abilities}
               moves={pokemon.moves}
+              types={pokemon.types}
             />
           </div>
         ))}

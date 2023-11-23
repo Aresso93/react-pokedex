@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Ability, Mfe } from "../../model/pokemon";
+import { Ability, Mfe, Type } from "../../model/pokemon";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -49,6 +49,7 @@ interface CardProps {
   art: string;
   abilities: Ability[];
   moves: Mfe[];
+  types: Type[]
 }
 
 export function PokemonCard(props: CardProps) {
@@ -61,6 +62,11 @@ export function PokemonCard(props: CardProps) {
   return (
     <Card sx={{ maxWidth: 500 }}>
       <CardHeader title={capitaliseFirstLetter(props.name)} />
+      Type(s): {props.types.map((type: Type) => (
+        <div key={type.type.name}>
+          <span>{capitaliseFirstLetter(type.type.name)}</span>
+        </div>
+      ))}
       <CardMedia
         component="img"
         height="600"
@@ -100,7 +106,7 @@ export function PokemonCard(props: CardProps) {
             {props.moves.map((move: Mfe) => (
           <div>
               <span key={move.move.name}>
-                {capitaliseFirstLetter(move.move.name) }  
+                {capitaliseFirstLetter(move.move.name)}{}  
               </span>
           </div>
             ))}
