@@ -13,9 +13,11 @@ export function PokemonList(props: PokemonListProps) {
     <>
         <div className="card-container">
           {props.list.map((pokemon: Pokemon) => (
-            <div >
+            <div key={pokemon.name}>
               <PokemonCard 
+                
                 name={capitaliseFirstLetter(pokemon.name)} 
+                art={`https://img.pokemondb.net/artwork/large/${pokemon.name}.jpg`}
                 
               />
             </div>

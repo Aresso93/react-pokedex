@@ -47,15 +47,17 @@ const instance = axios.create({
 function App() {
   let [pokemonList, setPokemonList] = useState([])
   
-  async function getPokemonData(){
-    axios.get('https://pokeapi.co/api/v2/pokemon/')
-    .then(response => {
-      console.log('AAAAAAA', response.data)
-      setPokemonList(response.data.results)
+  function getPokemonData(){
+    axios({
+      url: 'pokemon/',
+      baseURL: 'https://pokeapi.co/api/v2/'
     })
-   
+    .then(response => {console.log('AAAAAAA', response.data)
+    setPokemonList(response.data.results)
+    pokemonList = response.data.results
+    console.log('Listona', pokemonList);}
+    )
   }
-
 
   useEffect(() => {
     getPokemonData()
