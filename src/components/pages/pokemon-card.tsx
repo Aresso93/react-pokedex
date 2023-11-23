@@ -97,11 +97,13 @@ export function PokemonCard(props: CardProps) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Moves:</Typography>
-          <Typography paragraph>
             {props.moves.map((move: Mfe) => (
-              <span key={move.move.name}>{move.move.name} </span>
+          <div>
+              <span key={move.move.name}>
+                {capitaliseFirstLetter(move.move.name) }  
+              </span>
+          </div>
             ))}
-          </Typography>
           <Typography>
             Set aside off of the heat to let rest for 10 minutes, and then
             serve.
