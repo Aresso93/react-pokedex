@@ -6,6 +6,7 @@ import { PokemonList } from './components/pages/pokemon-list';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Pokemon } from './model/pokemon';
+import { useAxios } from './services/axios-api';
 
 // export const lightThemeOptions: ThemeOptions = {
 //   palette: {
@@ -36,28 +37,30 @@ export const darkThemeOptions: ThemeOptions = {
     },
   },
 };
-
-const instance = axios.create({
-  baseURL: 'https://pokeapi.co/api/v2/',
-  url: 'pokemon/',
-  timeout: 1000,
-  headers: {'X-Custom-Header': 'foobar'}
-});
-
 // let lightTheme = createTheme(lightThemeOptions)
+//fare file apposta per axios
 
 function App() {
   let [pokemonList, setPokemonList] = useState([])
-  
+  let [pokemonDetail, setPokemonDetail] = useState([])
+
+  const axiosService = useAxios()
+
   function getPokemonData(){
-    axios({
-      url: 'pokemon/',
-      baseURL: 'https://pokeapi.co/api/v2/'
-    })
+
+    let detailPokemonArray = []
+
+    axiosService.get('pokemon/')
     .then(response => {response.data.results.map((singlePokemon: Pokemon) => (
-      axios({url: singlePokemon.url}).then(resp => console.log(resp.data))
-    ))
-    setPokemonList(response.data.results);
+      axiosService({url: singlePokemon.url}).then(resp => {
+        detailPokemonArray.push(singlePokemon)
+        setPokemonList(response.data.results);
+        console.log('DETTAGLIONI', resp.data)
+        setPokemonDetail(detailPokemonArray)
+        console.log('DETTAGLIIIIIII', pokemonDetail)
+        console.log('DETTAGLI', detailPokemonArray)
+      })
+      ))
   })}
 
   useEffect(() => {
