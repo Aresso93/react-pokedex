@@ -1,12 +1,12 @@
-import { Button, ThemeOptions, createTheme } from '@mui/material';
-import './App.css'
-import PokedexHeader from './components/single-components/header'
-import { ThemeProvider } from '@emotion/react';
-import { PokemonList } from './components/pages/pokemon-list';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Pokemon } from './model/pokemon';
-import { useAxios } from './services/axios-api';
+import { Button, ThemeOptions, createTheme } from "@mui/material";
+import "./App.css";
+import PokedexHeader from "./components/single-components/header";
+import { ThemeProvider } from "@emotion/react";
+import { PokemonList } from "./components/pages/pokemon-list";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Pokemon } from "./model/pokemon";
+import { useAxios } from "./services/axios-api";
 
 // export const lightThemeOptions: ThemeOptions = {
 //   palette: {
@@ -25,15 +25,15 @@ import { useAxios } from './services/axios-api';
 
 export const darkThemeOptions: ThemeOptions = {
   palette: {
-    mode: 'dark',
+    mode: "dark",
     primary: {
-      main: '#a54208',
+      main: "#a54208",
     },
     secondary: {
-      main: '#086ca5',
+      main: "#086ca5",
     },
     error: {
-      main: '#c71d0f',
+      main: "#c71d0f",
     },
   },
 };
@@ -41,42 +41,49 @@ export const darkThemeOptions: ThemeOptions = {
 //fare file apposta per axios
 
 function App() {
-  let [pokemonList, setPokemonList] = useState([])
-  let [pokemonDetail, setPokemonDetail] = useState([])
+  let [pokemonList, setPokemonList] = useState([]);
+  let [pokemonDetail, setPokemonDetail] = useState([]);
 
-  const axiosService = useAxios()
+  const axiosService = useAxios();
 
-  function getPokemonData(){
+  async function getPokemonData() {
+    const firstResponse = await axiosService("pokemon/");
+    let arrayScrauso = firstResponse.data.results;
+    console.log(arrayScrauso);
 
-    let detailPokemonArray: Pokemon[] = []
+    let detailPokemonArray: Pokemon[] = [];
 
-    axiosService.get('pokemon/')
-    .then(response => {response.data.results.map((singlePokemon: Pokemon) => (
-      axiosService({url: singlePokemon.url}).then(resp => {
-        detailPokemonArray.push(resp.data)
-        setPokemonList(response.data.results);
-        console.log('DETTAGLI QUELLO CHE MI SERVE', detailPokemonArray)
-        setPokemonDetail(detailPokemonArray)
-        pokemonDetail = detailPokemonArray
-        console.log('HADOKEN', pokemonDetail)
-      })
-      ))
-  })}
+    arrayScrauso.map(
+      async (singlePokemon: Pokemon) =>
+        await axiosService(singlePokemon.url).then(
+          (secondResponse) => {
+            console.log(secondResponse.data);
+            detailPokemonArray.push(secondResponse.data);
+            setPokemonList(firstResponse.data.results);
+            console.log("DETTAGLI QUELLO CHE MI SERVE", detailPokemonArray);
+            setPokemonDetail(detailPokemonArray);
+            pokemonDetail = detailPokemonArray;
+            pokemonList = firstResponse.data.results
+            console.log("HADOKEN", pokemonDetail);
+            console.log('AAAAAAAAAAAA', pokemonDetail, 'NNNNNNNNNNNNN', pokemonList)
+          }
+        )
+    );
+  }
 
   useEffect(() => {
-    getPokemonData()
-  },[])
+    getPokemonData();
+  }, []);
+
 
   return (
     <>
-    {/* <ThemeProvider theme={lightTheme}> */}
-    <PokedexHeader/>
-    <PokemonList
-    list={pokemonList}
-    />
-    {/* </ThemeProvider> */}
+      {/* <ThemeProvider theme={lightTheme}> */}
+      <PokedexHeader />
+      <PokemonList list={pokemonDetail} />
+      {/* </ThemeProvider> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
