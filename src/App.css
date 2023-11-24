@@ -45,9 +45,14 @@ html, body{
   padding: 8px;
 }
 
-.steve-the-div{
+.outer-div{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+}
 
+.card-button{
+  display: flex;
+  justify-content: center;
 }

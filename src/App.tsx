@@ -83,7 +83,7 @@ console.log('INPUTTONE', pokemonSearch.states.input);
         search={pokemonSearch.actions.onChange}
         count={pokemonApi.states.genericData} 
         renderSearch={pokemonSearch.actions.pokemonFinder(pokemonApi.states.pokemonDetail, pokemonSearch.states.input)}      />
-      <div className="steve-the-div">
+      <div className="outer-div">
       <PokemonList detail={pokemonApi.states.pokemonDetail} />
       </div>
 
