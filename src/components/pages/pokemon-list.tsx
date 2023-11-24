@@ -1,6 +1,7 @@
 import { PokemonCard } from "./pokemon-card";
 import { Ability, Pokemon } from "../../model/pokemon";
 import { ChangeEvent, useState } from "react";
+import React from "react";
 
 interface PokemonListProps {
   detail: Pokemon[];
@@ -12,7 +13,7 @@ export function PokemonList(props: PokemonListProps) {
     <>
    
         {props.detail.map((pokemon: Pokemon) => (
-        
+          <React.Fragment key={pokemon.id}>
 
             <PokemonCard
               name={pokemon.name}
@@ -22,7 +23,7 @@ export function PokemonList(props: PokemonListProps) {
               moves={pokemon.moves}
               types={pokemon.types}
             />
-         
+          </React.Fragment>
             ))}
          
     </>

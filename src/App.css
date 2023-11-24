@@ -41,12 +41,13 @@ html, body{
 }
 
 .mon-card{
-  margin: 12px;
-  padding: px;
+  margin: 8px;
+  padding: 8px;
 }
 
 .steve-the-div{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
 }
