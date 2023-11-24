@@ -1,11 +1,13 @@
-#root {
+/* #root {
   display: flex;
   flex-direction: column;
   max-width: 1280px;
   margin: auto;
   padding: 2rem;
+  align-items:center;
   text-align: center;
-}
+} */
+
 html, body{
   box-sizing: border-box;
 
@@ -24,6 +26,9 @@ html, body{
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 8px;
+  margin: 8px;
+  align-items: center;
 }
 
 .temp-card{
@@ -34,6 +39,21 @@ html, body{
   padding: 0px;
 }
 
+
+.open-card{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: end;
+}
+
+.open-card-text{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
 .mon-card{
   margin: 8px;
+  background-color: aqua;
 }

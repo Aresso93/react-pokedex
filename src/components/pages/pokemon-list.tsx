@@ -1,15 +1,16 @@
 import { PokemonCard } from "./pokemon-card";
 import { Ability, Pokemon } from "../../model/pokemon";
+import { ChangeEvent, useState } from "react";
 
 interface PokemonListProps {
   detail: Pokemon[];
 }
 
-
 export function PokemonList(props: PokemonListProps) {
+
   return (
     <>
-    
+      <div className="card-container">
         {props.detail.map((pokemon: Pokemon) => (
             <PokemonCard
               name={pokemon.name}
@@ -20,7 +21,7 @@ export function PokemonList(props: PokemonListProps) {
               types={pokemon.types}
             />
         ))}
-     
+     </div>
     </>
   );
 }

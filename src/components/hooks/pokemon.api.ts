@@ -7,41 +7,64 @@ export function usePokemonApi() {
   let [pokemonDetail, setPokemonDetail] = useState([]);
   let [genericData, setGenericData] = useState(0);
   let [moveData, setMoveData] = useState([])
+  let [nextPage, setNextPage] = useState()
 
+  let offset = 0
+  
   function listPokemonByID(a: Pokemon, b: Pokemon) {
     return a.id - b.id;
   }
-
+  
   async function getPokemonData() {
     const firstResponse = await axiosService("pokemon/");
     let firstArray = firstResponse.data.results;
     let detailPokemonArray: Pokemon[] = [];
     firstArray.map(
       async (singlePokemon: Pokemon) =>
-        await axiosService(singlePokemon.url).then((secondResponse) => {
-          detailPokemonArray.push(secondResponse.data);
-          const orderedArray = detailPokemonArray.sort(listPokemonByID);
-          setPokemonDetail(orderedArray);
-          return orderedArray;
-        })
-    );
+      await axiosService(singlePokemon.url).then((secondResponse) => {
+        detailPokemonArray.push(secondResponse.data);
+        const orderedArray = detailPokemonArray.sort(listPokemonByID);
+        setPokemonDetail(orderedArray);
+        return orderedArray;
+      })
+      );
+    }
+    
+    async function getMoveData(){
+      const movesResp = await axiosService("move/");
+      setMoveData(movesResp.data)
+    }
+    
+    async function getData(){
+      const response = await axiosService("pokemon/");
+      setGenericData(response.data.count)
+    }
+    
+    async function getOnlyData(){
+      await axiosService("pokemon/?offset="+offset+"&limit=20");
+    }
+
+    async function getNextPage(){
+    offset = offset + 20
+    getOnlyData()
+    
   }
 
-  async function getMoveData(){
-    const movesResp = await axiosService("move/");
-    setMoveData(movesResp.data)
+  async function getPreviousPage(){
+    const response = await axiosService("pokemon/")
+    console.log(response.data.previous);
+    axiosService(response.data.previous)
+    
   }
 
-  async function getData(){
-    const response = await axiosService("pokemon/");
-    setGenericData(response.data.count)
-  }
 
   return {
     actions: {
       getPokemonData,
       getMoveData,
-      getData
+      getData,
+      getNextPage,
+      getPreviousPage
     },
     states: {
         pokemonDetail, 

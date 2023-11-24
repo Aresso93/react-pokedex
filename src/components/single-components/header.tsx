@@ -9,11 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { usePokemonApi } from '../hooks/pokemon.api';
 import { useEffect } from 'react';
-
-
+import { Button } from '@mui/material';
+import { usePokemonSearch } from '../hooks/use-search-pokemon';
 
 const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
+  position: 'sticky',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
@@ -55,11 +55,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 interface PokedexHeaderProps{
-  count: number
+  count: number,
+  search: React.ChangeEventHandler<HTMLInputElement>,
+  renderSearch: any;
 }
 
 export default function PokedexHeader(props: PokedexHeaderProps) {
   const pokemonApi = usePokemonApi()
+  const pokemonSearch = usePokemonSearch()
+
   useEffect(() => {
     pokemonApi.actions.getData()
   }, [])
@@ -83,15 +87,16 @@ export default function PokedexHeader(props: PokedexHeaderProps) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Gotta catch 'em all! Browse {props.count} pokémon (and counting)!
+            Gotta catch 'em all! Browse {props.count} pokémon (and counting)! <Button variant='contained' color='secondary'>Back</Button> Page 1 <Button variant='contained' color='secondary'>Next</Button>
           </Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Search mon…"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={props.search}
             />
           </Search>
         </Toolbar>

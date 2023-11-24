@@ -8,8 +8,6 @@ import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Ability, Mfe, Stat, Type } from "../../model/pokemon";
 
@@ -50,7 +48,7 @@ interface CardProps {
   abilities: Ability[];
   moves: Mfe[];
   types: Type[];
-  stats: Stat[]
+  stats: Stat[];
 }
 
 export function PokemonCard(props: CardProps) {
@@ -61,9 +59,9 @@ export function PokemonCard(props: CardProps) {
   };
 
   return (
-    <Card sx={{ maxWidth: 350}} className="mon-card">
+    <Card sx={{ maxWidth: 350 }} className="mon-card">
       <CardHeader title={capitaliseFirstLetter(props.name)} />
-      <h3>Type{props.types.length > 1 ? 's' : ''}:</h3>
+      <h3>Type{props.types.length > 1 ? "s" : ""}:</h3>
       {props.types.map((type: Type) => (
         <div key={type.type.name}>
           <span>{capitaliseFirstLetter(type.type.name)}</span>
@@ -76,16 +74,6 @@ export function PokemonCard(props: CardProps) {
         image={props.art}
         alt="pokemon"
       />
-
-      <h3>Base stats: </h3>
-      {props.stats.map((stat: Stat) => (
-        <div>
-          <span>
-            {capitaliseFirstLetter(stat.stat.name)}:{' '+ stat.base_stat}
-          </span>
-        </div>
-      ))}
-
       <h3>Abilities:</h3>
       {props.abilities.map((ability: Ability) => (
         <div key={ability.ability.name}>
@@ -98,38 +86,42 @@ export function PokemonCard(props: CardProps) {
       <CardContent>
         <Typography variant="body2" color="text.secondary"></Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
+
+      <div className="open-card-text">Click to open pokémon stats</div>
+      <ExpandMore
+        expand={expanded}
+        onClick={handleExpandClick}
+        aria-expanded={expanded}
+        aria-label="show more"
+      >
+        <ExpandMoreIcon />
+      </ExpandMore>
+
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          
-            <h3>Moves:</h3>
-         
-          {props.moves.map((move: Mfe) => (
+          <h3>Base stats: </h3>
+          {props.stats.map((stat: Stat) => (
             <div>
-              <span key={move.move.name}>
-                {capitaliseFirstLetter(move.move.name)}
-                {}
+              <span>
+                {capitaliseFirstLetter(stat.stat.name)}:{" " + stat.base_stat}
               </span>
             </div>
           ))}
-          
         </CardContent>
       </Collapse>
     </Card>
   );
+}
+
+{
+  /* <h3>Moves:</h3>
+
+{props.moves.map((move: Mfe) => (
+  <div>
+    <span key={move.move.name}>
+      {capitaliseFirstLetter(move.move.name)}
+      {}
+    </span>
+  </div>
+))} */
 }
