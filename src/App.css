@@ -27,8 +27,9 @@ html, body{
   flex-direction: column;
   gap: 8px;
   padding: 8px;
-  margin: 8px;
+  margin: 24px;
   align-items: center;
+
 }
 
 .temp-card{

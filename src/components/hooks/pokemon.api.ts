@@ -7,7 +7,8 @@ export function usePokemonApi() {
   let [pokemonDetail, setPokemonDetail] = useState([]);
   let [genericData, setGenericData] = useState(0);
   let [moveData, setMoveData] = useState([])
-  let [nextPage, setNextPage] = useState()
+  let [nextPage, setNextPage] = useState([])
+  let [previousPage, setPreviousPage] = useState([])
 
   let offset = 0
   
@@ -46,15 +47,14 @@ export function usePokemonApi() {
 
     async function getNextPage(){
     offset = offset + 20
-    getOnlyData()
+    let nextResp = await getOnlyData()
+    console.log(nextResp);
     
-  }
+    }
 
   async function getPreviousPage(){
-    const response = await axiosService("pokemon/")
-    console.log(response.data.previous);
-    axiosService(response.data.previous)
-    
+    offset = offset - 20
+    getOnlyData()
   }
 
 

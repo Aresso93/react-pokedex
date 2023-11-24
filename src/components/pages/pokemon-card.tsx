@@ -101,7 +101,7 @@ export function PokemonCard(props: CardProps) {
         <CardContent>
           <h3>Base stats: </h3>
           {props.stats.map((stat: Stat) => (
-            <div>
+            <div key={stat.stat.name}>
               <span>
                 {capitaliseFirstLetter(stat.stat.name)}:{" " + stat.base_stat}
               </span>
