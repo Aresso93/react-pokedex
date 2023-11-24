@@ -1,12 +1,14 @@
 import { Pokemon } from "../../model/pokemon";
-import React from "react";
+import React, { useEffect } from "react";
 import { PokemonSimpleCard } from "./pokemon-simple-card";
+import { usePokemonApi } from "../hooks/pokemon.api";
 
 interface PokemonListProps {
   detail: Pokemon[];
 }
 
 export function PokemonList(props: PokemonListProps) {
+  const pokemonApi = usePokemonApi()
 
   return (
     <>
@@ -26,13 +28,3 @@ export function PokemonList(props: PokemonListProps) {
     </>
   );
 }
-
-// per prove varie
-{/* <PokemonCard
-  name={pokemon.name}
-  stats={pokemon.stats}
-  art={pokemon.sprites.other["official-artwork"].front_default}
-  abilities={pokemon.abilities}
-  moves={pokemon.moves}
-  types={pokemon.types}
-/>; */}

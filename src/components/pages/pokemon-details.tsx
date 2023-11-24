@@ -1,9 +1,13 @@
+import { Ability, Mfe, Stat, Type } from "../../model/pokemon"
+import { PokemonCard } from "./pokemon-card"
+
 interface PokemonDetailsProps{
-    name: string,
-    abilities: string[],
-    moves: string[],
-    types: string[],
-    stats: []
+    name: string;
+    art: string;
+    abilities: Ability[];
+    moves: Mfe[];
+    types: Type[];
+    stats: Stat[];
 }
 
 export function PokemonDetails(props: PokemonDetailsProps){
@@ -11,13 +15,14 @@ export function PokemonDetails(props: PokemonDetailsProps){
     return (
     <>
     <h2>{props.name}</h2>
-    <div>
-        {props.abilities.map((ability) => (
-
-        <div>{ability}</div>
-        ))}
-    </div>
-    <span></span>
+    <PokemonCard
+  name={props.name}
+  stats={props.stats}
+  art={props.art}
+  abilities={props.abilities}
+  moves={props.moves}
+  types={props.types}
+/>
     </>
     )
 }

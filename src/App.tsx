@@ -57,7 +57,7 @@ function App() {
 
 console.log('AAAAAAA', pokemonApi.states.genericData)
 console.log('BBBBBBB', pokemonApi.states.pokemonDetail)
-console.log('INPUTTONE', pokemonSearch.states.input);
+//console.log('INPUTTONE', pokemonSearch.states.input);
 console.log(pokemonApi.states.currentPage)
 
   return (
