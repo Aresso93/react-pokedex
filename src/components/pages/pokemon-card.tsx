@@ -59,7 +59,7 @@ export function PokemonCard(props: CardProps) {
   };
 
   return (
-    <Card sx={{ maxWidth: 350 }} className="mon-card">
+    <Card className="mon-card">
       <CardHeader title={capitaliseFirstLetter(props.name)} />
       <h3>Type{props.types.length > 1 ? "s" : ""}:</h3>
       {props.types.map((type: Type) => (

@@ -10,9 +10,9 @@ export function PokemonList(props: PokemonListProps) {
 
   return (
     <>
-      <div className="card-container" >
+   
         {props.detail.map((pokemon: Pokemon) => (
-          <div key={pokemon.id}>
+        
 
             <PokemonCard
               name={pokemon.name}
@@ -22,9 +22,9 @@ export function PokemonList(props: PokemonListProps) {
               moves={pokemon.moves}
               types={pokemon.types}
             />
-          </div>
+         
             ))}
-            </div>
+         
     </>
   );
 }
