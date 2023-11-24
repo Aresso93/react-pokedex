@@ -26,7 +26,9 @@ export function usePokemonApi() {
         detailPokemonArray.push(secondResponse.data);
         const orderedArray = detailPokemonArray.sort(listPokemonByID);
         setPokemonDetail(orderedArray);
+        console.log('UGA BUGA', detailPokemonArray);
         return orderedArray;
+        
       })
       );
     }

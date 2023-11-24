@@ -43,7 +43,7 @@ function App() {
   const pokemonSearch = usePokemonSearch()
   const pokemonApi = usePokemonApi()
   useEffect(() => {
-    pokemonApi.actions.getPokemonData();
+    pokemonApi.actions.getPokemonData()
   }, []);
   useEffect(() => {
     pokemonApi.actions.getData();
@@ -51,9 +51,6 @@ function App() {
   useEffect(() => {
     pokemonApi.actions.getNextPage()
   })
-  // useEffect(() => {
-  //   pokemonApi.actions.getMoveData();
-  // }, []);
 
 console.log('AAAAAAA', pokemonApi.states.genericData)
 console.log('BBBBBBB', pokemonApi.states.pokemonDetail)
