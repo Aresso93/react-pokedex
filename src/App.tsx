@@ -34,12 +34,13 @@ export const darkThemeOptions: ThemeOptions = {
     secondary: {
       main: "#086ca5",
     },
-    error: {
-      main: "#c71d0f",
+    background: {
+      default: '#2b2929',
     },
   },
 };
 let lightTheme = createTheme(lightThemeOptions)
+let darkTheme = createTheme(darkThemeOptions)
 
 function App() {
   const pokemonSearch = usePokemonSearch()
@@ -50,20 +51,20 @@ function App() {
   useEffect(() => {
     pokemonApi.actions.getData();
   }, []);
-  useEffect(() => {
-    pokemonApi.actions.getMoveData();
-  }, []);
+  // useEffect(() => {
+  //   pokemonApi.actions.getMoveData();
+  // }, []);
 
 console.log('AAAAAAA', pokemonApi.states.genericData)
 console.log('BBBBBBB', pokemonApi.states.pokemonDetail)
-console.log('uuuuuuuuuuuu', pokemonApi.states.moveData);
+// console.log('uuuuuuuuuuuu', pokemonApi.states.moveData);
 console.log('INPUTTONE', pokemonSearch.states.input);
 
 
 
   return (
     <>
-      <ThemeProvider theme={lightTheme}>
+      <ThemeProvider theme={darkTheme}>
         <Button 
         variant="contained" 
         color="secondary"

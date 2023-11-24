@@ -17,11 +17,6 @@ html, body{
     animation: logo-spin infinite 20s linear;
   }
 }
-
-.read-the-docs {
-  color: #888;
-}
-
 .card-container{
   display: flex;
   flex-direction: column;
@@ -31,15 +26,6 @@ html, body{
   align-items: center;
 
 }
-
-.temp-card{
-  border: 1px solid crimson;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0px;
-}
-
 
 .open-card{
   display: flex;
@@ -55,6 +41,6 @@ html, body{
 }
 
 .mon-card{
-  margin: 8px;
-  background-color: aqua;
+  margin: 12px;
+  padding: 12px;
 }

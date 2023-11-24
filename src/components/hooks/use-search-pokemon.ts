@@ -18,7 +18,6 @@ export function usePokemonSearch(){
         console.log('Pokémon filtrati', filteredPokemon);
         return filteredPokemon;
       }
-    
 
       return{
         actions:{
