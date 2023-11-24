@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Ability, Mfe, Type } from "../../model/pokemon";
+import { Ability, Mfe, Stat, Type } from "../../model/pokemon";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -50,7 +50,7 @@ interface CardProps {
   abilities: Ability[];
   moves: Mfe[];
   types: Type[];
-  pokedexNumber: number
+  stats: Stat[]
 }
 
 export function PokemonCard(props: CardProps) {
@@ -61,10 +61,9 @@ export function PokemonCard(props: CardProps) {
   };
 
   return (
-    <Card sx={{ maxWidth: 600}} className="AAA">
+    <Card sx={{ maxWidth: 350}} className="mon-card">
       <CardHeader title={capitaliseFirstLetter(props.name)} />
-      <h3>Pokedex number: {props.pokedexNumber}</h3>
-      <h3>Type(s):</h3>
+      <h3>Type{props.types.length > 1 ? 's' : ''}:</h3>
       {props.types.map((type: Type) => (
         <div key={type.type.name}>
           <span>{capitaliseFirstLetter(type.type.name)}</span>
@@ -72,11 +71,21 @@ export function PokemonCard(props: CardProps) {
       ))}
       <CardMedia
         component="img"
-        height="600"
-        width="600"
+        height="300"
+        width="300"
         image={props.art}
         alt="pokemon"
       />
+
+      <h3>Base stats: </h3>
+      {props.stats.map((stat: Stat) => (
+        <div>
+          <span>
+            {capitaliseFirstLetter(stat.stat.name)}:{' '+ stat.base_stat}
+          </span>
+        </div>
+      ))}
+
       <h3>Abilities:</h3>
       {props.abilities.map((ability: Ability) => (
         <div key={ability.ability.name}>
@@ -118,10 +127,7 @@ export function PokemonCard(props: CardProps) {
               </span>
             </div>
           ))}
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then
-            serve.
-          </Typography>
+          
         </CardContent>
       </Collapse>
     </Card>

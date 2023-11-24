@@ -54,8 +54,8 @@ function App() {
     pokemonApi.actions.getMoveData();
   }, []);
 
-
-console.log('IIIIIIIIIIII', pokemonApi.states.pokemonDetail)
+console.log('AAAAAAA', pokemonApi.states.genericData)
+console.log('BBBBBBB', pokemonApi.states.pokemonDetail)
 console.log('uuuuuuuuuuuu', pokemonApi.states.moveData);
 
 

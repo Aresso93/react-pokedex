@@ -13,7 +13,7 @@ export function usePokemonApi() {
   }
 
   async function getPokemonData() {
-    const firstResponse = await axiosService("pokemon/?limit=10");
+    const firstResponse = await axiosService("pokemon/");
     let firstArray = firstResponse.data.results;
     let detailPokemonArray: Pokemon[] = [];
     firstArray.map(
