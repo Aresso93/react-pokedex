@@ -29,7 +29,6 @@ interface CardProps {
 }
 
 export function PokemonCard(props: CardProps) {
-
   return (
     <Card className="mon-card">
       <CardHeader title={capitaliseFirstLetter(props.name)} />
@@ -46,38 +45,35 @@ export function PokemonCard(props: CardProps) {
         image={props.art}
         alt="pokemon"
       />
-        <CardContent>
-          <h3>Base stats: </h3>
-          {props.stats.map((stat: Stat) => (
-            <div key={stat.stat.name}>
-              <span>
-                {capitaliseFirstLetter(stat.stat.name)}:{" " + stat.base_stat}
-              </span>
-            </div>
-          ))}
-      <h3>Abilities:</h3>
-      {props.abilities.map((ability: Ability) => (
-        <div key={ability.ability.name}>
-          <span>
-            {capitaliseFirstLetter(ability.ability.name)}
-            {ability.is_hidden === true ? " (hidden ability)" : ""}
-          </span>
-        </div>
-      ))}   
-        </CardContent>
+      <CardContent>
+        <h3>Moves:</h3>
+        {props.moves.map((move: Mfe) => (
+          <div>
+            <span key={move.move.name}>
+              {capitaliseFirstLetter(move.move.name)}
+              {}
+            </span>
+          </div>
+        ))}
+
+        <h3>Base stats: </h3>
+        {props.stats.map((stat: Stat) => (
+          <div key={stat.stat.name}>
+            <span>
+              {capitaliseFirstLetter(stat.stat.name)}:{" " + stat.base_stat}
+            </span>
+          </div>
+        ))}
+        <h3>Abilities:</h3>
+        {props.abilities.map((ability: Ability) => (
+          <div key={ability.ability.name}>
+            <span>
+              {capitaliseFirstLetter(ability.ability.name)}
+              {ability.is_hidden === true ? " (hidden ability)" : ""}
+            </span>
+          </div>
+        ))}
+      </CardContent>
     </Card>
   );
-}
-
-{
-  /* <h3>Moves:</h3>
-
-{props.moves.map((move: Mfe) => (
-  <div>
-    <span key={move.move.name}>
-      {capitaliseFirstLetter(move.move.name)}
-      {}
-    </span>
-  </div>
-))} */
 }

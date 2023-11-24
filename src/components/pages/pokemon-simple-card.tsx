@@ -4,6 +4,7 @@ import { capitaliseFirstLetter } from "./pokemon-card";
 interface PokemonSimpleCard{
     name: string;
     art: string;
+    id: number;
 }
 
 const capital = capitaliseFirstLetter
@@ -23,6 +24,7 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
           <Button
           variant="contained"
           color="secondary"
+          onClick={() => {console.log('HADOKEN', props.id)}}
           >
             Open pokémon details
           </Button>

@@ -11,7 +11,7 @@ export function usePokemonApi() {
   let [previousPage, setPreviousPage] = useState([])
 
   let offset = 0
-  
+  let currentPage = 1
   function listPokemonByID(a: Pokemon, b: Pokemon) {
     return a.id - b.id;
   }
@@ -42,10 +42,12 @@ export function usePokemonApi() {
     }
     
     async function getOnlyData(){
-      await axiosService("pokemon/?offset="+offset+"&limit=20");
+     const resp = await axiosService("pokemon/?offset="+offset+"&limit=20");
+     return resp.data.results
     }
 
     async function getNextPage(){
+    currentPage++
     offset = offset + 20
     let nextResp = await getOnlyData()
     console.log(nextResp);
@@ -53,8 +55,13 @@ export function usePokemonApi() {
     }
 
   async function getPreviousPage(){
-    offset = offset - 20
-    getOnlyData()
+    currentPage--
+    if (offset > 0){
+      offset = offset - 20
+      let prevResp = await getOnlyData()
+      console.log(prevResp);
+    }
+    
   }
 
 
@@ -69,7 +76,8 @@ export function usePokemonApi() {
     states: {
         pokemonDetail, 
         genericData,
-        moveData
+        moveData,
+        currentPage
     },
   };
 }

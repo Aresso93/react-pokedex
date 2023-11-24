@@ -1,6 +1,4 @@
-import { PokemonCard } from "./pokemon-card";
-import { Ability, Pokemon } from "../../model/pokemon";
-import { ChangeEvent, useState } from "react";
+import { Pokemon } from "../../model/pokemon";
 import React from "react";
 import { PokemonSimpleCard } from "./pokemon-simple-card";
 
@@ -18,8 +16,9 @@ export function PokemonList(props: PokemonListProps) {
 
             <PokemonSimpleCard 
             name={pokemon.name} 
-            art={pokemon.sprites.other["official-artwork"].front_default}/>
-
+            art={pokemon.sprites.other["official-artwork"].front_default}
+            id={pokemon.id}
+            />
         
           </React.Fragment>
             ))}
@@ -27,3 +26,13 @@ export function PokemonList(props: PokemonListProps) {
     </>
   );
 }
+
+// per prove varie
+{/* <PokemonCard
+  name={pokemon.name}
+  stats={pokemon.stats}
+  art={pokemon.sprites.other["official-artwork"].front_default}
+  abilities={pokemon.abilities}
+  moves={pokemon.moves}
+  types={pokemon.types}
+/>; */}

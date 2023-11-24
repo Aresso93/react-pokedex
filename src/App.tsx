@@ -4,9 +4,6 @@ import PokedexHeader from "./components/single-components/header";
 import { ThemeProvider } from "@emotion/react";
 import { PokemonList } from "./components/pages/pokemon-list";
 import { ChangeEvent, useEffect, useState } from "react";
-import axios from "axios";
-import { Pokemon } from "./model/pokemon";
-import { useAxios } from "./services/axios-api";
 import { usePokemonApi } from "./components/hooks/pokemon.api";
 import { usePokemonSearch } from "./components/hooks/use-search-pokemon";
 
@@ -51,16 +48,17 @@ function App() {
   useEffect(() => {
     pokemonApi.actions.getData();
   }, []);
+  useEffect(() => {
+    pokemonApi.actions.getNextPage()
+  })
   // useEffect(() => {
   //   pokemonApi.actions.getMoveData();
   // }, []);
 
 console.log('AAAAAAA', pokemonApi.states.genericData)
 console.log('BBBBBBB', pokemonApi.states.pokemonDetail)
-// console.log('uuuuuuuuuuuu', pokemonApi.states.moveData);
 console.log('INPUTTONE', pokemonSearch.states.input);
-
-
+console.log(pokemonApi.states.currentPage)
 
   return (
     <>
