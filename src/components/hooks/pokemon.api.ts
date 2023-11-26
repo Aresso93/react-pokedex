@@ -13,6 +13,22 @@ export function usePokemonApi() {
   let offset = 0;
   let currentPage = 1;
 
+  // async function getPokemonData() {
+  //   const firstResponse = await axiosService("pokemon/");
+  //   const firstArray = firstResponse.data.results;
+  //   const detailPokemonArray: Pokemon[] = [];
+  //   firstArray.map(
+  //     async (singlePokemon: Pokemon) =>
+  //     await axiosService(singlePokemon.url).then((secondResponse) => {
+  //       detailPokemonArray.push(secondResponse.data);
+  //       const orderedArray = detailPokemonArray.sort(listPokemonByID);
+  //       setPokemonDetail(orderedArray);
+  //       console.log('UGA BUGA', detailPokemonArray);
+  //       return orderedArray;
+  //     })
+  //     );
+  // }
+
   async function getPokemonData() {
     const firstResponse = await axiosService("pokemon/");
     const firstArray = firstResponse.data.results;
