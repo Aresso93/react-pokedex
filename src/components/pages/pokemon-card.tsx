@@ -38,7 +38,7 @@ export function PokemonCard(props: CardProps) {
     <Card className="mon-card">
       <CardHeader title={capitaliseFirstLetter(pokemonContext.states.singlePokemon.name)} />
       <h3>Type{pokemonContext.states.singlePokemon.types.length > 1 ? "s" : ""}:</h3>
-      {props.types.map((type: Type) => (
+      {pokemonContext.states.singlePokemon.types.map((type: Type) => (
         <div key={type.type.name}>
           <span>{capitaliseFirstLetter(type.type.name)}</span>
         </div>
@@ -47,12 +47,12 @@ export function PokemonCard(props: CardProps) {
         component="img"
         height="300"
         width="300"
-        image={props.art}
+        image={pokemonContext.states.singlePokemon.art}
         alt="pokemon"
       />
       <CardContent>
         <h3>Base stats: </h3>
-        {props.stats.map((stat: Stat) => (
+        {pokemonContext.states.singlePokemon.stats.map((stat: Stat) => (
           <div key={stat.stat.name}>
             <span>
               {capitaliseFirstLetter(stat.stat.name)}:{" " + stat.base_stat}
@@ -60,7 +60,7 @@ export function PokemonCard(props: CardProps) {
           </div>
         ))}
         <h3>Abilities:</h3>
-        {props.abilities.map((ability: Ability) => (
+        {pokemonContext.states.singlePokemon.abilities.map((ability: Ability) => (
           <div key={ability.ability.name}>
             <span>
               {capitaliseFirstLetter(ability.ability.name)}
@@ -69,7 +69,7 @@ export function PokemonCard(props: CardProps) {
           </div>
         ))}
         <h3>Moves:</h3>
-        {props.moves.map((move: Mfe) => (
+        {pokemonContext.states.singlePokemon.moves.map((move: Mfe) => (
           <div>
             <span key={move.move.name}>
               {capitaliseFirstLetter(move.move.name)}
