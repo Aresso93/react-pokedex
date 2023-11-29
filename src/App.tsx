@@ -11,15 +11,15 @@ import { PokemonCard } from "./components/pages/pokemon-card";
 
 export const lightThemeOptions: ThemeOptions = {
   palette: {
-    mode: 'light',
+    mode: "light",
     primary: {
-      main: '#202976',
+      main: "#202976",
     },
     secondary: {
-      main: '#766d20',
+      main: "#766d20",
     },
     background: {
-      default: '#ececec',
+      default: "#ececec",
     },
   },
 };
@@ -34,18 +34,18 @@ export const darkThemeOptions: ThemeOptions = {
       main: "#086ca5",
     },
     background: {
-      default: '#2b2929',
+      default: "#2b2929",
     },
   },
 };
-let lightTheme = createTheme(lightThemeOptions)
-let darkTheme = createTheme(darkThemeOptions)
+let lightTheme = createTheme(lightThemeOptions);
+let darkTheme = createTheme(darkThemeOptions);
 
 function App() {
-  const pokemonSearch = usePokemonSearch()
-  const pokemonApi = usePokemonApi()
+  const pokemonSearch = usePokemonSearch();
+  const pokemonApi = usePokemonApi();
   useEffect(() => {
-    pokemonApi.actions.getPokemonData()
+    pokemonApi.actions.getPokemonData();
   }, []);
   useEffect(() => {
     pokemonApi.actions.getData();
@@ -54,44 +54,76 @@ function App() {
   //  pokemonApi.actions.getNextPage()
   //}, [pokemonApi.actions.getNextPage])
 
-console.log('AAAAAAA', pokemonApi.states.genericData)
-console.log('BBBBBBB', pokemonApi.states.pokemonDetail)
-//console.log('INPUTTONE', pokemonSearch.states.input);
-console.log(pokemonApi.states.currentPage)
-let detailRoute = "pokemon/"+pokemonApi.states.singlePokemon.id
+  console.log("AAAAAAA", pokemonApi.states.genericData);
+  console.log("BBBBBBB", pokemonApi.states.pokemonDetail);
+  //console.log('INPUTTONE', pokemonSearch.states.input);
+  console.log(pokemonApi.states.currentPage);
+  let detailRoute = "pokemon/" + pokemonApi.states.singlePokemon.id;
 
   return (
     <>
-     <BrowserRouter>
-      <ThemeProvider theme={darkTheme}>
-        <Button 
-        variant="contained" 
-        color="secondary"
-        onClick={pokemonApi.actions.getNextPage}
-        >
-          PROVA PROVA PROSSIMA PAGINA
-        </Button>
-        <Button 
-        variant="contained" 
-        color="secondary"
-        onClick={pokemonApi.actions.getPreviousPage}
-        >
-          PROVA PROVA PAGINA PRIMA
-        </Button>
-      <PokedexHeader 
-        search={pokemonSearch.actions.onChange}
-        count={pokemonApi.states.genericData} 
-        renderSearch={pokemonSearch.actions.pokemonFinder(pokemonApi.states.pokemonDetail, pokemonSearch.states.input)}/>
-   <div className="outer-div">
-        <Routes>
-        <Route path="prova" element={<PokemonCard name={""} art={""} abilities={[]} moves={[]} types={[]} stats={[]}/>}/>
-        <Route path={detailRoute} element={<PokemonCard name={pokemonApi.states.singlePokemon.name} art={""} abilities={[]} moves={[]} types={[]} stats={[]}/>}/>
-        <Route path="home" element={<PokemonList detail={pokemonApi.states.pokemonDetail}/>}/>
-        <Route path="*" element={<Navigate to="/home"/>}/>
-        </Routes>
-      </div>
-
-      </ThemeProvider> 
+      <BrowserRouter>
+        <ThemeProvider theme={darkTheme}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={pokemonApi.actions.getNextPage}
+          >
+            PROVA PROVA PROSSIMA PAGINA
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={pokemonApi.actions.getPreviousPage}
+          >
+            PROVA PROVA PAGINA PRIMA
+          </Button>
+          <PokedexHeader
+            search={pokemonSearch.actions.onChange}
+            count={pokemonApi.states.genericData}
+            renderSearch={pokemonSearch.actions.pokemonFinder(
+              pokemonApi.states.pokemonDetail,
+              pokemonSearch.states.input
+            )}
+          />
+          <div className="outer-div">
+            <Routes>
+              <Route
+                path="prova"
+                element={
+                  <PokemonCard
+                    name={""}
+                    art={""}
+                    abilities={[]}
+                    moves={[]}
+                    types={[]}
+                    stats={[]}
+                  />
+                }
+              />
+              <Route
+                path={detailRoute}
+                element={
+                  <PokemonCard
+                    name={pokemonApi.states.singlePokemon.name}
+                    art={""}
+                    abilities={[]}
+                    moves={[]}
+                    types={[]}
+                    stats={[]}
+                  />
+                }
+              />
+              <Route
+                path="home"
+                element={
+                  <PokemonList detail={pokemonApi.states.pokemonDetail} />
+                }
+              />
+              <Route path="*" element={<Navigate to="/home" />} />
+            </Routes>
+          </div>
+        </ThemeProvider>
       </BrowserRouter>
     </>
   );
