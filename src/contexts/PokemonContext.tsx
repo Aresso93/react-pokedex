@@ -7,10 +7,14 @@ export const PokemonContext = createContext({
         getData: () => 0,
     },
     states: {
-        currentPage: 1,
+        currentPage: 0,
         singlePokemon: {
             name: '',
-            art: '',
+            sprites: {
+                other:{["official-artwork"]:{
+                    front_default: ''
+                }},
+            },
             id: 0,
             stats: [],
             moves: [],
