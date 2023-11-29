@@ -86,7 +86,7 @@ console.log(pokemonApi.states.currentPage)
         <Route path="prova" element={<PokemonCard name={""} art={""} abilities={[]} moves={[]} types={[]} stats={[]}/>}/>
         <Route path="home" element={<PokemonList detail={pokemonApi.states.pokemonDetail}/>}/>
         {/* <Route path={pokemonApi.states.singlePokemon?.id}/> */}
-        <Route path="*" element={<Navigate to="home"/>}/>
+        <Route path="*" element={<Navigate to="/home"/>}/>
         </Routes>
       </div>
 
