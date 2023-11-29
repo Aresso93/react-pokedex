@@ -46,23 +46,18 @@ function App() {
   const pokemonSearch = usePokemonSearch();
   const pokemonApi = usePokemonApi();
   const pokemonContext = usePokemonContext();
-
+    
   useEffect(() => {
     pokemonApi.actions.getPokemonData();
   }, []);
-  useEffect(() => {
-    pokemonApi.actions.getData();
-  }, []);
+
   //useEffect(() => {
   //  pokemonApi.actions.getNextPage()
   //}, [pokemonApi.actions.getNextPage])
 
-  //console.log("AAAAAAA", pokemonApi.states.genericData);
-  //console.log("BBBBBBB", pokemonApi.states.pokemonDetail);
   console.log("HHHHHHHHH", usePokemonContext().states.currentPage)
   //console.log('INPUTTONE', pokemonSearch.states.input);
-  console.log(pokemonApi.states.currentPage);
-  let detailRoute = "pokemon/" + pokemonApi.states.singlePokemon.id;
+  //console.log(pokemonApi.states.currentPage);
 
   return (
     <>
@@ -85,7 +80,6 @@ function App() {
           </Button>
           <PokedexHeader
             search={pokemonSearch.actions.onChange}
-            count={pokemonApi.states.genericData}
             renderSearch={pokemonSearch.actions.pokemonFinder(
               pokemonApi.states.pokemonDetail,
               pokemonSearch.states.input

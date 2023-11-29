@@ -69,7 +69,7 @@ export function PokemonCard(props: CardProps) {
         title={capitaliseFirstLetter(pokemonContext.states.singlePokemon.name)}
       />
       <h3>
-        Type{pokemonContext.states.singlePokemon.types.length > 1 ? "s" : ""}:
+      Type{pokemonContext.states.singlePokemon.types.length > 1 ? "s" : ""}:
       </h3>
       {pokemonContext.states.singlePokemon.types.map((type: Type) => (
         <div key={type.type.name}>

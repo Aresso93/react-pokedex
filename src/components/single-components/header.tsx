@@ -56,19 +56,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 interface PokedexHeaderProps{
-  count: number,
   search: React.ChangeEventHandler<HTMLInputElement>,
   renderSearch: any;
 }
 
 export default function PokedexHeader(props: PokedexHeaderProps) {
+
+  useEffect(() => {
+    pokemonContext.actions.getData();
+  }, []);
+
   const pokemonApi = usePokemonApi()
   const pokemonSearch = usePokemonSearch()
   const pokemonContext = usePokemonContext()
-
-  useEffect(() => {
-    pokemonApi.actions.getData()
-  }, [])
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -89,7 +89,7 @@ export default function PokedexHeader(props: PokedexHeaderProps) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Gotta catch 'em all! Browse {props.count} pokémon (and counting)! <Button variant='contained' color='secondary'>Back</Button> Page {pokemonContext.states.currentPage} <Button variant='contained' color='secondary'>Next</Button>
+            Gotta catch 'em all! Browse {pokemonContext.states.genericData} pokémon (and counting)! <Button variant='contained' color='secondary'>Back</Button> Page {pokemonContext.states.currentPage} <Button variant='contained' color='secondary'>Next</Button>
           </Typography>
           <Search>
             <SearchIconWrapper>

@@ -4,6 +4,7 @@ import { usePokemonApi } from "../components/hooks/pokemon.api";
 export const PokemonContext = createContext({
     actions:{
         getSinglePokemon: (pokemonID: number) => {},
+        getData: () => 0,
     },
     states: {
         currentPage: 1,
@@ -15,7 +16,8 @@ export const PokemonContext = createContext({
             moves: [],
             types: [],
             abilities: [],
-        }
+        },
+        genericData: 0
     }
 })
 

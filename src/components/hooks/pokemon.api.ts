@@ -25,7 +25,8 @@ export function usePokemonApi() {
   }
   
   async function getData() {
-    const response = await axiosService("pokemon/");
+    const response = await axiosService("pokemon");
+    console.log('RRRRRRRRRRR', response.data.count)
     setGenericData(response.data.count);
   }
   
