@@ -50,14 +50,15 @@ function App() {
   useEffect(() => {
     pokemonApi.actions.getData();
   }, []);
-  useEffect(() => {
-    pokemonApi.actions.getNextPage()
-  })
+  //useEffect(() => {
+  //  pokemonApi.actions.getNextPage()
+  //}, [pokemonApi.actions.getNextPage])
 
 console.log('AAAAAAA', pokemonApi.states.genericData)
 console.log('BBBBBBB', pokemonApi.states.pokemonDetail)
 //console.log('INPUTTONE', pokemonSearch.states.input);
 console.log(pokemonApi.states.currentPage)
+let detailRoute = "pokemon/"+pokemonApi.states.singlePokemon.id
 
   return (
     <>
@@ -80,12 +81,12 @@ console.log(pokemonApi.states.currentPage)
       <PokedexHeader 
         search={pokemonSearch.actions.onChange}
         count={pokemonApi.states.genericData} 
-        renderSearch={pokemonSearch.actions.pokemonFinder(pokemonApi.states.pokemonDetail, pokemonSearch.states.input)}      />
+        renderSearch={pokemonSearch.actions.pokemonFinder(pokemonApi.states.pokemonDetail, pokemonSearch.states.input)}/>
    <div className="outer-div">
         <Routes>
         <Route path="prova" element={<PokemonCard name={""} art={""} abilities={[]} moves={[]} types={[]} stats={[]}/>}/>
+        <Route path={detailRoute} element={<PokemonCard name={pokemonApi.states.singlePokemon.name} art={""} abilities={[]} moves={[]} types={[]} stats={[]}/>}/>
         <Route path="home" element={<PokemonList detail={pokemonApi.states.pokemonDetail}/>}/>
-        {/* <Route path={pokemonApi.states.singlePokemon?.id}/> */}
         <Route path="*" element={<Navigate to="/home"/>}/>
         </Routes>
       </div>

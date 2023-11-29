@@ -9,7 +9,6 @@ interface PokemonSimpleCard{
     id: number;
 }
 
-
 export function PokemonSimpleCard(props: PokemonSimpleCard){
   const navigate = useNavigate()
   const pokemonApi = usePokemonApi()

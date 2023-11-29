@@ -47,16 +47,6 @@ export function PokemonCard(props: CardProps) {
         alt="pokemon"
       />
       <CardContent>
-        <h3>Moves:</h3>
-        {props.moves.map((move: Mfe) => (
-          <div>
-            <span key={move.move.name}>
-              {capitaliseFirstLetter(move.move.name)}
-              {}
-            </span>
-          </div>
-        ))}
-
         <h3>Base stats: </h3>
         {props.stats.map((stat: Stat) => (
           <div key={stat.stat.name}>
@@ -71,6 +61,15 @@ export function PokemonCard(props: CardProps) {
             <span>
               {capitaliseFirstLetter(ability.ability.name)}
               {ability.is_hidden === true ? " (hidden ability)" : ""}
+            </span>
+          </div>
+        ))}
+        <h3>Moves:</h3>
+        {props.moves.map((move: Mfe) => (
+          <div>
+            <span key={move.move.name}>
+              {capitaliseFirstLetter(move.move.name)}
+              {}
             </span>
           </div>
         ))}
