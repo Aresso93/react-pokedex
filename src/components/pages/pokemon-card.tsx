@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import { Ability, Mfe, Stat, Type } from "../../model/pokemon";
+import { Ability, Mfe, Pokemon, Stat, Type } from "../../model/pokemon";
 import { usePokemonContext } from "../../contexts/PokemonContext";
 import { useParams } from "react-router-dom";
 import {
@@ -63,11 +63,12 @@ export function PokemonCard(props: CardProps) {
   const {pokemonID} = useParams();
   console.log(pokemonID);
 
-  const [pokemon, setPokemon] = useState({})
+  const [pokemon, setPokemon] = useState({name: '', types: [], stats: [], moves: [], abilities: [], id: 0})
 
   useEffect(() => {
     axiosService.get("https://pokeapi.co/api/v2/pokemon/"+pokemonID)
-    .then((resp) => console.log(resp.data))
+    .then((resp) => setPokemon(resp.data))
+    
   }, [pokemonID]);
 
   const [expanded, setExpanded] = useState(false);
@@ -81,12 +82,12 @@ export function PokemonCard(props: CardProps) {
   return (
     <Card className="mon-card">
       <CardHeader
-        title={capitaliseFirstLetter('a')}
+        title={capitaliseFirstLetter(pokemon?.name)}
       />
       <h3>
        Type{pokemonContext.states.singlePokemon.types.length > 1 ? "s" : ""}:
       </h3>
-      {pokemonContext.states.singlePokemon.types.map((type: Type) => (
+      {pokemon.types.map((type: Type) => (
         <div key={type.type.name}>
           <span>{capitaliseFirstLetter(type.type.name)}</span>
         </div>
@@ -95,12 +96,12 @@ export function PokemonCard(props: CardProps) {
         component="img"
         height="300"
         width="300"
-        image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonContext.states.singlePokemon.id}.png`}
+        image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
         alt="pokemon"
       />
       <CardContent>
         <h3>Base stats: </h3>
-        {pokemonContext.states.singlePokemon.stats.map((stat: Stat) => (
+        {pokemon.stats.map((stat: Stat) => (
           <div key={stat.stat.name}>
             <span>
               {capitaliseFirstLetter(stat.stat.name)}:{" " + stat.base_stat}
@@ -108,7 +109,7 @@ export function PokemonCard(props: CardProps) {
           </div>
         ))}
         <h3>Abilities:</h3>
-        {pokemonContext.states.singlePokemon.abilities.map(
+        {pokemon.abilities.map(
           (ability: Ability) => (
             <div key={ability.ability.name}>
               <span>
@@ -123,7 +124,7 @@ export function PokemonCard(props: CardProps) {
           Click to expand 
           <hr/>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          {pokemonContext.states.singlePokemon.moves.map((move: Mfe) => (
+          {pokemon.moves.map((move: Mfe) => (
             <div>
               <span key={move.move.name}>
                 {capitaliseFirstLetter(move.move.name)}
