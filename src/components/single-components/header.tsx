@@ -5,13 +5,14 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import { usePokemonApi } from '../hooks/pokemon.api';
 import { useEffect } from 'react';
 import { Button } from '@mui/material';
 import { usePokemonSearch } from '../hooks/use-search-pokemon';
 import { usePokemonContext } from '../../contexts/PokemonContext';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'sticky',
@@ -61,7 +62,7 @@ interface PokedexHeaderProps{
 }
 
 export default function PokedexHeader(props: PokedexHeaderProps) {
-
+  const navigate = useNavigate()
   useEffect(() => {
     pokemonContext.actions.getData();
   }, []);
@@ -80,8 +81,9 @@ export default function PokedexHeader(props: PokedexHeaderProps) {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={() => navigate('/home')}
           >
-            <MenuIcon />
+             <HomeIcon fontSize="large" />
           </IconButton>
           <Typography
             variant="h6"
