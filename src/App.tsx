@@ -6,6 +6,8 @@ import { PokemonList } from "./components/pages/pokemon-list";
 import { ChangeEvent, useEffect, useState } from "react";
 import { usePokemonApi } from "./components/hooks/pokemon.api";
 import { usePokemonSearch } from "./components/hooks/use-search-pokemon";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import { PokemonCard } from "./components/pages/pokemon-card";
 
 export const lightThemeOptions: ThemeOptions = {
   palette: {
@@ -59,6 +61,7 @@ console.log(pokemonApi.states.currentPage)
 
   return (
     <>
+     <BrowserRouter>
       <ThemeProvider theme={darkTheme}>
         <Button 
         variant="contained" 
@@ -78,11 +81,17 @@ console.log(pokemonApi.states.currentPage)
         search={pokemonSearch.actions.onChange}
         count={pokemonApi.states.genericData} 
         renderSearch={pokemonSearch.actions.pokemonFinder(pokemonApi.states.pokemonDetail, pokemonSearch.states.input)}      />
-      <div className="outer-div">
-      <PokemonList detail={pokemonApi.states.pokemonDetail} />
+   <div className="outer-div">
+        <Routes>
+        <Route path="prova" element={<PokemonCard name={""} art={""} abilities={[]} moves={[]} types={[]} stats={[]}/>}/>
+        <Route path="home" element={<PokemonList detail={pokemonApi.states.pokemonDetail}/>}/>
+        {/* <Route path={pokemonApi.states.singlePokemon?.id}/> */}
+        <Route path="*" element={<Navigate to="home"/>}/>
+        </Routes>
       </div>
 
       </ThemeProvider> 
+      </BrowserRouter>
     </>
   );
 }
