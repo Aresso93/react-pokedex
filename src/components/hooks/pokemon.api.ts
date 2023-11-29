@@ -5,6 +5,7 @@ import { useAxios } from "../../services/axios-api";
 export function usePokemonApi() {
   const axiosService = useAxios();
   const [pokemonDetail, setPokemonDetail] = useState([]);
+  const [singlePokemon, setSinglePokemon] = useState([])
   const [genericData, setGenericData] = useState(0);
   const [moveData, setMoveData] = useState([]);
   const [nextPage, setNextPage] = useState([]);
@@ -28,6 +29,12 @@ export function usePokemonApi() {
     setPokemonDetail(orderedArray);
     console.log("UGA BUGA", detailPokemonArray);
     return orderedArray;
+  }
+
+  async function getSinglePokemon(pokemonID: number){
+    const pokemonResp = await axiosService("pokemon/"+pokemonID)
+    console.log(pokemonResp.data)
+    setSinglePokemon(pokemonResp.data)
   }
 
   async function getMoveData() {
