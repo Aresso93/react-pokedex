@@ -8,6 +8,7 @@ import { usePokemonApi } from "./components/hooks/pokemon.api";
 import { usePokemonSearch } from "./components/hooks/use-search-pokemon";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import { PokemonCard } from "./components/pages/pokemon-card";
+import { PokemonContextProvider, usePokemonContext } from "./contexts/PokemonContext";
 
 export const lightThemeOptions: ThemeOptions = {
   palette: {
@@ -54,14 +55,16 @@ function App() {
   //  pokemonApi.actions.getNextPage()
   //}, [pokemonApi.actions.getNextPage])
 
-  console.log("AAAAAAA", pokemonApi.states.genericData);
-  console.log("BBBBBBB", pokemonApi.states.pokemonDetail);
+  //console.log("AAAAAAA", pokemonApi.states.genericData);
+  //console.log("BBBBBBB", pokemonApi.states.pokemonDetail);
+  console.log("HHHHHHHHH", usePokemonContext().states.currentPage)
   //console.log('INPUTTONE', pokemonSearch.states.input);
   console.log(pokemonApi.states.currentPage);
   let detailRoute = "pokemon/" + pokemonApi.states.singlePokemon.id;
 
   return (
     <>
+    <PokemonContextProvider>
       <BrowserRouter>
         <ThemeProvider theme={darkTheme}>
           <Button
@@ -125,6 +128,7 @@ function App() {
           </div>
         </ThemeProvider>
       </BrowserRouter>
+      </PokemonContextProvider>
     </>
   );
 }

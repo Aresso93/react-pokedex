@@ -5,38 +5,31 @@ import { useAxios } from "../../services/axios-api";
 export function usePokemonApi() {
   const axiosService = useAxios();
   const [pokemonDetail, setPokemonDetail] = useState([]);
-  let [singlePokemon, setSinglePokemon] = useState({name: "", id: 0, art: "", abilities: [], types: [], moves: [], stats: []})
+  const [singlePokemon, setSinglePokemon] = useState({name: "", id: 0, art: "", abilities: [], types: [], moves: [], stats: []})
   const [genericData, setGenericData] = useState(0);
   const [moveData, setMoveData] = useState([]);
-  const [nextPage, setNextPage] = useState([]);
-  const [previousPage, setPreviousPage] = useState([]);
+  const [nextPage, setNextPage] = useState(0);
+  const [previousPage, setPreviousPage] = useState(0);
 
   let offset = 0;
-  let currentPage = 1;
-
+  
   async function getPokemonData() {
     const firstResponse = await axiosService("pokemon/");
     const firstArray = firstResponse.data.results;
-
     const detailPokemonArray = await Promise.all(
       firstArray.map(async (singlePokemon: Pokemon) => {
         const secondResponse = await axiosService(singlePokemon.url);
         return secondResponse.data;
       })
     );
-
-    const orderedArray = detailPokemonArray;
-    setPokemonDetail(orderedArray);
-    console.log("UGA BUGA", detailPokemonArray);
-    return orderedArray;
+    setPokemonDetail(detailPokemonArray);
+    return detailPokemonArray;
   }
 
   async function getSinglePokemon(pokemonID: number){
     const pokemonResp = await axiosService("pokemon/"+pokemonID)
     console.log(pokemonResp.data)
     setSinglePokemon(pokemonResp.data)
-    singlePokemon = pokemonResp.data
-    console.log(singlePokemon);
   }
 
   async function getMoveData() {
@@ -53,23 +46,32 @@ export function usePokemonApi() {
     const resp = await axiosService("pokemon/?offset=" + offset + "&limit=20");
     return resp.data.results;
   }
-
   async function getNextPage() {
+    let currentPage = 1;
     currentPage++;
     offset = offset + 20;
     const nextResp = await getOnlyData();
-    console.log(nextResp);
+  
+    console.log('next resp', nextResp);
+    setNextPage(currentPage)
+    console.log('PAGGGGGINA', currentPage)
   }
 
   async function getPreviousPage() {
-    currentPage--;
+    let currentPage = 1;
+    if (currentPage >= 2) {
+      currentPage--;
+    }
+
     if (offset > 0) {
       offset = offset - 20;
       const prevResp = await getOnlyData();
       console.log(prevResp);
     }
+    setPreviousPage(currentPage)
+    console.log('Pagina attuale', currentPage)
   }
-
+ 
   return {
     actions: {
       getPokemonData,
@@ -83,7 +85,8 @@ export function usePokemonApi() {
       pokemonDetail,
       genericData,
       moveData,
-      currentPage,
+      nextPage,
+      previousPage,
       singlePokemon
     },
   };

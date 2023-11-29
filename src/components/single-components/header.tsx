@@ -11,6 +11,7 @@ import { usePokemonApi } from '../hooks/pokemon.api';
 import { useEffect } from 'react';
 import { Button } from '@mui/material';
 import { usePokemonSearch } from '../hooks/use-search-pokemon';
+import { usePokemonContext } from '../../contexts/PokemonContext';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'sticky',
@@ -63,6 +64,7 @@ interface PokedexHeaderProps{
 export default function PokedexHeader(props: PokedexHeaderProps) {
   const pokemonApi = usePokemonApi()
   const pokemonSearch = usePokemonSearch()
+  const pokemonContext = usePokemonContext()
 
   useEffect(() => {
     pokemonApi.actions.getData()
@@ -87,7 +89,7 @@ export default function PokedexHeader(props: PokedexHeaderProps) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Gotta catch 'em all! Browse {props.count} pokémon (and counting)! <Button variant='contained' color='secondary'>Back</Button> Page 1 <Button variant='contained' color='secondary'>Next</Button>
+            Gotta catch 'em all! Browse {props.count} pokémon (and counting)! <Button variant='contained' color='secondary'>Back</Button> Page {pokemonContext.states.currentPage} <Button variant='contained' color='secondary'>Next</Button>
           </Typography>
           <Search>
             <SearchIconWrapper>
