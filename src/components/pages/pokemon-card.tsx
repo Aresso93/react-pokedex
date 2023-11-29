@@ -66,8 +66,8 @@ export function PokemonCard(props: CardProps) {
   const [pokemon, setPokemon] = useState({})
 
   useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon/"+pokemonID)
-    .then((resp )=> console.log(resp.json()))
+    axiosService.get("https://pokeapi.co/api/v2/pokemon/"+pokemonID)
+    .then((resp) => console.log(resp.data))
   }, [pokemonID]);
 
   const [expanded, setExpanded] = useState(false);
