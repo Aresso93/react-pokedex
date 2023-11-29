@@ -45,6 +45,8 @@ let darkTheme = createTheme(darkThemeOptions);
 function App() {
   const pokemonSearch = usePokemonSearch();
   const pokemonApi = usePokemonApi();
+  const pokemonContext = usePokemonContext();
+
   useEffect(() => {
     pokemonApi.actions.getPokemonData();
   }, []);
@@ -95,20 +97,7 @@ function App() {
                 path="prova"
                 element={
                   <PokemonCard
-                    name={""}
-                    art={""}
-                    abilities={[]}
-                    moves={[]}
-                    types={[]}
-                    stats={[]}
-                  />
-                }
-              />
-              <Route
-                path={detailRoute}
-                element={
-                  <PokemonCard
-                    name={pokemonApi.states.singlePokemon.name}
+                    name={pokemonContext.states.singlePokemon.name}
                     art={""}
                     abilities={[]}
                     moves={[]}

@@ -3,9 +3,20 @@ import { usePokemonApi } from "../components/hooks/pokemon.api";
 
 export const PokemonContext = createContext({
     actions:{
-    
+        getSinglePokemon: (pokemonID: number) => {},
     },
-    states: {currentPage: 1}
+    states: {
+        currentPage: 1,
+        singlePokemon: {
+            name: '',
+            art: '',
+            id: 0,
+            stats: [],
+            moves: [],
+            types: [],
+            abilities: [],
+        }
+    }
 })
 
 export const PokemonContextProvider = ({children}: PropsWithChildren) => {

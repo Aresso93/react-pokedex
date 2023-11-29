@@ -4,6 +4,7 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import { Ability, Mfe, Stat, Type } from "../../model/pokemon";
+import { usePokemonContext } from "../../contexts/PokemonContext";
 
 export function capitaliseFirstLetter(string: string) {
   if (string.includes("-")) {
@@ -30,10 +31,13 @@ interface CardProps {
 }
 
 export function PokemonCard(props: CardProps) {
+
+  const pokemonContext = usePokemonContext()
+
   return (
     <Card className="mon-card">
-      <CardHeader title={capitaliseFirstLetter(props.name)} />
-      <h3>Type{props.types.length > 1 ? "s" : ""}:</h3>
+      <CardHeader title={capitaliseFirstLetter(pokemonContext.states.singlePokemon.name)} />
+      <h3>Type{pokemonContext.states.singlePokemon.types.length > 1 ? "s" : ""}:</h3>
       {props.types.map((type: Type) => (
         <div key={type.type.name}>
           <span>{capitaliseFirstLetter(type.type.name)}</span>
