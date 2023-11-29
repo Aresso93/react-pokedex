@@ -75,12 +75,14 @@ export function usePokemonApi() {
       getData,
       getNextPage,
       getPreviousPage,
+      getSinglePokemon,
     },
     states: {
       pokemonDetail,
       genericData,
       moveData,
       currentPage,
+      singlePokemon
     },
   };
 }

@@ -1,5 +1,7 @@
 import { Card, CardHeader, CardMedia, CardContent, Button } from "@mui/material";
 import { capitaliseFirstLetter } from "./pokemon-card";
+import { usePokemonApi } from "../hooks/pokemon.api";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface PokemonSimpleCard{
     name: string;
@@ -7,12 +9,13 @@ interface PokemonSimpleCard{
     id: number;
 }
 
-const capital = capitaliseFirstLetter
 
 export function PokemonSimpleCard(props: PokemonSimpleCard){
+  const navigate = useNavigate()
+  const pokemonApi = usePokemonApi()
     return (
         <Card className="mon-card">
-          <CardHeader title={capital(props.name)} />
+          <CardHeader title={capitaliseFirstLetter(props.name)} />
           <CardMedia
             component="img"
             height="300"
@@ -24,7 +27,11 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
           <Button
           variant="contained"
           color="secondary"
-          onClick={() => {console.log('HADOKEN', props.id)}}
+          onClick={() => {
+            console.log('ID NUMERO', props.id)
+            pokemonApi.actions.getSinglePokemon(props.id)
+            navigate('/prova')
+          }}
           >
             Open pokémon details
           </Button>
