@@ -94,7 +94,7 @@ function App() {
           <div className="outer-div">
             <Routes>
               <Route
-                path="prova"
+                path="details"
                 element={
                   <PokemonCard
                     name={pokemonContext.states.singlePokemon.name}

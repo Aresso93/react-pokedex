@@ -5,6 +5,14 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import { Ability, Mfe, Stat, Type } from "../../model/pokemon";
 import { usePokemonContext } from "../../contexts/PokemonContext";
+import {
+  Collapse,
+  IconButton,
+  IconButtonProps,
+  styled,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useState } from "react";
 
 export function capitaliseFirstLetter(string: string) {
   if (string.includes("-")) {
@@ -21,6 +29,22 @@ export function capitaliseFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 }
+
+interface ExpandMoreProps extends IconButtonProps {
+  expand: boolean;
+}
+
+const ExpandMore = styled((props: ExpandMoreProps) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
 interface CardProps {
   name: string;
   art: string;
@@ -31,13 +55,22 @@ interface CardProps {
 }
 
 export function PokemonCard(props: CardProps) {
+  const [expanded, setExpanded] = useState(false);
 
-  const pokemonContext = usePokemonContext()
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+  const pokemonContext = usePokemonContext();
 
   return (
     <Card className="mon-card">
-      <CardHeader title={capitaliseFirstLetter(pokemonContext.states.singlePokemon.name)} />
-      <h3>Type{pokemonContext.states.singlePokemon.types.length > 1 ? "s" : ""}:</h3>
+      <CardHeader
+        title={capitaliseFirstLetter(pokemonContext.states.singlePokemon.name)}
+      />
+      <h3>
+        Type{pokemonContext.states.singlePokemon.types.length > 1 ? "s" : ""}:
+      </h3>
       {pokemonContext.states.singlePokemon.types.map((type: Type) => (
         <div key={type.type.name}>
           <span>{capitaliseFirstLetter(type.type.name)}</span>
@@ -60,24 +93,39 @@ export function PokemonCard(props: CardProps) {
           </div>
         ))}
         <h3>Abilities:</h3>
-        {pokemonContext.states.singlePokemon.abilities.map((ability: Ability) => (
-          <div key={ability.ability.name}>
-            <span>
-              {capitaliseFirstLetter(ability.ability.name)}
-              {ability.is_hidden === true ? " (hidden ability)" : ""}
-            </span>
-          </div>
-        ))}
+        {pokemonContext.states.singlePokemon.abilities.map(
+          (ability: Ability) => (
+            <div key={ability.ability.name}>
+              <span>
+                {capitaliseFirstLetter(ability.ability.name)}
+                {ability.is_hidden === true ? " (hidden ability)" : ""}
+              </span>
+            </div>
+          )
+        )}
+
         <h3>Moves:</h3>
-        {pokemonContext.states.singlePokemon.moves.map((move: Mfe) => (
-          <div>
-            <span key={move.move.name}>
-              {capitaliseFirstLetter(move.move.name)}
-              {}
-            </span>
-          </div>
-        ))}
+          Click to expand 
+          <hr/>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          {pokemonContext.states.singlePokemon.moves.map((move: Mfe) => (
+            <div>
+              <span key={move.move.name}>
+                {capitaliseFirstLetter(move.move.name)}
+              </span>
+            </div>
+          ))}
+        </Collapse>
       </CardContent>
+
+      <ExpandMore
+        expand={expanded}
+        onClick={handleExpandClick}
+        aria-expanded={expanded}
+        aria-label="show more"
+      >
+        <ExpandMoreIcon />
+      </ExpandMore>
     </Card>
   );
 }
