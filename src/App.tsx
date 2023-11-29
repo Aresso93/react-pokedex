@@ -9,6 +9,7 @@ import { usePokemonSearch } from "./components/hooks/use-search-pokemon";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import { PokemonCard } from "./components/pages/pokemon-card";
 import { PokemonContextProvider, usePokemonContext } from "./contexts/PokemonContext";
+import { useAxios } from "./services/axios-api";
 
 export const lightThemeOptions: ThemeOptions = {
   palette: {
@@ -46,6 +47,7 @@ function App() {
   const pokemonSearch = usePokemonSearch();
   const pokemonApi = usePokemonApi();
   const pokemonContext = usePokemonContext();
+  const axiosService = useAxios();
     
   useEffect(() => {
     pokemonApi.actions.getPokemonData();
@@ -88,7 +90,7 @@ function App() {
           <div className="outer-div">
             <Routes>
               <Route
-                path="details"
+                path="details/:pokemonID"
                 element={
                   <PokemonCard
                     name={pokemonContext.states.singlePokemon.name}

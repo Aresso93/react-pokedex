@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import { Ability, Mfe, Stat, Type } from "../../model/pokemon";
 import { usePokemonContext } from "../../contexts/PokemonContext";
+import { useParams } from "react-router-dom";
 import {
   Collapse,
   IconButton,
@@ -12,7 +13,9 @@ import {
   styled,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAxios } from "../../services/axios-api";
+import { usePokemonApi } from "../hooks/pokemon.api";
 
 export function capitaliseFirstLetter(string: string) {
   if (string.includes("-")) {
@@ -55,6 +58,18 @@ interface CardProps {
 }
 
 export function PokemonCard(props: CardProps) {
+  const pokemonApi = usePokemonApi()
+  const axiosService = useAxios()
+  const {pokemonID} = useParams();
+  console.log(pokemonID);
+
+  const [pokemon, setPokemon] = useState({})
+
+  useEffect(() => {
+    fetch("https://pokeapi.co/api/v2/pokemon/"+pokemonID)
+    .then((resp )=> console.log(resp.json()))
+  }, [pokemonID]);
+
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -66,7 +81,7 @@ export function PokemonCard(props: CardProps) {
   return (
     <Card className="mon-card">
       <CardHeader
-        title={capitaliseFirstLetter(pokemonContext.states.singlePokemon.name)}
+        title={capitaliseFirstLetter('a')}
       />
       <h3>
        Type{pokemonContext.states.singlePokemon.types.length > 1 ? "s" : ""}:
