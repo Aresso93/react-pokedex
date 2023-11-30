@@ -8,7 +8,7 @@ import { Pokemon } from "../../model/pokemon";
 
 interface PokemonSimpleCard{
     name: string;
-    art: string;
+    //art: string;
     id: number;
 }
 
@@ -23,7 +23,7 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
             component="img"
             height="300"
             width="300"
-            image={props.art}
+            image={`https://img.pokemondb.net/artwork/large/${props.name}.jpg`}
             alt={`${props.name}-img`}
           />
           <div className="card-button">
@@ -31,7 +31,7 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
           variant="contained"
           color="secondary"
           onClick={() => {
-            navigate(`/details/${props.id}`)
+            navigate(`/details/${props.name}`)
           }}
           >
             Open pokémon details

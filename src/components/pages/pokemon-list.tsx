@@ -11,37 +11,34 @@ interface PokemonListProps {
 export function PokemonList(props: PokemonListProps) {
 
   const pokemonApi = usePokemonApi()
-  
   const [detailedPokemon, setDetailedPokemon] = useState([])
   const axiosService = useAxios()
+  
+  
+  // async function getDetailedPokemon() {
+  //   const detailPokemonArray = await Promise.all(
+  //     props.detail.map(async (pokemon: Pokemon) => {
+  //       const detailedResponse = await axiosService(pokemon.url);
+  //       console.log("Risposta dettagliata", detailedResponse.data);
+  //       return detailedResponse.data;
+  //     })
+  //   );
 
-  useEffect(()=> {
-    getDetailedPokemon()
-  }, [])
-
-  async function getDetailedPokemon(){
-    const detailPokemonArray = await Promise.all(
-      props.detail.map(async (pokemon: Pokemon) => {
-        const detailedResponse = await axiosService(pokemon.url)
-        console.log('Risposta dettagliata', detailedResponse.data);
-        return detailedResponse.data
-        
-      })
-
-    )
-    
-    setDetailedPokemon(detailPokemonArray)
-  }
+  //   setDetailedPokemon(detailPokemonArray);
+  // }
+  // useEffect(() => {
+  //   getDetailedPokemon();
+  // }, []);
 
   return (
     <>
    
-        {detailedPokemon.map((pokemon: Pokemon) => (
+        {props.detail.map((pokemon: Pokemon) => (
           <React.Fragment key={pokemon.id}>
 
             <PokemonSimpleCard 
             name={pokemon.name} 
-            art={pokemon.sprites.other["official-artwork"].front_default}
+            //art={pokemon.sprites.other["official-artwork"].front_default}
             id={pokemon.id}
             />
         

@@ -12,6 +12,7 @@ export function usePokemonApi() {
   const [nextPageDetail, setNextPageDetail] = useState(0);
   const [previousPage, setPreviousPage] = useState(0);
   const [allPokemonDetail, setAllPokemonDetail] = useState([])
+  const [detailedPokemon, setDetailedPokemon] = useState([])
 
   let offset = 0;
   
@@ -36,7 +37,7 @@ export function usePokemonApi() {
     const resp = await axiosService("pokemon/?offset=" + offset + "&limit=40");
     return resp.data.results;
   }
-  
+
   async function getTypeData(){
     const typesResp = await axiosService("type/")
     const typesArray = typesResp.data.results;
@@ -73,6 +74,7 @@ export function usePokemonApi() {
     console.log(pokemonArray);
     
     setPokemonDetail(pokemonArray);
+    return pokemonArray
   }
 
     async function getNextPage() {
