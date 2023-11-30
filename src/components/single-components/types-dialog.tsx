@@ -36,7 +36,7 @@ function ConfirmationDialogRaw(props: ConfirmationDialogRawProps) {
     if (!open) {
       setValue(valueProp);
     }
-  }, [valueProp, open]);
+  }, []);
 
   useEffect(() => {
     pokemonApi.actions.getTypeData()
