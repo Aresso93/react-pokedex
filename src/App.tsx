@@ -1,18 +1,16 @@
-import { Button, Checkbox, FormControlLabel, FormGroup, ThemeOptions, createTheme } from "@mui/material";
+import { Button, ThemeOptions, createTheme } from "@mui/material";
 import "./App.css";
 import PokedexHeader from "./components/single-components/header";
 import { ThemeProvider } from "@emotion/react";
 import { PokemonList } from "./components/pages/pokemon-list";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { usePokemonApi } from "./components/hooks/pokemon.api";
 import { usePokemonSearch } from "./components/hooks/use-search-pokemon";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
-import { PokemonCard, capitaliseFirstLetter } from "./components/pages/pokemon-card";
+import { PokemonCard } from "./components/pages/pokemon-card";
 import { PokemonContextProvider, usePokemonContext } from "./contexts/PokemonContext";
 import { useAxios } from "./services/axios-api";
 import TypesDialog from "./components/single-components/types-dialog";
-import { TypeCard } from "./components/pages/pokemon-type-card";
-import { TypesList } from "./components/pages/types-list";
 
 export const lightThemeOptions: ThemeOptions = {
   palette: {

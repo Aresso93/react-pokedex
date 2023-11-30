@@ -66,17 +66,13 @@ export function usePokemonApi() {
   //prima faccio la chiamata dei primi 40 E BASTA, dopodiché faccio che la chiamata singola per la card se la fa la card
 
   async function getPokemonData() {
-    const firstResponse = await axiosService(
+    const response = await axiosService(
       "pokemon/?offset=" + offset + "&limit=40"
     );
-    const firstArray = firstResponse.data.results;
-    const detailPokemonArray = await Promise.all(
-      firstArray.map(async (singlePokemon: Pokemon) => {
-        const secondResponse = await axiosService(singlePokemon.url);
-        return secondResponse.data;
-      })
-    );
-    setPokemonDetail(detailPokemonArray);
+    const pokemonArray = response.data.results;
+    console.log(pokemonArray);
+    
+    setPokemonDetail(pokemonArray);
   }
 
     async function getNextPage() {
