@@ -66,6 +66,13 @@ function App() {
     <PokemonContextProvider>
       <BrowserRouter>
         <ThemeProvider theme={darkTheme}>
+          <PokedexHeader
+            search={pokemonSearch.actions.onChange}
+            renderSearch={pokemonSearch.actions.pokemonFinder(
+              pokemonApi.states.pokemonDetail,
+              pokemonSearch.states.input
+            )}
+          />
           <Button
             variant="contained"
             color="secondary"
@@ -80,13 +87,6 @@ function App() {
           >
             PROVA PROVA PAGINA PRIMA
           </Button>
-          <PokedexHeader
-            search={pokemonSearch.actions.onChange}
-            renderSearch={pokemonSearch.actions.pokemonFinder(
-              pokemonApi.states.pokemonDetail,
-              pokemonSearch.states.input
-            )}
-          />
           <div className="outer-div">
             <Routes>
               <Route

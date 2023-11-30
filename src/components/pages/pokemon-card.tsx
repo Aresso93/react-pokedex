@@ -1,10 +1,8 @@
-/* eslint-disable prefer-const */
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import { Ability, Mfe, Pokemon, Stat, Type } from "../../model/pokemon";
-import { usePokemonContext } from "../../contexts/PokemonContext";
 import { useParams } from "react-router-dom";
 import {
   Collapse,
@@ -15,7 +13,6 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useEffect, useState } from "react";
 import { useAxios } from "../../services/axios-api";
-import { usePokemonApi } from "../hooks/pokemon.api";
 
 export function capitaliseFirstLetter(string: string) {
   if (string.includes("-")) {
@@ -58,7 +55,6 @@ interface CardProps {
 }
 
 export function PokemonCard(props: CardProps) {
-  const pokemonApi = usePokemonApi()
   const axiosService = useAxios()
   const {pokemonID} = useParams();
   console.log(pokemonID);
@@ -77,15 +73,13 @@ export function PokemonCard(props: CardProps) {
     setExpanded(!expanded);
   };
 
-  const pokemonContext = usePokemonContext();
-
   return (
     <Card className="mon-card">
       <CardHeader
         title={capitaliseFirstLetter(pokemon?.name)}
       />
       <h3>
-       Type{pokemonContext.states.singlePokemon.types.length > 1 ? "s" : ""}:
+       Type{pokemon.types.length > 1 ? "s" : ""}:
       </h3>
       {pokemon.types.map((type: Type) => (
         <div key={type.type.name}>
@@ -94,8 +88,7 @@ export function PokemonCard(props: CardProps) {
       ))}
       <CardMedia
         component="img"
-        height="300"
-        width="300"
+        height="400"
         image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
         alt="pokemon"
       />
