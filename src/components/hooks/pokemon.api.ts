@@ -42,14 +42,14 @@ export function usePokemonApi() {
     const typesResp = await axiosService("type/")
     const typesArray = typesResp.data.results;
     console.log(typesArray);
-    const detailMoveArray = await Promise.all(
+    const detailTypeArray = await Promise.all(
      typesArray.map(async (singleType: Type) => {
       const secondResponse = await axiosService(singleType.url)
       console.log(secondResponse.data);
       return secondResponse.data
     })
     );
-    setTypeData(detailMoveArray)
+    setTypeData(detailTypeArray)
   }
   
   async function getAllPokemon(){
@@ -63,8 +63,6 @@ export function usePokemonApi() {
     );
     setAllPokemonDetail(detailAllPokemonArray)
   }
-
-  //prima faccio la chiamata dei primi 40 E BASTA, dopodiché faccio che la chiamata singola per la card se la fa la card
 
   async function getPokemonData() {
     const response = await axiosService(
