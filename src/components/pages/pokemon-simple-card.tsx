@@ -29,9 +29,7 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
           variant="contained"
           color="secondary"
           onClick={() => {
-            console.log('ID NUMERO', props.id)
-            pokemonContext.actions.getSinglePokemon(props.id)
-            navigate("details/:pokemonID")
+            navigate(`/details/${props.id}`)
           }}
           >
             Open pokémon details
