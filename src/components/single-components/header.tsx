@@ -64,7 +64,7 @@ interface PokedexHeaderProps{
 export default function PokedexHeader(props: PokedexHeaderProps) {
   const navigate = useNavigate()
   useEffect(() => {
-    pokemonContext.actions.getData();
+    pokemonApi.actions.getData();
   }, []);
 
   const pokemonApi = usePokemonApi()
@@ -91,7 +91,7 @@ export default function PokedexHeader(props: PokedexHeaderProps) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Gotta catch 'em all! Browse {pokemonContext.states.genericData} pokémon (and counting)! <Button variant='contained' color='secondary'>Back</Button> Page {pokemonContext.states.currentPage} <Button variant='contained' color='secondary'>Next</Button>
+            Gotta catch 'em all! Browse {pokemonApi.states.genericData} pokémon (and counting)! <Button variant='contained' color='secondary'>Back</Button> Page {pokemonContext.states.currentPage} <Button variant='contained' color='secondary'>Next</Button>
           </Typography>
           <Search>
             <SearchIconWrapper>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pokemon } from "../../model/pokemon";
+import { Pokemon, Type } from "../../model/pokemon";
 import { useAxios } from "../../services/axios-api";
 
 export function usePokemonApi() {
@@ -8,6 +8,7 @@ export function usePokemonApi() {
   const [singlePokemon, setSinglePokemon] = useState({name: "", id: 0, art: "", abilities: [], types: [], moves: [], stats: []})
   const [genericData, setGenericData] = useState(0);
   const [moveData, setMoveData] = useState([]);
+  const [typeData, setTypeData] = useState([])
   const [nextPageDetail, setNextPageDetail] = useState(0);
   const [previousPage, setPreviousPage] = useState(0);
 
@@ -23,7 +24,7 @@ export function usePokemonApi() {
     const movesResp = await axiosService("move/");
     setMoveData(movesResp.data);
   }
-  
+
   async function getData() {
     const response = await axiosService("pokemon");
     console.log('RRRRRRRRRRR', response.data.count)
@@ -35,17 +36,33 @@ export function usePokemonApi() {
     return resp.data.results;
   }
   
+  async function getTypeData(){
+    const typesResp = await axiosService("type/")
+    const typesArray = typesResp.data.results;
+    console.log(typesArray);
+    const detailMoveArray = await Promise.all(
+     typesArray.map(async (singleType: Type) => {
+      const secondResponse = await axiosService(singleType.url)
+      console.log(secondResponse.data);
+      return secondResponse.data
+    })
+    );
+    setTypeData(detailMoveArray)
+  }
+  
   async function getPokemonData() {
-    const firstResponse = await axiosService("pokemon/?offset=" + offset + "&limit=40");
+    const firstResponse = await axiosService(
+      "pokemon/?offset=" + offset + "&limit=40"
+    );
     const firstArray = firstResponse.data.results;
     const detailPokemonArray = await Promise.all(
       firstArray.map(async (singlePokemon: Pokemon) => {
         const secondResponse = await axiosService(singlePokemon.url);
         return secondResponse.data;
       })
-      );
-      setPokemonDetail(detailPokemonArray);
-    }
+    );
+    setPokemonDetail(detailPokemonArray);
+  }
 
     async function getNextPage() {
       let currentPage = 1;
@@ -85,6 +102,7 @@ export function usePokemonApi() {
       getNextPage,
       getPreviousPage,
       getSinglePokemon,
+      getTypeData
     },
     states: {
       pokemonDetail,
@@ -92,7 +110,8 @@ export function usePokemonApi() {
       moveData,
       nextPageDetail,
       previousPage,
-      singlePokemon
+      singlePokemon,
+      typeData
     },
   };
 }

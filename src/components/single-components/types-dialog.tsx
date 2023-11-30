@@ -7,6 +7,8 @@ import Dialog from '@mui/material/Dialog';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { usePokemonApi } from '../hooks/pokemon.api';
+import { useEffect } from 'react';
 
 const options = [
   'Bug',
@@ -34,15 +36,20 @@ export interface ConfirmationDialogRawProps {
 }
 
 function ConfirmationDialogRaw(props: ConfirmationDialogRawProps) {
+  const pokemonApi = usePokemonApi()
   const { onClose, value: valueProp, open, ...other } = props;
   const [value, setValue] = React.useState(valueProp);
   const radioGroupRef = React.useRef<HTMLElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) {
       setValue(valueProp);
     }
   }, [valueProp, open]);
+
+  useEffect(() => {
+    pokemonApi.actions.getTypeData
+  },[])
 
   const handleEntering = () => {
     if (radioGroupRef.current != null) {
@@ -79,12 +86,12 @@ function ConfirmationDialogRaw(props: ConfirmationDialogRawProps) {
           value={value}
           onChange={handleChange}
         >
-          {options.map((option) => (
+          {pokemonApi.states.typeData.map((type) => (
             <FormControlLabel
-              value={option}
-              key={option}
+              value={type.name}
+              key={type.name}
               control={<Radio />}
-              label={option}
+              label={type.name}
             />
           ))}
         </RadioGroup>
@@ -99,7 +106,7 @@ function ConfirmationDialogRaw(props: ConfirmationDialogRawProps) {
   );
 }
 
-export default function ConfirmationDialog() {
+export default function TypesDialog() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('Dione');
 

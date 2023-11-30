@@ -10,6 +10,9 @@ import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import { PokemonCard } from "./components/pages/pokemon-card";
 import { PokemonContextProvider, usePokemonContext } from "./contexts/PokemonContext";
 import { useAxios } from "./services/axios-api";
+import TypesDialog from "./components/single-components/types-dialog";
+import { TypeCard } from "./components/pages/pokemon-type-card";
+import { TypesList } from "./components/pages/types-list";
 
 export const lightThemeOptions: ThemeOptions = {
   palette: {
@@ -53,6 +56,10 @@ function App() {
     pokemonApi.actions.getPokemonData();
   }, []);
 
+  useEffect(() => {
+    pokemonApi.actions.getTypeData()
+  }, [])
+
   //useEffect(() => {
   //  pokemonApi.actions.getNextPage()
   //}, [pokemonApi.actions.getNextPage])
@@ -71,22 +78,42 @@ function App() {
             renderSearch={pokemonSearch.actions.pokemonFinder(
               pokemonApi.states.pokemonDetail,
               pokemonSearch.states.input
-            )}
-          />
+              )}
+              />
           <Button
             variant="contained"
             color="secondary"
             onClick={pokemonApi.actions.getNextPage}
-          >
+            >
             PROVA PROVA PROSSIMA PAGINA
           </Button>
           <Button
             variant="contained"
             color="secondary"
             onClick={pokemonApi.actions.getPreviousPage}
-          >
+            >
             PROVA PROVA PAGINA PRIMA
           </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={pokemonApi.actions.getTypeData}
+            >
+            PROVA PROVA TIPI
+          </Button>
+            <TypesDialog/>
+            {/* <div>
+              {pokemonApi.states.typeData.map((type) => (
+                <div>{type}</div>
+                ))}
+                </div> */}
+
+
+                <TypesList 
+                detail={pokemonApi.states.typeData}>
+                  
+                </TypesList>
+
           <div className="outer-div">
             <Routes>
               <Route
