@@ -9,23 +9,7 @@ import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { usePokemonApi } from '../hooks/pokemon.api';
 import { useEffect } from 'react';
-
-const options = [
-  'Bug',
-  'Atria',
-  'Callisto',
-  'Dione',
-  'Ganymede',
-  'Hangouts Call',
-  'Luna',
-  'Oberon',
-  'Phobos',
-  'Pyxis',
-  'Sedna',
-  'Titania',
-  'Triton',
-  'Umbriel',
-];
+import { capitaliseFirstLetter } from '../pages/pokemon-card';
 
 export interface ConfirmationDialogRawProps {
   id: string;
@@ -35,12 +19,19 @@ export interface ConfirmationDialogRawProps {
   onClose: (value?: string) => void;
 }
 
+
 function ConfirmationDialogRaw(props: ConfirmationDialogRawProps) {
   const pokemonApi = usePokemonApi()
   const { onClose, value: valueProp, open, ...other } = props;
   const [value, setValue] = React.useState(valueProp);
   const radioGroupRef = React.useRef<HTMLElement>(null);
+  
+  
+  let pokemonTypes = pokemonApi.states.typeData 
 
+  console.log('TIPI', pokemonTypes);
+  
+  
   useEffect(() => {
     if (!open) {
       setValue(valueProp);
@@ -48,7 +39,7 @@ function ConfirmationDialogRaw(props: ConfirmationDialogRawProps) {
   }, [valueProp, open]);
 
   useEffect(() => {
-    pokemonApi.actions.getTypeData
+    pokemonApi.actions.getTypeData()
   },[])
 
   const handleEntering = () => {
@@ -86,12 +77,12 @@ function ConfirmationDialogRaw(props: ConfirmationDialogRawProps) {
           value={value}
           onChange={handleChange}
         >
-          {pokemonApi.states.typeData.map((type) => (
+          {pokemonTypes.map((type) => (
             <FormControlLabel
               value={type.name}
               key={type.name}
               control={<Radio />}
-              label={type.name}
+              label={capitaliseFirstLetter(type.name)}
             />
           ))}
         </RadioGroup>
