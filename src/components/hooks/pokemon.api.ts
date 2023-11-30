@@ -11,6 +11,7 @@ export function usePokemonApi() {
   const [typeData, setTypeData] = useState([])
   const [nextPageDetail, setNextPageDetail] = useState(0);
   const [previousPage, setPreviousPage] = useState(0);
+  const [allPokemonDetail, setAllPokemonDetail] = useState([])
 
   let offset = 0;
   
@@ -50,6 +51,20 @@ export function usePokemonApi() {
     setTypeData(detailMoveArray)
   }
   
+  async function getAllPokemon(){
+    const allMonResp = await axiosService("pokemon/?offset=0&limit=2000")
+    const allMonArray = allMonResp.data.results;
+    const detailAllPokemonArray = await Promise.all(
+      allMonArray.map(async (singlePokemon: Pokemon) => {
+        const secondResponse = await axiosService(singlePokemon.url);
+        return secondResponse.data
+      })
+    );
+    setAllPokemonDetail(detailAllPokemonArray)
+  }
+
+  //prima faccio la chiamata dei primi 40 E BASTA, dopodiché faccio che la chiamata singola per la card se la fa la card
+
   async function getPokemonData() {
     const firstResponse = await axiosService(
       "pokemon/?offset=" + offset + "&limit=40"
@@ -102,7 +117,8 @@ export function usePokemonApi() {
       getNextPage,
       getPreviousPage,
       getSinglePokemon,
-      getTypeData
+      getTypeData,
+      getAllPokemon
     },
     states: {
       pokemonDetail,
@@ -111,7 +127,8 @@ export function usePokemonApi() {
       nextPageDetail,
       previousPage,
       singlePokemon,
-      typeData
+      typeData,
+      allPokemonDetail
     },
   };
 }
