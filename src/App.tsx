@@ -22,6 +22,7 @@ import {
   usePokemonContext,
 } from "./contexts/PokemonContext";
 import { useAxios } from "./services/axios-api";
+import TypesSelect from "./components/single-components/types-select";
 
 export const lightThemeOptions: ThemeOptions = {
   palette: {
@@ -89,6 +90,9 @@ function App() {
                 pokemonSearch.states.input
               )}
             />
+            <div className="select-div">
+            <TypesSelect/>
+            </div>
             {/* <Button
               variant="contained"
               color="secondary"

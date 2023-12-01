@@ -9,6 +9,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { usePokemonApi } from '../hooks/pokemon.api';
 import { useEffect, useState } from 'react';
 import { capitaliseFirstLetter } from '../pages/pokemon-card';
+import { PokemonSimpleCard } from '../pages/pokemon-simple-card';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -48,15 +49,15 @@ export default function TypesSelect() {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
       );
-      
       for (let i = 0; i < value.length; i++) {
         const string = value[i];
         pokemonApi.actions.getPokemonByType(string)
-        
       }
   };
 
   return (
+    <>
+    
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-checkbox-label">Filter pokémon by type</InputLabel>
@@ -82,6 +83,16 @@ export default function TypesSelect() {
       </FormControl>
     </div>
 
-    
+    <div>
+        {pokemonApi.states.pokemonByType.map((singlePokemon)=> (
+            <PokemonSimpleCard 
+            name={singlePokemon.name} 
+            art={''} 
+            id={0}
+            />
+        ))}
+        
+    </div>
+    </>
   );
 }

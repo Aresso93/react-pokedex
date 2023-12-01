@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { PokemonSimpleCard } from "./pokemon-simple-card";
 import { usePokemonApi } from "../hooks/pokemon.api";
 import { useAxios } from "../../services/axios-api";
+import { capitaliseFirstLetter } from "./pokemon-card";
 
 interface PokemonListProps {
   detail: Pokemon[];
@@ -37,7 +38,7 @@ export function PokemonList(props: PokemonListProps) {
           <React.Fragment key={pokemon.name}>
 
             <PokemonSimpleCard 
-            name={pokemon.name} 
+            name={capitaliseFirstLetter(pokemon.name)} 
             art={pokemon.sprites.other["official-artwork"].front_default}
             id={pokemon.id}
             />
