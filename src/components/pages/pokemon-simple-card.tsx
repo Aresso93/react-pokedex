@@ -9,13 +9,34 @@ import { Pokemon } from "../../model/pokemon";
 interface PokemonSimpleCard{
     name: string;
     art: string;
-    id: number;
+    //id: number;
 }
 
 export function PokemonSimpleCard(props: PokemonSimpleCard){
   const navigate = useNavigate()
   const pokemonApi = usePokemonApi()
-  
+  const axiosService = useAxios()
+  const [singlePokemon, setSinglePokemon] = useState({
+    name: "",
+    id: 0,
+    art: "",
+    abilities: [],
+    types: [],
+    moves: [],
+    stats: [],
+  });
+
+  console.log(singlePokemon);
+
+  async function getSinglePokemon(pokemonName: string) {
+    const pokemonResp = await axiosService("pokemon/" + pokemonName);
+    setSinglePokemon(pokemonResp.data);
+  }
+
+  useEffect(() => {
+    getSinglePokemon(props.name);
+  }, []);
+
     return (
         <Card className="mon-card">
           <div className="mon-name">
@@ -26,7 +47,7 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
             component="img"
             height="500"
             width="500"
-            image={props.art}
+            image={singlePokemon.sprites.other["official-artwork"].front_default}
             alt={`${props.name}-img`}
           />
           <div className="card-button">
