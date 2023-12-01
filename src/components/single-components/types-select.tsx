@@ -66,8 +66,8 @@ export default function TypesSelect() {
           MenuProps={MenuProps}
         >
           {pokemonApi.states.typeData.map((type) => (
-            <MenuItem key={type.name} value={type.name}>
-              <Checkbox checked={pokemonType.indexOf(type.name) > -1} />
+            <MenuItem key={type.name} value={capitaliseFirstLetter(type.name)}>
+              <Checkbox checked={pokemonType.indexOf(capitaliseFirstLetter(type.name)) > -1} />
               <ListItemText primary={capitaliseFirstLetter(type.name)} />
             </MenuItem>
           ))}
