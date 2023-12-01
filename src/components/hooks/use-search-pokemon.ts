@@ -15,7 +15,6 @@ export function usePokemonSearch(){
     function pokemonFinder(array: Pokemon[], input:string){
         array = pokemonApi.states.pokemonDetail
         const filteredPokemon = array.filter((pokemon) => pokemon.name.includes(input.toLowerCase()))
-        console.log('Pokémon filtrati', filteredPokemon);
         return filteredPokemon;
       }
 

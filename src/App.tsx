@@ -71,10 +71,6 @@ function App() {
     pokemonApi.actions.getTypeData();
   }, []);
 
-  useEffect(() => {
-    pokemonApi.actions.getPokemonByType("dark");
-  }, []);
-
   //useEffect(() => {
   //  pokemonApi.actions.getNextPage()
   //}, [pokemonApi.actions.getNextPage])

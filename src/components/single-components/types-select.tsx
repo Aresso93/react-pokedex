@@ -81,5 +81,7 @@ export default function TypesSelect() {
         </Select>
       </FormControl>
     </div>
+
+    
   );
 }
