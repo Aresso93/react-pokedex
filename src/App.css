@@ -60,3 +60,8 @@ html, body{
   padding: 4px;
   margin: 4px;
 }
+
+.mon-name{
+  display: flex;
+  justify-content: center;
+}

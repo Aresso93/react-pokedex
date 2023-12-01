@@ -1,14 +1,14 @@
 import { Card, CardHeader, CardMedia, CardContent, Button } from "@mui/material";
 import { capitaliseFirstLetter } from "./pokemon-card";
 import { usePokemonApi } from "../hooks/pokemon.api";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAxios } from "../../services/axios-api";
 import { Pokemon } from "../../model/pokemon";
 
 interface PokemonSimpleCard{
     name: string;
-    //art: string;
+    art: string;
     id: number;
 }
 
@@ -18,11 +18,14 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
   
     return (
         <Card className="mon-card">
+          <div className="mon-name">
+
           <CardHeader title={capitaliseFirstLetter(props.name)} />
+          </div>
           <CardMedia
             component="img"
-            height="300"
-            width="300"
+            height="500"
+            width="500"
             image={`https://img.pokemondb.net/artwork/large/${props.name}.jpg`}
             alt={`${props.name}-img`}
           />

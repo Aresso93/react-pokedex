@@ -114,7 +114,8 @@ export function usePokemonApi() {
       getPreviousPage,
       getSinglePokemon,
       getTypeData,
-      getAllPokemon
+      getAllPokemon,
+    
     },
     states: {
       pokemonDetail,

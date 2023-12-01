@@ -83,7 +83,7 @@ function App() {
     <>
       <PokemonContextProvider>
         <BrowserRouter>
-          <ThemeProvider theme={lightTheme}>
+          {/* <ThemeProvider theme={lightTheme}> */}
             <PokedexHeader
               search={pokemonSearch.actions.onChange}
               renderSearch={pokemonSearch.actions.pokemonFinder(
@@ -132,7 +132,7 @@ function App() {
                 <Route path="*" element={<Navigate to="/home" />} />
               </Routes>
             </div>
-          </ThemeProvider>
+          {/* </ThemeProvider> */}
         </BrowserRouter>
       </PokemonContextProvider>
     </>
