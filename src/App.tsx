@@ -23,6 +23,7 @@ import {
 } from "./contexts/PokemonContext";
 import { useAxios } from "./services/axios-api";
 import TypesDialog from "./components/single-components/types-dialog";
+import TypesSelect from "./components/single-components/types-select";
 
 export const lightThemeOptions: ThemeOptions = {
   palette: {
@@ -82,7 +83,7 @@ function App() {
     <>
       <PokemonContextProvider>
         <BrowserRouter>
-          <ThemeProvider theme={darkTheme}>
+          <ThemeProvider theme={lightTheme}>
             <PokedexHeader
               search={pokemonSearch.actions.onChange}
               renderSearch={pokemonSearch.actions.pokemonFinder(
@@ -105,18 +106,8 @@ function App() {
               PROVA PROVA PAGINA PRIMA
             </Button>
 
-            <TypesDialog />
-            <div className="checkbox-container">
-              {pokemonApi.states.typeData.map((singleType) => (
-                <FormControlLabel
-                  value="end"
-                  control={<Checkbox />}
-                  label={capitaliseFirstLetter(singleType.name)}
-                  labelPlacement="start"
-                />
-              ))}
-            </div>
-
+                <TypesSelect/>
+          
             <div className="outer-div">
               <Routes>
                 <Route
