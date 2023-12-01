@@ -20,7 +20,7 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
         <Card className="mon-card">
           <div className="mon-name">
 
-          <CardHeader title={props.name}/>
+          <CardHeader title={capitaliseFirstLetter(props.name)}/>
           </div>
           <CardMedia
             component="img"

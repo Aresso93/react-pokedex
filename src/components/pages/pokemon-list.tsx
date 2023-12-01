@@ -38,7 +38,7 @@ export function PokemonList(props: PokemonListProps) {
           <React.Fragment key={pokemon.name}>
 
             <PokemonSimpleCard 
-            name={capitaliseFirstLetter(pokemon.name)} 
+            name={pokemon.name} 
             art={pokemon.sprites.other["official-artwork"].front_default}
             id={pokemon.id}
             />

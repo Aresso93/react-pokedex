@@ -24,8 +24,8 @@ export function usePokemonApi() {
 
   let offset = 0;
 
-  async function getSinglePokemon(pokemonID: number) {
-    const pokemonResp = await axiosService("pokemon/" + pokemonID);
+  async function getSinglePokemon(pokemonName: string) {
+    const pokemonResp = await axiosService("pokemon/" + pokemonName);
     setSinglePokemon(pokemonResp.data);
   }
 

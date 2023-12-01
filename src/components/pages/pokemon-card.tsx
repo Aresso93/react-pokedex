@@ -75,7 +75,7 @@ export function PokemonCard(props: CardProps) {
   return (
     <Card className="mon-card">
       <CardHeader
-        title={capitaliseFirstLetter(pokemon?.name)}
+        title={capitaliseFirstLetter(pokemon.name)}
       />
       <h3>
        Type{pokemon.types.length > 1 ? "s" : ""}:
