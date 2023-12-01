@@ -58,7 +58,7 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
             navigate(`/details/${props.name}`)
           }}
           >
-            Open pokémon details (ID = {singlePokemon.id})
+            Open pokémon details
           </Button>
           </div>
         </Card>
