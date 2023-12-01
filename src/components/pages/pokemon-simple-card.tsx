@@ -21,6 +21,9 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
     types: [],
     moves: [],
     stats: [],
+    sprites: {
+      other: {"official-artwork": ''},
+    },
   });
 
   console.log(singlePokemon);
@@ -44,7 +47,7 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
             component="img"
             height="500"
             width="500"
-            //image={singlePokemon.sprites.other["official-artwork"].front_default}
+            image={singlePokemon.sprites.other["official-artwork"].front_default}
             alt={`${props.name}-img`}
           />
           <div className="card-button">
@@ -55,7 +58,7 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
             navigate(`/details/${props.name}`)
           }}
           >
-            Open pokémon details
+            Open pokémon details (ID = {singlePokemon.id})
           </Button>
           </div>
         </Card>

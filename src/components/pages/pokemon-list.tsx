@@ -33,7 +33,6 @@ export function PokemonList(props: PokemonListProps) {
 
   return (
     <>
-   
         {props.detail.map((pokemon: Pokemon) => (
           <React.Fragment key={pokemon.name}>
 
