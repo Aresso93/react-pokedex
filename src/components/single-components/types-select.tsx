@@ -35,7 +35,13 @@ export default function TypesSelect() {
     setPokemonType(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
-    );
+      );
+      console.log(value)
+      for (let i = 0; i < value.length; i++) {
+        const string = value[i];
+        pokemonApi.actions.getPokemonByType(string)
+        
+      }
   };
 
   return (
@@ -53,8 +59,8 @@ export default function TypesSelect() {
           MenuProps={MenuProps}
         >
           {pokemonApi.states.typeData.map((type) => (
-            <MenuItem key={type.name} value={capitaliseFirstLetter(type.name)}>
-              <Checkbox checked={pokemonType.indexOf(capitaliseFirstLetter(type.name)) > -1} />
+            <MenuItem key={type.name} value={type.name}>
+              <Checkbox checked={pokemonType.indexOf(type.name) > -1} />
               <ListItemText primary={capitaliseFirstLetter(type.name)} />
             </MenuItem>
           ))}
