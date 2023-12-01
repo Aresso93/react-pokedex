@@ -8,8 +8,6 @@ import { Pokemon } from "../../model/pokemon";
 
 interface PokemonSimpleCard{
     name: string;
-    art: string;
-    //id: number;
 }
 
 export function PokemonSimpleCard(props: PokemonSimpleCard){
@@ -19,7 +17,6 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
   const [singlePokemon, setSinglePokemon] = useState({
     name: "",
     id: 0,
-    art: "",
     abilities: [],
     types: [],
     moves: [],
@@ -47,7 +44,7 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
             component="img"
             height="500"
             width="500"
-            image={singlePokemon.sprites.other["official-artwork"].front_default}
+            //image={singlePokemon.sprites.other["official-artwork"].front_default}
             alt={`${props.name}-img`}
           />
           <div className="card-button">

@@ -39,7 +39,6 @@ export function PokemonList(props: PokemonListProps) {
 
             <PokemonSimpleCard 
             name={pokemon.name}
-            art= {''} 
             />
         
           </React.Fragment>
