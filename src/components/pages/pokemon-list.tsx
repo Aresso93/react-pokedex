@@ -15,30 +15,30 @@ export function PokemonList(props: PokemonListProps) {
   const axiosService = useAxios()
   
   
-  // async function getDetailedPokemon() {
-  //   const detailPokemonArray = await Promise.all(
-  //     props.detail.map(async (pokemon: Pokemon) => {
-  //       const detailedResponse = await axiosService(pokemon.url);
-  //       console.log("Risposta dettagliata", detailedResponse.data);
-  //       return detailedResponse.data;
-  //     })
-  //   );
+   async function getDetailedPokemon() {
+     const detailPokemonArray = await Promise.all(
+       props.detail.map(async (pokemon: Pokemon) => {
+         const detailedResponse = await axiosService(pokemon.url);
+         console.log("Risposta dettagliata", detailedResponse.data);
+         return detailedResponse.data;
+       })
+     )
+     setDetailedPokemon(detailPokemonArray);
+   }
 
-  //   setDetailedPokemon(detailPokemonArray);
-  // }
-  // useEffect(() => {
-  //   getDetailedPokemon();
-  // }, []);
+   useEffect(() => {
+     getDetailedPokemon();
+   }, [props.detail]);
 
   return (
     <>
    
-        {props.detail.map((pokemon: Pokemon) => (
+        {detailedPokemon.map((pokemon: Pokemon) => (
           <React.Fragment key={pokemon.name}>
 
             <PokemonSimpleCard 
             name={pokemon.name} 
-            //art={pokemon.sprites.other["official-artwork"].front_default}
+            art={pokemon.sprites.other["official-artwork"].front_default}
             id={pokemon.id}
             />
         

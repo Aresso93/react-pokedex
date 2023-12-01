@@ -26,7 +26,7 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
             component="img"
             height="500"
             width="500"
-            image={`https://img.pokemondb.net/artwork/large/${props.name}.jpg`}
+            image={props.art}
             alt={`${props.name}-img`}
           />
           <div className="card-button">
