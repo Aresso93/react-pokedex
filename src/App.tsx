@@ -22,8 +22,6 @@ import {
   usePokemonContext,
 } from "./contexts/PokemonContext";
 import { useAxios } from "./services/axios-api";
-import TypesDialog from "./components/single-components/types-dialog";
-import TypesSelect from "./components/single-components/types-select";
 
 export const lightThemeOptions: ThemeOptions = {
   palette: {
@@ -91,7 +89,7 @@ function App() {
                 pokemonSearch.states.input
               )}
             />
-            <Button
+            {/* <Button
               variant="contained"
               color="secondary"
               onClick={pokemonApi.actions.getNextPage}
@@ -104,10 +102,8 @@ function App() {
               onClick={pokemonApi.actions.getPreviousPage}
             >
               PROVA PROVA PAGINA PRIMA
-            </Button>
+            </Button> */}
 
-                <TypesSelect/>
-          
             <div className="outer-div">
               <Routes>
                 <Route
