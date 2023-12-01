@@ -34,7 +34,7 @@ export function PokemonList(props: PokemonListProps) {
     <>
    
         {props.detail.map((pokemon: Pokemon) => (
-          <React.Fragment key={pokemon.id}>
+          <React.Fragment key={pokemon.name}>
 
             <PokemonSimpleCard 
             name={pokemon.name} 

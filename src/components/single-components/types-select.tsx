@@ -24,6 +24,18 @@ const MenuProps = {
 export default function TypesSelect() {
   const [pokemonType, setPokemonType] = useState<string[]>([]);
   const pokemonApi = usePokemonApi()
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    console.log('Capitolo CHIUSO')
+    
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   useEffect(() => {
     pokemonApi.actions.getTypeData()
   },[])
@@ -36,7 +48,7 @@ export default function TypesSelect() {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
       );
-      console.log(value)
+      
       for (let i = 0; i < value.length; i++) {
         const string = value[i];
         pokemonApi.actions.getPokemonByType(string)
@@ -54,6 +66,8 @@ export default function TypesSelect() {
           multiple
           value={pokemonType}
           onChange={handleChange}
+          onClose={handleClose}
+          onOpen={handleOpen}
           input={<OutlinedInput label="Types" />}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}

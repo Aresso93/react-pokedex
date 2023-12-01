@@ -26,7 +26,6 @@ export function usePokemonApi() {
 
   async function getSinglePokemon(pokemonID: number) {
     const pokemonResp = await axiosService("pokemon/" + pokemonID);
-    console.log(pokemonResp.data);
     setSinglePokemon(pokemonResp.data);
   }
 
@@ -49,11 +48,9 @@ export function usePokemonApi() {
   async function getTypeData() {
     const typesResp = await axiosService("type/");
     const typesArray = typesResp.data.results;
-    console.log(typesArray);
     const detailTypeArray = await Promise.all(
       typesArray.map(async (singleType: Type) => {
         const secondResponse = await axiosService(singleType.url);
-        console.log(secondResponse.data);
         return secondResponse.data;
       })
     );

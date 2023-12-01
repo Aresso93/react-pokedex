@@ -79,7 +79,6 @@ function App() {
   //  pokemonApi.actions.getNextPage()
   //}, [pokemonApi.actions.getNextPage])
 
-  console.log("HHHHHHHHH", usePokemonContext().states.currentPage);
   //console.log('INPUTTONE', pokemonSearch.states.input);
   //console.log(pokemonApi.states.currentPage);
 
