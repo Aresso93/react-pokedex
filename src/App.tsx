@@ -83,6 +83,7 @@ function App() {
     <>
       <PokemonContextProvider>
         <BrowserRouter>
+        <div style={{backgroundImage: "url(/pokeball-background.jpg)"}}>
           {/* <ThemeProvider theme={lightTheme}> */}
             <PokedexHeader
               search={pokemonSearch.actions.onChange}
@@ -111,7 +112,7 @@ function App() {
             <div className="outer-div">
               <Routes>
                 <Route
-                  path="details/:pokemonID"
+                  path="details/:pokemonName"
                   element={
                     <PokemonCard
                       name={pokemonContext.states.singlePokemon.name}
@@ -133,6 +134,7 @@ function App() {
               </Routes>
             </div>
           {/* </ThemeProvider> */}
+          </div>
         </BrowserRouter>
       </PokemonContextProvider>
     </>

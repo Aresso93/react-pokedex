@@ -13,6 +13,7 @@ import { Button } from '@mui/material';
 import { usePokemonSearch } from '../hooks/use-search-pokemon';
 import { usePokemonContext } from '../../contexts/PokemonContext';
 import { useNavigate } from 'react-router-dom';
+import TypesSelect from './types-select';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'sticky',
@@ -93,16 +94,7 @@ export default function PokedexHeader(props: PokedexHeaderProps) {
           >
             Gotta catch 'em all! Browse {pokemonApi.states.genericData} pokémon (and counting)! <Button variant='contained' color='secondary'>Back</Button> Page {pokemonContext.states.currentPage} <Button variant='contained' color='secondary'>Next</Button>
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search mon…"
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={props.search}
-            />
-          </Search>
+         <TypesSelect/>
         </Toolbar>
       </AppBar>
     </Box>

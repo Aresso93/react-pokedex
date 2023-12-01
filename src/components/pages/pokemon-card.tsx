@@ -56,16 +56,15 @@ interface CardProps {
 
 export function PokemonCard(props: CardProps) {
   const axiosService = useAxios()
-  const {pokemonID} = useParams();
-  console.log(pokemonID);
+  const {pokemonName} = useParams();
 
   const [pokemon, setPokemon] = useState({name: '', types: [], stats: [], moves: [], abilities: [], id: 0})
 
   useEffect(() => {
-    axiosService.get("https://pokeapi.co/api/v2/pokemon/"+pokemonID)
+    axiosService.get("https://pokeapi.co/api/v2/pokemon/"+pokemonName)
     .then((resp) => setPokemon(resp.data))
     
-  }, [pokemonID]);
+  }, [pokemonName]);
 
   const [expanded, setExpanded] = useState(false);
 
