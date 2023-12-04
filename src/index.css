@@ -54,3 +54,7 @@ button:focus-visible {
   }
 }
 
+#root > div > div.MuiFormGroup-root.css-dmmspl-MuiFormGroup-root > label{
+  width: 0%;
+  margin: 0px;
+}

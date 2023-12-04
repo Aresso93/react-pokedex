@@ -1,7 +1,5 @@
 import {
   Button,
-  Checkbox,
-  FormControlLabel,
   ThemeOptions,
   createTheme,
 } from "@mui/material";
@@ -15,7 +13,6 @@ import { usePokemonSearch } from "./components/hooks/use-search-pokemon";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import {
   PokemonCard,
-  capitaliseFirstLetter,
 } from "./components/pages/pokemon-card";
 import {
   PokemonContextProvider,
@@ -98,7 +95,7 @@ function App() {
             <ThemeSwitch
             click= {()=> setLight((prev) => !prev)}
             />
-            {/* <Button
+            <Button
               variant="contained"
               color="secondary"
               onClick={pokemonApi.actions.getNextPage}
@@ -111,7 +108,7 @@ function App() {
               onClick={pokemonApi.actions.getPreviousPage}
             >
               PROVA PROVA PAGINA PRIMA
-            </Button> */}
+            </Button>
 
             <div className="outer-div">
               <Routes>
@@ -119,7 +116,7 @@ function App() {
                   path="details/:pokemonName"
                   element={
                     <PokemonCard
-                      name={pokemonContext.states.singlePokemon.name}
+                      name={pokemonApi.states.singlePokemon.name}
                       art={""}
                       abilities={[]}
                       moves={[]}
@@ -132,6 +129,12 @@ function App() {
                   path="home"
                   element={
                     <PokemonList detail={pokemonApi.states.pokemonDetail} />
+                  }
+                />
+                 <Route
+                  path="page/:pageNumber"
+                  element={
+                    <PokemonList detail={pokemonApi.states.nextPageDetail} />
                   }
                 />
                 <Route path="*" element={<Navigate to="/home" />} />

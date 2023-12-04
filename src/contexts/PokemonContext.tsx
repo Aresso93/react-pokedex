@@ -7,20 +7,7 @@ export const PokemonContext = createContext({
         getData: () => 0,
     },
     states: {
-        currentPage: 0,
-        singlePokemon: {
-            name: '',
-            sprites: {
-                other:{["official-artwork"]:{
-                    front_default: ''
-                }},
-            },
-            id: 0,
-            stats: [],
-            moves: [],
-            types: [],
-            abilities: [],
-        },
+        currentPage: 1,
         genericData: 0
     }
 })

@@ -74,9 +74,32 @@ export function usePokemonApi() {
       "pokemon/?offset=" + offset + "&limit=40"
     );
     const pokemonArray = response.data.results;
-
     setPokemonDetail(pokemonArray);
     return pokemonArray;
+  }
+  // async function getNextPage() {
+  //   //let currentPage = 1;
+  //   //currentPage++;
+  //   offset = offset + 40;
+  //   console.log(offset);
+    
+  //   const nextResp = await getOnlyData();
+  //   console.log("next resp", nextResp);
+  //   const nextPageDetailPokemonArray = await Promise.all(
+  //     nextResp.map(async (singlePokemon: Pokemon) => {
+  //       const nextPageResponse = await axiosService(singlePokemon.url);
+  //       return nextPageResponse.data;
+  //     })
+  //   );
+  //   setNextPageDetail(nextPageDetailPokemonArray);
+  // }
+
+  async function getNextPage(){
+    offset = offset + 40
+    getOnlyData()
+    let nextResp = await getOnlyData()
+    console.log(nextResp);
+    
   }
 
   async function getPokemonByType(typeName: string) {
@@ -87,34 +110,19 @@ export function usePokemonApi() {
     
   }
 
-  async function getNextPage() {
-    let currentPage = 1;
-    currentPage++;
-    offset = offset + 40;
-    const nextResp = await getOnlyData();
-    const nextPageDetailPokemonArray = await Promise.all(
-      nextResp.map(async (singlePokemon: Pokemon) => {
-        const nextPageResponse = await axiosService(singlePokemon.url);
-        console.log("next resp", nextResp);
-        return nextPageResponse.data;
-      })
-    );
-    setNextPageDetail(nextPageDetailPokemonArray);
-  }
-
   async function getPreviousPage() {
-    let currentPage = 1;
-    if (currentPage >= 2) {
-      currentPage--;
-    }
+   //let currentPage = 1;
+   //if (currentPage >= 2) {
+   //  currentPage--;
+   //}
 
     if (offset > 0) {
       offset = offset - 40;
       const prevResp = await getOnlyData();
       console.log(prevResp);
     }
-    setPreviousPage(currentPage);
-    console.log("Pagina attuale", currentPage);
+    //setPreviousPage(currentPage);
+    //console.log("Pagina attuale", currentPage);
   }
 
   return {

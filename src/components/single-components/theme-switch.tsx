@@ -55,7 +55,7 @@ export default function ThemeSwitch({click}) {
       <FormGroup>
         <FormControlLabel
           control={<MaterialUISwitch sx={{ m: 1 }}/>}
-          label="Switch theme"
+          //label="Switch theme"
           onClick={click}
         />
       </FormGroup>
