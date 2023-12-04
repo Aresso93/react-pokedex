@@ -29,7 +29,6 @@ export default function TypesSelect() {
 
   const handleClose = () => {
     setOpen(false);
-    console.log('Capitolo CHIUSO')
     
   };
 
@@ -82,7 +81,7 @@ export default function TypesSelect() {
         </Select>
       </FormControl>
     </div>
-
+{/* 
     <div>
         {pokemonApi.states.pokemonByType.map((singlePokemon)=> (
             <PokemonSimpleCard 
@@ -92,7 +91,7 @@ export default function TypesSelect() {
             />
         ))}
         
-    </div>
+    </div> */}
     </>
   );
 }

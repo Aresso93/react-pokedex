@@ -14,11 +14,6 @@ html, body{
   box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
 .card-container{
   display: flex;
   flex-direction: column;
@@ -46,6 +41,10 @@ html, body{
   margin: 16px;
   padding: 8px;
 }
+
+/* .css-bhp9pd-MuiPaper-root-MuiCard-root{
+  background-color: aqua;
+} */
 
 .outer-div{
   display: flex;

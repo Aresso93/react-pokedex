@@ -9,7 +9,7 @@ import "./App.css";
 import PokedexHeader from "./components/single-components/header";
 import { ThemeProvider } from "@emotion/react";
 import { PokemonList } from "./components/pages/pokemon-list";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePokemonApi } from "./components/hooks/pokemon.api";
 import { usePokemonSearch } from "./components/hooks/use-search-pokemon";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
@@ -23,6 +23,7 @@ import {
 } from "./contexts/PokemonContext";
 import { useAxios } from "./services/axios-api";
 import TypesSelect from "./components/single-components/types-select";
+import ThemeSwitch from "./components/single-components/theme-switch";
 
 export const lightThemeOptions: ThemeOptions = {
   palette: {
@@ -57,6 +58,7 @@ let lightTheme = createTheme(lightThemeOptions);
 let darkTheme = createTheme(darkThemeOptions);
 
 function App() {
+  const [light, setLight] = useState(true);
   const pokemonSearch = usePokemonSearch();
   const pokemonApi = usePokemonApi();
   const pokemonContext = usePokemonContext();
@@ -82,17 +84,19 @@ function App() {
       <PokemonContextProvider>
         <BrowserRouter>
         <div style={{backgroundImage: "url(/pokeball-background.jpg)"}}>
-          {/* <ThemeProvider theme={lightTheme}> */}
+          <ThemeProvider theme={light ? lightTheme : darkTheme}>
             <PokedexHeader
               search={pokemonSearch.actions.onChange}
               renderSearch={pokemonSearch.actions.pokemonFinder(
                 pokemonApi.states.pokemonDetail,
                 pokemonSearch.states.input
-              )}
+                )}
             />
             <div className="select-div">
             <TypesSelect/>
             </div>
+            <ThemeSwitch/>
+                <Button onClick={() => setLight((prev) => !prev)}>Toggle Theme</Button>
             {/* <Button
               variant="contained"
               color="secondary"
@@ -132,7 +136,7 @@ function App() {
                 <Route path="*" element={<Navigate to="/home" />} />
               </Routes>
             </div>
-          {/* </ThemeProvider> */}
+          </ThemeProvider>
           </div>
         </BrowserRouter>
       </PokemonContextProvider>

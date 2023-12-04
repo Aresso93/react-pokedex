@@ -26,8 +26,6 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
     },
   });
 
-  console.log(singlePokemon);
-
   async function getSinglePokemon(pokemonName: string) {
     const pokemonResp = await axiosService("pokemon/" + pokemonName);
     setSinglePokemon(pokemonResp.data);

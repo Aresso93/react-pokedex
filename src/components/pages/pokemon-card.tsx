@@ -117,8 +117,8 @@ export function PokemonCard(props: CardProps) {
           <hr/>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           {pokemon.moves.map((move: Mfe) => (
-            <div>
-              <span key={move.move.name}>
+            <div key={move.move.name}>
+              <span >
                 {capitaliseFirstLetter(move.move.name)}
               </span>
             </div>

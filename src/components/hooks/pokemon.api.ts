@@ -74,7 +74,6 @@ export function usePokemonApi() {
       "pokemon/?offset=" + offset + "&limit=40"
     );
     const pokemonArray = response.data.results;
-    console.log(pokemonArray);
 
     setPokemonDetail(pokemonArray);
     return pokemonArray;
