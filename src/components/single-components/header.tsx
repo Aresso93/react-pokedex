@@ -93,23 +93,26 @@ export default function PokedexHeader(props: PokedexHeaderProps) {
           >
             Gotta catch 'em all! Browse {pokemonApi.states.genericData} pokémon
             (and counting)!
-            </Typography>
-            <Typography
+          </Typography>
+          <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 0, display: { xs: "none", sm: "block" } }}>
-            <Button variant="contained" color="secondary">
-              Back
-            </Button>
-            Page {pokemonContext.states.currentPage}
-            <Button 
-            variant="contained" 
-            color="secondary"
-            onClick={pokemonApi.actions.getNextPage}
-            >
-              Next
-            </Button>
+            sx={{ flexGrow: 0, display: { xs: "none", sm: "block" } }}
+          >
+            <div className="page-div">
+              <Button variant="contained" color="secondary">
+                Back
+              </Button>
+              Page {pokemonContext.states.currentPage}
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={pokemonApi.actions.getNextPage}
+              >
+                Next
+              </Button>
+            </div>
           </Typography>
         </Toolbar>
       </AppBar>

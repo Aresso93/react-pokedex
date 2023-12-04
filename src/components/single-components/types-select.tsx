@@ -29,7 +29,6 @@ export default function TypesSelect() {
 
   const handleClose = () => {
     setOpen(false);
-    
   };
 
   const handleOpen = () => {
@@ -45,13 +44,14 @@ export default function TypesSelect() {
       target: { value },
     } = event;
     setPokemonType(
-      // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
       );
       for (let i = 0; i < value.length; i++) {
         const string = value[i];
         pokemonApi.actions.getPokemonByType(string)
+        
       }
+      console.log('PIKA PIKA', pokemonApi.states.pokemonByType);
   };
 
   return (
@@ -70,7 +70,7 @@ export default function TypesSelect() {
           input={<OutlinedInput label="Types" />}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
-        >
+          >
           {pokemonApi.states.typeData.map((type) => (
             <MenuItem key={type.name} value={type.name}>
               <Checkbox checked={pokemonType.indexOf(type.name) > -1} />
@@ -80,17 +80,13 @@ export default function TypesSelect() {
         </Select>
       </FormControl>
     </div>
-{/* 
-    <div>
-        {pokemonApi.states.pokemonByType.map((singlePokemon)=> (
-            <PokemonSimpleCard 
-            name={singlePokemon.name} 
-            art={''} 
-            id={0}
-            />
-        ))}
-        
-    </div> */}
+          <div>
+              {pokemonApi.states.pokemonByType.map((singlePokemon)=> (
+                 <div>{JSON.stringify(singlePokemon.name)} </div>
+              ))}
+              
+          </div>  
+
     </>
   );
 }
