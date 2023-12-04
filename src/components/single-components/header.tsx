@@ -86,8 +86,19 @@ export default function PokedexHeader() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            Gotta catch 'em all! Browse {pokemonApi.states.genericData} pokémon
+            Gotta browse 'em all! Search amongst {pokemonApi.states.genericData} pokémon
             (and counting)!
+          </Typography>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 0, display: { xs: "none", sm: "block" } }}
+          >
+            <div className="outer-div">
+
+            <TypesSelect/>
+            </div>
           </Typography>
           <Typography
             variant="h6"

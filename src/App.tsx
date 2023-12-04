@@ -56,7 +56,6 @@ let darkTheme = createTheme(darkThemeOptions);
 
 function App() {
   const [light, setLight] = useState(true);
-  const pokemonSearch = usePokemonSearch();
   const pokemonApi = usePokemonApi();
   const pokemonContext = usePokemonContext();
   const axiosService = useAxios();
@@ -77,19 +76,16 @@ function App() {
 
   return (
     <>
+        <div style={{backgroundImage: light ? "url(/pokeball-background.jpg)": "url(/masterball-background.jpg)"}}>
       <PokemonContextProvider>
         <BrowserRouter>
-        {/* implementare il tema qui */}
-        <div style={{backgroundImage: light ? "url(/pokeball-background.jpg)": "url(/masterball-background.jpg)"}}>
           <ThemeProvider theme={light ? lightTheme : darkTheme}>
             <PokedexHeader/>
-            <div className="select-div">
             <TypesSelect/>
-            </div>
             <ThemeSwitch
             click= {()=> setLight((prev) => !prev)}
             />
-            <Button
+            {/* <Button
               variant="contained"
               color="secondary"
               onClick={pokemonApi.actions.getNextPage}
@@ -102,7 +98,7 @@ function App() {
               onClick={pokemonApi.actions.getPreviousPage}
             >
               PROVA PROVA PAGINA PRIMA
-            </Button>
+            </Button> */}
 
             <div className="outer-div">
               <Routes>
@@ -135,9 +131,9 @@ function App() {
               </Routes>
             </div>
           </ThemeProvider>
-          </div>
         </BrowserRouter>
       </PokemonContextProvider>
+          </div>
     </>
   );
 }
