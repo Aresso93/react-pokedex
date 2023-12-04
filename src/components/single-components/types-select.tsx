@@ -10,6 +10,8 @@ import { usePokemonApi } from '../hooks/pokemon.api';
 import { useEffect, useState } from 'react';
 import { capitaliseFirstLetter } from '../pages/pokemon-card';
 import { PokemonSimpleCard } from '../pages/pokemon-simple-card';
+import { useAxios } from '../../services/axios-api';
+import { Pokemon } from '../../model/pokemon';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -25,15 +27,29 @@ const MenuProps = {
 export default function TypesSelect() {
   const [pokemonType, setPokemonType] = useState<string[]>([]);
   const pokemonApi = usePokemonApi()
+  const axiosService = useAxios()
   const [open, setOpen] = useState(false);
 
-  const multipleCall = (typeArray: string[]) => {
+  const multipleCall = async (typeArray: string[]) => {
+    const macroArray = []
     for (let i = 0; i < typeArray.length; i++) {
-      const string = typeArray[i];
-      pokemonApi.actions.getPokemonByType(string)
+      const type = typeArray[i];
+      const singleTypeResp = await axiosService("type/" + type);
+      const pokemonArray = singleTypeResp.data.pokemon;
+      console.log('pokemoni tiponi?', pokemonArray);
+      macroArray.push(pokemonArray)
+      const flatMacroArray = macroArray.flat()
+      console.log('non filtrato', flatMacroArray);
+      const ids = flatMacroArray.map(({pokemon}) => pokemon)
+      console.log('ID', ids);
+      const names = ids.map(({name}) => name);
+      const filtered = ids.filter(({name}, index) => 
+      !names.includes(name, index +1)  
+      )
+      console.log(filtered);
       
     }
-    console.log('PIKA PIKA');
+    
   }
 
   const handleClose = () => {

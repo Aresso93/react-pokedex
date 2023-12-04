@@ -57,12 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-interface PokedexHeaderProps {
-  search: React.ChangeEventHandler<HTMLInputElement>;
-  renderSearch: any;
-}
-
-export default function PokedexHeader(props: PokedexHeaderProps) {
+export default function PokedexHeader() {
   const navigate = useNavigate();
   useEffect(() => {
     pokemonApi.actions.getData();

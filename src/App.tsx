@@ -44,7 +44,7 @@ export const darkThemeOptions: ThemeOptions = {
       main: "#a54208",
     },
     secondary: {
-      main: "#086ca5",
+      main: "#e9b4fc",
     },
     background: {
       default: "#2b2929",
@@ -79,15 +79,10 @@ function App() {
     <>
       <PokemonContextProvider>
         <BrowserRouter>
-        <div style={{backgroundImage: "url(/pokeball-background.jpg)"}}>
+        {/* implementare il tema qui */}
+        <div style={{backgroundImage: light ? "url(/pokeball-background.jpg)": "url(/masterball-background.jpg)"}}>
           <ThemeProvider theme={light ? lightTheme : darkTheme}>
-            <PokedexHeader
-              search={pokemonSearch.actions.onChange}
-              renderSearch={pokemonSearch.actions.pokemonFinder(
-                pokemonApi.states.pokemonDetail,
-                pokemonSearch.states.input
-                )}
-            />
+            <PokedexHeader/>
             <div className="select-div">
             <TypesSelect/>
             </div>
