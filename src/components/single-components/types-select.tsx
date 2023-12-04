@@ -27,8 +27,18 @@ export default function TypesSelect() {
   const pokemonApi = usePokemonApi()
   const [open, setOpen] = useState(false);
 
+  const multipleCall = (typeArray: string[]) => {
+    for (let i = 0; i < typeArray.length; i++) {
+      const string = typeArray[i];
+      pokemonApi.actions.getPokemonByType(string)
+      
+    }
+    console.log('PIKA PIKA');
+  }
+
   const handleClose = () => {
     setOpen(false);
+    multipleCall(pokemonType)
   };
 
   const handleOpen = () => {
@@ -46,14 +56,17 @@ export default function TypesSelect() {
     setPokemonType(
       typeof value === 'string' ? value.split(',') : value,
       );
-      for (let i = 0; i < value.length; i++) {
-        const string = value[i];
-        pokemonApi.actions.getPokemonByType(string)
-        
-      }
-      console.log('PIKA PIKA', pokemonApi.states.pokemonByType);
+     
   };
 
+
+  
+  useEffect(() => {
+    multipleCall(pokemonType)
+  }, [])
+
+  console.log(pokemonType);
+  
   return (
     <>
     <div>
