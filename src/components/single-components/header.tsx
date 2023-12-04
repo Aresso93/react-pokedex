@@ -69,7 +69,6 @@ export default function PokedexHeader(props: PokedexHeaderProps) {
   }, []);
 
   const pokemonApi = usePokemonApi();
-  const pokemonSearch = usePokemonSearch();
   const pokemonContext = usePokemonContext();
 
   return (
@@ -94,6 +93,12 @@ export default function PokedexHeader(props: PokedexHeaderProps) {
           >
             Gotta catch 'em all! Browse {pokemonApi.states.genericData} pokémon
             (and counting)!
+            </Typography>
+            <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 0, display: { xs: "none", sm: "block" } }}>
             <Button variant="contained" color="secondary">
               Back
             </Button>

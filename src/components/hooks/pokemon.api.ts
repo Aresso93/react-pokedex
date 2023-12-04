@@ -36,7 +36,6 @@ export function usePokemonApi() {
 
   async function getData() {
     const response = await axiosService("pokemon");
-    console.log("RRRRRRRRRRR", response.data.count);
     setGenericData(response.data.count);
   }
 
@@ -99,7 +98,7 @@ export function usePokemonApi() {
     getOnlyData()
     let nextResp = await getOnlyData()
     console.log(nextResp);
-    
+    setNextPageDetail(nextResp)
   }
 
   async function getPokemonByType(typeName: string) {

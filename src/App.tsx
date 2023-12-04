@@ -69,11 +69,10 @@ function App() {
     pokemonApi.actions.getTypeData();
   }, []);
 
-  //useEffect(() => {
-  //  pokemonApi.actions.getNextPage()
-  //}, [pokemonApi.actions.getNextPage])
+  useEffect(() => {
+    pokemonApi.actions.getNextPage()
+  }, [])
 
-  //console.log('INPUTTONE', pokemonSearch.states.input);
   //console.log(pokemonApi.states.currentPage);
 
   return (
