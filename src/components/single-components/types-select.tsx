@@ -56,7 +56,6 @@ export default function TypesSelect() {
 
   return (
     <>
-    
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-checkbox-label">Filter pokémon by type</InputLabel>

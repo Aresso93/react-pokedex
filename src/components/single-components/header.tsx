@@ -94,6 +94,7 @@ export default function PokedexHeader(props: PokedexHeaderProps) {
           >
             Gotta catch 'em all! Browse {pokemonApi.states.genericData} pokémon (and counting)! <Button variant='contained' color='secondary'>Back</Button> Page {pokemonContext.states.currentPage} <Button variant='contained' color='secondary'>Next</Button>
           </Typography>
+          
         </Toolbar>
       </AppBar>
     </Box>

@@ -29,10 +29,10 @@ export const lightThemeOptions: ThemeOptions = {
   palette: {
     mode: "light",
     primary: {
-      main: "#202976",
+      main: "#f98f39",
     },
     secondary: {
-      main: "#766d20",
+      main: "#ecc320",
     },
     background: {
       default: "#ececec",
@@ -95,8 +95,9 @@ function App() {
             <div className="select-div">
             <TypesSelect/>
             </div>
-            <ThemeSwitch/>
-                <Button onClick={() => setLight((prev) => !prev)}>Toggle Theme</Button>
+            <ThemeSwitch
+            click= {()=> setLight((prev) => !prev)}
+            />
             {/* <Button
               variant="contained"
               color="secondary"

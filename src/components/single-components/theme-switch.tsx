@@ -50,12 +50,13 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default function ThemeSwitch() {
+export default function ThemeSwitch({click}) {
     return (
       <FormGroup>
         <FormControlLabel
-          control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+          control={<MaterialUISwitch sx={{ m: 1 }}/>}
           label="Switch theme"
+          onClick={click}
         />
       </FormGroup>
     );
