@@ -24,6 +24,33 @@ html, body{
 
 }
 
+.upper-div{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.spacer{
+  display: flex;
+  flex-grow: 1;
+}
+
+.mon-card-header{
+  display: flex;
+  justify-content: center;
+}
+
+.type-div{
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon-size-container{
+  display: flex;
+  flex-direction: column;
+  align-self: end;
+}
+
 .open-card{
   display: flex;
   flex-direction: row;

@@ -1,4 +1,3 @@
-
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -81,12 +80,12 @@ export default function TypesSelect() {
   return (
     <>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="pokemon-filter">
+        <InputLabel id="demo-multiple-checkbox-label">
           Filter pokémon by type
         </InputLabel>
         <Select
-          labelId="type-select"
-          id="type-select"
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
           multiple
           value={pokemonType}
           onChange={handleChange}

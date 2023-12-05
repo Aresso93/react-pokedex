@@ -78,20 +78,20 @@ function App() {
             <ThemeProvider theme={light ? lightTheme : darkTheme}>
               <PokedexHeader themeSwitch={() => setLight((prev) => !prev)} />
               <TypesSelect />
-              <Button
+              {/* <Button
                 variant="contained"
                 color="secondary"
                 onClick={pokemonApi.actions.getPreviousPage}
-              >
+                >
                 PREVIOUS PAGE TEST
-              </Button>
-              <Button
+                </Button>
+                <Button
                 variant="contained"
                 color="secondary"
                 onClick={pokemonApi.actions.getNextPage}
-              >
+                >
                 NEXT PAGE TEST
-              </Button>
+              </Button> */}
 
               <div className="outer-div">
                 <Routes>

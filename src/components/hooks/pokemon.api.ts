@@ -65,7 +65,8 @@ export function usePokemonApi() {
         return secondResponse.data;
       })
     );
-    setAllPokemonDetail(detailAllPokemonArray);
+    setAllPokemonDetail(allMonArray);
+    return allMonArray
   }
 
   async function getPokemonData() {

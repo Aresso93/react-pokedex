@@ -52,13 +52,15 @@ interface CardProps {
   moves: Mfe[];
   types: Type[];
   stats: Stat[];
+  weight: number;
+  height: number;
 }
 
 export function PokemonCard(props: CardProps) {
   const axiosService = useAxios()
   const {pokemonName} = useParams();
 
-  const [pokemon, setPokemon] = useState({name: '', types: [], stats: [], moves: [], abilities: [], id: 0})
+  const [pokemon, setPokemon] = useState({name: '', types: [], stats: [], moves: [], abilities: [], id: 0, height: 0, weight: 0})
 
   useEffect(() => {
     axiosService.get("https://pokeapi.co/api/v2/pokemon/"+pokemonName)
@@ -74,20 +76,34 @@ export function PokemonCard(props: CardProps) {
 
   return (
     <Card className="mon-card">
+      <div className="mon-card-header">
       <CardHeader
         title={capitaliseFirstLetter(pokemon.name)}
       />
+
+      </div>
+      <div className="upper-div">
+        <div className="type-div">
       <h3>
-       Type{pokemon.types.length > 1 ? "s" : ""}:
+       Type{pokemon.types.length > 1 ? "s" : ""}
       </h3>
       {pokemon.types.map((type: Type) => (
         <div key={type.type.name}>
           <span>{capitaliseFirstLetter(type.type.name)}</span>
         </div>
       ))}
+
+        </div>
+        <div className="spacer"></div>
+        <div className="pokemon-size-container">
+        <h3>Size</h3>
+        <span>Weight: {pokemon.weight / 10} kgs</span>
+        <span>Height: {pokemon.height / 10} m</span>
+        </div>
+      </div>
       <CardMedia
         component="img"
-        height="400"
+        height="500"
         image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
         alt="pokemon"
       />
