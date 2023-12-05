@@ -14,6 +14,7 @@ import { usePokemonSearch } from "../hooks/use-search-pokemon";
 import { usePokemonContext } from "../../contexts/PokemonContext";
 import { useNavigate } from "react-router-dom";
 import TypesSelect from "./types-select";
+import ThemeSwitch from "./theme-switch";
 
 const Search = styled("div")(({ theme }) => ({
   position: "sticky",
@@ -57,7 +58,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PokedexHeader() {
+interface HeaderProps{
+  themeSwitch
+}
+
+export default function PokedexHeader(props: HeaderProps) {
   const navigate = useNavigate();
   useEffect(() => {
     pokemonApi.actions.getData();
@@ -88,6 +93,18 @@ export default function PokedexHeader() {
           >
             Gotta browse 'em all! Search amongst {pokemonApi.states.genericData} pokémon
             (and counting)!
+          </Typography>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 0, display: { xs: "none", sm: "block" } }}
+          >
+            
+
+            <ThemeSwitch 
+            click={props.themeSwitch}/>
+            
           </Typography>
           <Typography
             variant="h6"

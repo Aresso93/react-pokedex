@@ -81,12 +81,12 @@ export default function TypesSelect() {
   return (
     <>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">
+        <InputLabel id="pokemon-filter">
           Filter pokémon by type
         </InputLabel>
         <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
+          labelId="type-select"
+          id="type-select"
           multiple
           value={pokemonType}
           onChange={handleChange}
