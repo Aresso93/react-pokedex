@@ -104,8 +104,7 @@ function App() {
                         abilities={[]}
                         moves={[]}
                         types={[]}
-                        stats={[]}
-                      />
+                        stats={[]} weight={0} height={0}                      />
                     }
                   />
                   <Route

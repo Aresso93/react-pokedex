@@ -61,14 +61,19 @@ export default function TypesSelect() {
   }, []);
 
   useEffect(() => {
-    filteredMon;
-  }, []);
+    multipleCall
+  }, [multipleCall]);
 
   const handleChange = (event: SelectChangeEvent<typeof pokemonType>) => {
     const {
       target: { value },
     } = event;
     setPokemonType(typeof value === "string" ? value.split(",") : value);
+
+    if (value.length === 0){
+      setFilteredMon([])
+      
+    }
   };
 
   useEffect(() => {

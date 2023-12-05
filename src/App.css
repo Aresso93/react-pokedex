@@ -27,6 +27,7 @@ html, body{
 .upper-div{
   display: flex;
   flex-direction: row;
+  padding: 8px;
 
 }
 
@@ -43,12 +44,14 @@ html, body{
 .type-div{
   display: flex;
   flex-direction: column;
+  padding: 4px;
 }
 
 .pokemon-size-container{
   display: flex;
   flex-direction: column;
   align-self: end;
+  padding: 4px;
 }
 
 .open-card{
@@ -96,4 +99,14 @@ html, body{
   padding: 8px;
   display: flex;
   gap: 8px;
+}
+
+.moves-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.move-div{
+  display: flex;
+  width: 49%;
 }
