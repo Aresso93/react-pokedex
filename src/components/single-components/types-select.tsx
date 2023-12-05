@@ -11,6 +11,7 @@ import { capitaliseFirstLetter } from "../pages/pokemon-card";
 import { useAxios } from "../../services/axios-api";
 import { Pokemon } from "../../model/pokemon";
 import { PokemonList } from "../pages/pokemon-list";
+import { PokemonSimpleCard } from "../pages/pokemon-simple-card";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -22,6 +23,7 @@ const MenuProps = {
     },
   },
 };
+
 
 export default function TypesSelect() {
   const [pokemonType, setPokemonType] = useState<string[]>([]);
@@ -45,6 +47,9 @@ export default function TypesSelect() {
       );
       setFilteredMon(filtered);
     }
+    if(typeArray.length === 0){
+      setFilteredMon([])
+    }
   };
 
   const handleClose = () => {
@@ -60,9 +65,13 @@ export default function TypesSelect() {
     pokemonApi.actions.getTypeData();
   }, []);
 
+  //useEffect(() => {
+  //  pokemonApi.actions.getAllPokemon()
+  //},[])
+
   useEffect(() => {
     multipleCall
-  }, [multipleCall]);
+  }, []);
 
   const handleChange = (event: SelectChangeEvent<typeof pokemonType>) => {
     const {
@@ -70,10 +79,6 @@ export default function TypesSelect() {
     } = event;
     setPokemonType(typeof value === "string" ? value.split(",") : value);
 
-    if (value.length === 0){
-      setFilteredMon([])
-      
-    }
   };
 
   useEffect(() => {
@@ -110,7 +115,9 @@ export default function TypesSelect() {
       </FormControl>
 
       <div className="outer-div">
-        <PokemonList detail={filteredMon} />
+        {filteredMon.map((pokemon) => (
+          <PokemonSimpleCard name={pokemon.name}></PokemonSimpleCard>
+        ))}
       </div>
     </>
   );

@@ -12,8 +12,8 @@ import { useNavigate } from "react-router-dom";
 import TypesSelect from "./types-select";
 import ThemeSwitch from "./theme-switch";
 
-interface HeaderProps{
-  themeSwitch
+interface HeaderProps {
+  themeSwitch;
 }
 
 export default function PokedexHeader(props: HeaderProps) {
@@ -45,8 +45,7 @@ export default function PokedexHeader(props: HeaderProps) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            Gotta browse 'em all! Search amongst {pokemonApi.states.genericData} pokémon
-            (and counting)!
+            Gotta browse 'em all! Search amongst {pokemonApi.states.genericData} pokémon (and counting)!
           </Typography>
           <Typography
             variant="h6"
@@ -54,11 +53,7 @@ export default function PokedexHeader(props: HeaderProps) {
             component="div"
             sx={{ flexGrow: 0, display: { xs: "none", sm: "block" } }}
           >
-            
-
-            <ThemeSwitch 
-            click={props.themeSwitch}/>
-            
+            <ThemeSwitch click={props.themeSwitch} />
           </Typography>
           <Typography
             variant="h6"
@@ -67,8 +62,7 @@ export default function PokedexHeader(props: HeaderProps) {
             sx={{ flexGrow: 0, display: { xs: "none", sm: "block" } }}
           >
             <div className="outer-div">
-
-            <TypesSelect/>
+              <TypesSelect />
             </div>
           </Typography>
           <Typography
@@ -81,7 +75,7 @@ export default function PokedexHeader(props: HeaderProps) {
               <Button variant="contained" color="secondary">
                 Back
               </Button>
-              Page {pokemonContext.states.currentPage}
+              Page {pokemonApi.states.currentPage.toString()}
               <Button
                 variant="contained"
                 color="secondary"

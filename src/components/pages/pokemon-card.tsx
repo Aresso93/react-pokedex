@@ -108,6 +108,10 @@ export function PokemonCard(props: CardProps) {
         alt="pokemon"
       />
       <CardContent>
+
+
+      <div className="upper-div">
+        <div className="type-div">
         <h3>Base stats: </h3>
         {pokemon.stats.map((stat: Stat) => (
           <div key={stat.stat.name}>
@@ -116,6 +120,10 @@ export function PokemonCard(props: CardProps) {
             </span>
           </div>
         ))}
+     
+        </div>
+        <div className="spacer"></div>
+        <div className="ability-div">
         <h3>Abilities:</h3>
         {pokemon.abilities.map(
           (ability: Ability) => (
@@ -127,6 +135,11 @@ export function PokemonCard(props: CardProps) {
             </div>
           )
         )}
+        
+        </div>
+      </div>
+
+
 
         <h3>Moves:</h3>
           Click to expand 

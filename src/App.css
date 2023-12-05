@@ -47,6 +47,14 @@ html, body{
   padding: 4px;
 }
 
+.ability-div{
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    justify-self: flex-end;
+  
+}
+
 .pokemon-size-container{
   display: flex;
   flex-direction: column;

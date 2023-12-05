@@ -5,7 +5,7 @@ import { ThemeProvider } from "@emotion/react";
 import { PokemonList } from "./components/pages/pokemon-list";
 import { useEffect, useState } from "react";
 import { usePokemonApi } from "./components/hooks/pokemon.api";
-import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import { Routes, Route, Navigate, BrowserRouter, useNavigate } from "react-router-dom";
 import { PokemonCard } from "./components/pages/pokemon-card";
 import {
   PokemonContextProvider,
@@ -13,6 +13,8 @@ import {
 } from "./contexts/PokemonContext";
 import { useAxios } from "./services/axios-api";
 import TypesSelect from "./components/single-components/types-select";
+import { HomePage } from "./components/home";
+import BackToTopButton from "./components/single-components/button";
 
 export const lightThemeOptions: ThemeOptions = {
   palette: {
@@ -48,10 +50,10 @@ let darkTheme = createTheme(darkThemeOptions);
 
 function App() {
   const [light, setLight] = useState(true);
+  //const navigate = useNavigate()
   const pokemonApi = usePokemonApi();
   //const pokemonContext = usePokemonContext();
-  //const axiosService = useAxios();
-
+  
   useEffect(() => {
     pokemonApi.actions.getPokemonData();
   }, []);
@@ -60,9 +62,9 @@ function App() {
     pokemonApi.actions.getTypeData();
   }, []);
 
-  useEffect(() => {
-    pokemonApi.actions.getNextPage();
-  }, []);
+  //useEffect(() => {
+  //  pokemonApi.actions.getNextPage();
+  //}, []);
 
   return (
     <>
@@ -77,8 +79,9 @@ function App() {
           <BrowserRouter>
             <ThemeProvider theme={light ? lightTheme : darkTheme}>
               <PokedexHeader themeSwitch={() => setLight((prev) => !prev)} />
+              
               <TypesSelect />
-              {/* <Button
+              <Button
                 variant="contained"
                 color="secondary"
                 onClick={pokemonApi.actions.getPreviousPage}
@@ -88,10 +91,13 @@ function App() {
                 <Button
                 variant="contained"
                 color="secondary"
-                onClick={pokemonApi.actions.getNextPage}
+                onClick={() => {
+                  pokemonApi.actions.getNextPage()
+                  //navigate(`/page/${pokemonApi.states.currentPage}`)
+                }} 
                 >
                 NEXT PAGE TEST
-              </Button> */}
+              </Button>
 
               <div className="outer-div">
                 <Routes>
@@ -110,7 +116,9 @@ function App() {
                   <Route
                     path="home"
                     element={
-                      <PokemonList detail={pokemonApi.states.pokemonDetail} />
+                      <HomePage>
+                        <PokemonList detail={pokemonApi.states.pokemonDetail} />
+                      </HomePage>
                     }
                   />
                   <Route
