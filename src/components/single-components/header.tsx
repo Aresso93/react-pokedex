@@ -72,10 +72,14 @@ export default function PokedexHeader(props: HeaderProps) {
             sx={{ flexGrow: 0, display: { xs: "none", sm: "block" } }}
           >
             <div className="page-div">
-              <Button variant="contained" color="secondary">
+              <Button 
+              variant="contained" 
+              color="secondary"
+              onClick={pokemonApi.actions.getPreviousPage}
+              >
                 Back
               </Button>
-              Page {pokemonApi.states.currentPage.toString()}
+              Page {(pokemonApi.states.currentPage).toString()}
               <Button
                 variant="contained"
                 color="secondary"

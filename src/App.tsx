@@ -62,9 +62,12 @@ function App() {
     pokemonApi.actions.getTypeData();
   }, []);
 
-  //useEffect(() => {
-  //  pokemonApi.actions.getNextPage();
-  //}, []);
+  useEffect(() => {
+    pokemonApi.actions.getNextPage();
+  }, []);
+
+  console.log(pokemonApi.states.currentPage);
+  
 
   return (
     <>
@@ -116,9 +119,9 @@ function App() {
                   <Route
                     path="home"
                     element={
-                      <HomePage>
-                        <PokemonList detail={pokemonApi.states.pokemonDetail} />
-                      </HomePage>
+                        //IDEA BUONA MA DA IMPLEMENTARE MEGLIO
+                        <PokemonList detail={pokemonApi.states.currentPage !== 1? pokemonApi.states.pokemonDetail : pokemonApi.states.nextPageDetail} />
+                    
                     }
                   />
                   <Route
