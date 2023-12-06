@@ -65,9 +65,9 @@ function App() {
    pokemonApi.actions.getNextPage();
  }, []);
 
-//useEffect(() => {
-// pokemonApi.actions.getPokemonByPage(pokemonApi.states.currentPage);
-//}, []);
+ useEffect(() => {
+  pokemonApi.actions.getPokemonByPage(pokemonApi.states.currentPage);
+ }, [pokemonApi.states.currentPage]);
   
   console.log('Pagina corrente', pokemonApi.states.currentPage);
 
@@ -91,7 +91,7 @@ function App() {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={pokemonApi.actions.getPreviousPage}
+                onClick={pokemonApi.actions.goToPreviousPage}
                 >
                 Back
                 </Button>
@@ -102,7 +102,7 @@ function App() {
                 variant="contained"
                 color="primary"
                 onClick={
-                  pokemonApi.actions.getNextPage
+                  pokemonApi.actions.goToNextPage
                 }
                 >
                 Next
@@ -127,10 +127,10 @@ function App() {
                   <Route
                     path="home"
                     element={
-                        pokemonApi.states.currentPage === 1 ?
-                        <PokemonList detail={pokemonApi.states.pokemonDetail}/>
-                        :
-                        <PokemonList detail={pokemonApi.states.nextPageDetail}/>
+                        //pokemonApi.states.currentPage === 1 ?
+                        //<PokemonList detail={pokemonApi.states.pokemonDetail}/>
+                        //:
+                        <PokemonList detail={pokemonApi.states.pokemonByPage}/>
                     
                     }
                   />

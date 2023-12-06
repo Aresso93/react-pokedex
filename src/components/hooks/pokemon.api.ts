@@ -70,6 +70,14 @@ export function usePokemonApi() {
     return allMonArray;
   }
 
+  function goToNextPage(){
+    setCurrentPage(currentPage+1)
+  }
+
+  function goToPreviousPage(){
+    setCurrentPage(currentPage-1)
+  }
+
   async function getPokemonData() {
     const response = await axiosService("pokemon/?offset=0&limit=40");
     const pokemonArray = response.data.results;
@@ -78,12 +86,12 @@ export function usePokemonApi() {
   }
 
   async function getPokemonByPage(pokemonPage: number){
-    //pokemonPage = currentPage
+    pokemonPage = currentPage
     offset = pokemonPage * 40;
     const resp = await axiosService("pokemon/?offset=" + offset + "&limit=40");
     setPokemonByPage(resp.data.results)
     console.log('GGGGGGG', resp.data.results);
-    setCurrentPage(currentPage)
+    //setCurrentPage(currentPage)
     return resp.data.results
   }
 
@@ -131,7 +139,9 @@ export function usePokemonApi() {
       getSinglePokemon,
       getTypeData,
       getAllPokemon,
-      getPokemonByPage
+      getPokemonByPage,
+      goToNextPage,
+      goToPreviousPage
     },
     states: {
       currentPage,
