@@ -32,7 +32,7 @@ export const darkThemeOptions: ThemeOptions = {
   palette: {
     mode: "dark",
     primary: {
-      main: "#a54208",
+      main: "#000000",
     },
     secondary: {
       main: "#e9b4fc",
@@ -77,22 +77,28 @@ function App() {
               <PokedexHeader themeSwitch={() => setLight((prev) => !prev)} />
               
               <TypesSelect />
+              <div className="page-controls">
+
               <Button
                 variant="contained"
-                color="secondary"
+                color="primary"
                 onClick={pokemonApi.actions.getPreviousPage}
                 >
-                PREVIOUS PAGE TEST
+                Back
                 </Button>
+                <div>
+                  {pokemonApi.states.currentPage}
+                </div>
                 <Button
                 variant="contained"
-                color="secondary"
+                color="primary"
                 onClick={() => {
                   pokemonApi.actions.getNextPage()
                 }} 
                 >
-                NEXT PAGE TEST
+                Next
               </Button>
+              </div>
 
               <div className="outer-div">
                 <Routes>

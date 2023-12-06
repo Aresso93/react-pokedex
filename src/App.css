@@ -80,9 +80,12 @@ html, body{
   padding: 8px;
 }
 
-/* .css-bhp9pd-MuiPaper-root-MuiCard-root{
-  background-color: aqua;
-} */
+.page-controls{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
 
 .outer-div{
   display: flex;

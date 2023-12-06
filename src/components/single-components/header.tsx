@@ -65,7 +65,7 @@ export default function PokedexHeader(props: HeaderProps) {
               <TypesSelect />
             </div>
           </Typography>
-          <Typography
+          {/* <Typography
             variant="h6"
             noWrap
             component="div"
@@ -88,7 +88,7 @@ export default function PokedexHeader(props: HeaderProps) {
                 Next
               </Button>
             </div>
-          </Typography>
+          </Typography> */}
         </Toolbar>
       </AppBar>
     </Box>

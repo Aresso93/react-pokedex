@@ -20,7 +20,7 @@ export function usePokemonApi() {
   const [moveData, setMoveData] = useState([]);
   const [typeData, setTypeData] = useState([]);
   const [nextPageDetail, setNextPageDetail] = useState([]);
-  const [previousPage, setPreviousPage] = useState(0);
+  const [previousPageDetail, setPreviousPageDetail] = useState([]);
   const [allPokemonDetail, setAllPokemonDetail] = useState([]);
   const [pokemonByType, setPokemonByType] = useState([]);
 
@@ -94,22 +94,15 @@ export function usePokemonApi() {
     console.log(currentPage);
     
   }
-
-  async function getPokemonByType(typeName: string) {
-    const singleTypeResp = await axiosService("type/" + typeName);
-    const pokemonArray = singleTypeResp.data.pokemon;
-    console.log('pokemoni tiponi?', pokemonArray);
-    setPokemonByType(pokemonArray)
-    
-  }
-
   async function getPreviousPage() {
     console.log(currentPage);
     
     offset = (currentPage) * 40
     const resp = await axiosService("pokemon/?offset=" + offset + "&limit=40");
     console.log(resp.data.results);
-    setNextPageDetail(resp.data.results)
+    setPreviousPageDetail(resp.data.results)
+    console.log('KKKKK', previousPageDetail);
+    
 
     if(currentPage > 1){
       setCurrentPage(currentPage-1)
@@ -122,9 +115,17 @@ export function usePokemonApi() {
       const prevResp = await getOnlyData();
       console.log(prevResp);
     }
-    //setPreviousPage(currentPage);
-    //console.log("Pagina attuale", currentPage);
+    console.log("Pagina attuale", currentPage);
   }
+
+  async function getPokemonByType(typeName: string) {
+    const singleTypeResp = await axiosService("type/" + typeName);
+    const pokemonArray = singleTypeResp.data.pokemon;
+    console.log('pokemoni tiponi?', pokemonArray);
+    setPokemonByType(pokemonArray)
+    
+  }
+
 
   return {
     actions: {
@@ -144,7 +145,7 @@ export function usePokemonApi() {
       genericData,
       moveData,
       nextPageDetail,
-      previousPage,
+      previousPageDetail,
       singlePokemon,
       typeData,
       allPokemonDetail,
