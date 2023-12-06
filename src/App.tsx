@@ -47,10 +47,14 @@ let darkTheme = createTheme(darkThemeOptions);
 
 function App() {
   const [light, setLight] = useState(true);
-  //const navigate = useNavigate()
+  
   const pokemonApi = usePokemonApi();
   //const pokemonContext = usePokemonContext();
   
+  useEffect(() => {
+    pokemonApi.actions.getPreviousPage()
+  }, [])
+
   useEffect(() => {
     pokemonApi.actions.getPokemonData();
   }, []);
@@ -111,14 +115,19 @@ function App() {
                         abilities={[]}
                         moves={[]}
                         types={[]}
-                        stats={[]} weight={0} height={0}                      />
+                        stats={[]} 
+                        weight={0} 
+                        height={0}/>
                     }
                   />
                   <Route
                     path="home"
                     element={
                         //IDEA BUONA MA DA IMPLEMENTARE MEGLIO
-                        <PokemonList detail={pokemonApi.states.currentPage === 1 ? pokemonApi.states.pokemonDetail : pokemonApi.states.nextPageDetail}/>
+                        pokemonApi.states.currentPage === 1 ?
+                        <PokemonList detail={pokemonApi.states.pokemonDetail}/>
+                        :
+                        <PokemonList detail={pokemonApi.states.nextPageDetail}/>
                     }
                   />
                   <Route
