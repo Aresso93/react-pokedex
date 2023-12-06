@@ -23,6 +23,7 @@ export function usePokemonApi() {
   const [previousPageDetail, setPreviousPageDetail] = useState([]);
   const [allPokemonDetail, setAllPokemonDetail] = useState([]);
   const [pokemonByType, setPokemonByType] = useState([]);
+  const [pokemonByPage, setPokemonByPage] = useState([])
 
   async function getSinglePokemon(pokemonName: string) {
     const pokemonResp = await axiosService("pokemon/" + pokemonName);
@@ -39,10 +40,10 @@ export function usePokemonApi() {
     setGenericData(response.data.count);
   }
 
-  async function getOnlyData() {
-    const resp = await axiosService("pokemon/?offset=0&limit=40");
-    return resp.data.results;
-  }
+  // async function getOnlyData() {
+  //   const resp = await axiosService("pokemon/?offset=0&limit=40");
+  //   return resp.data.results;
+  // }
 
   async function getTypeData() {
     const typesResp = await axiosService("type/");
@@ -74,6 +75,14 @@ export function usePokemonApi() {
     const pokemonArray = response.data.results;
     setPokemonDetail(pokemonArray);
     return pokemonArray;
+  }
+
+  async function getPokemonByPage(pokemonPage: number){
+    pokemonPage = currentPage
+    offset = pokemonPage * 40;
+    const resp = await axiosService("pokemon/?offset=" + offset + "&limit=40");
+    setPokemonByPage(resp.data.results)
+    return resp.data.results
   }
 
   let offset = 0;
@@ -120,6 +129,7 @@ export function usePokemonApi() {
       getSinglePokemon,
       getTypeData,
       getAllPokemon,
+      getPokemonByPage
     },
     states: {
       currentPage,
@@ -132,6 +142,7 @@ export function usePokemonApi() {
       typeData,
       allPokemonDetail,
       pokemonByType,
+      pokemonByPage
     },
   };
 }

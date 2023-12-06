@@ -47,8 +47,8 @@ let darkTheme = createTheme(darkThemeOptions);
 
 function App() {
   const [light, setLight] = useState(true);
-  
   const pokemonApi = usePokemonApi();
+  const currentPage = pokemonApi.states.currentPage
   //const pokemonContext = usePokemonContext();
   
   useEffect(() => {
@@ -62,9 +62,12 @@ function App() {
  useEffect(() => {
    pokemonApi.actions.getNextPage();
  }, []);
+
+//useEffect(() => {
+// pokemonApi.actions.getPokemonByPage(pokemonApi.states.currentPage);
+//}, []);
   
   console.log('Pagina corrente', pokemonApi.states.currentPage);
-  
 
   return (
     <>
@@ -96,14 +99,13 @@ function App() {
                 <Button
                 variant="contained"
                 color="primary"
-                onClick={() => {
-                  pokemonApi.actions.getNextPage()
-                }} 
+                onClick={
+                  pokemonApi.actions.getNextPage
+                }
                 >
                 Next
               </Button>
               </div>
-
               <div className="outer-div">
                 <Routes>
                   <Route
@@ -123,19 +125,19 @@ function App() {
                   <Route
                     path="home"
                     element={
-                        //IDEA BUONA MA DA IMPLEMENTARE MEGLIO
                         pokemonApi.states.currentPage === 1 ?
                         <PokemonList detail={pokemonApi.states.pokemonDetail}/>
                         :
                         <PokemonList detail={pokemonApi.states.nextPageDetail}/>
+                    
                     }
                   />
-                  <Route
-                    path="page/:pageNumber"
+                  {/* <Route
+                    path="page/:currentPage"
                     element={
-                      <PokemonList detail={pokemonApi.states.nextPageDetail} />
+                      <PokemonList detail={pokemonApi.states.pokemonDetail} />
                     }
-                  />
+                  /> */}
                   <Route path="*" element={<Navigate to="/home" />} />
                 </Routes>
               </div>

@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { capitaliseFirstLetter } from "../pages/pokemon-card";
 import { useAxios } from "../../services/axios-api";
 import { Pokemon } from "../../model/pokemon";
-import { PokemonList } from "../pages/pokemon-list";
 import { PokemonSimpleCard } from "../pages/pokemon-simple-card";
 
 const ITEM_HEIGHT = 48;
@@ -116,7 +115,10 @@ export default function TypesSelect() {
 
       <div className="outer-div">
         {filteredMon.map((pokemon) => (
+          <div key={pokemon.name}>
+
           <PokemonSimpleCard name={pokemon.name}></PokemonSimpleCard>
+          </div>
         ))}
       </div>
     </>
