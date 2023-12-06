@@ -82,7 +82,9 @@ export function usePokemonApi() {
   
 
   async function getNextPage(){
+    
     setCurrentPage(1)
+    console.log(currentPage);
     offset = (currentPage) * 40
     const resp = await axiosService("pokemon/?offset=" + offset + "&limit=40");
     console.log(resp.data.results);

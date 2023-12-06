@@ -11,10 +11,7 @@ import {
   PokemonContextProvider,
   usePokemonContext,
 } from "./contexts/PokemonContext";
-import { useAxios } from "./services/axios-api";
 import TypesSelect from "./components/single-components/types-select";
-import { HomePage } from "./components/home";
-import BackToTopButton from "./components/single-components/button";
 
 export const lightThemeOptions: ThemeOptions = {
   palette: {
@@ -58,15 +55,11 @@ function App() {
     pokemonApi.actions.getPokemonData();
   }, []);
 
-  useEffect(() => {
-    pokemonApi.actions.getTypeData();
-  }, []);
-
-  useEffect(() => {
-    pokemonApi.actions.getNextPage();
-  }, []);
-
-  console.log(pokemonApi.states.currentPage);
+ useEffect(() => {
+   pokemonApi.actions.getNextPage();
+ }, []);
+  
+  console.log('Pagina corrente', pokemonApi.states.currentPage);
   
 
   return (
@@ -96,7 +89,6 @@ function App() {
                 color="secondary"
                 onClick={() => {
                   pokemonApi.actions.getNextPage()
-                  //navigate(`/page/${pokemonApi.states.currentPage}`)
                 }} 
                 >
                 NEXT PAGE TEST
@@ -120,8 +112,7 @@ function App() {
                     path="home"
                     element={
                         //IDEA BUONA MA DA IMPLEMENTARE MEGLIO
-                        <PokemonList detail={pokemonApi.states.currentPage !== 1? pokemonApi.states.pokemonDetail : pokemonApi.states.nextPageDetail} />
-                    
+                        <PokemonList detail={pokemonApi.states.nextPageDetail}/>
                     }
                   />
                   <Route
