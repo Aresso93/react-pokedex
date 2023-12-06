@@ -112,7 +112,7 @@ function App() {
                     path="home"
                     element={
                         //IDEA BUONA MA DA IMPLEMENTARE MEGLIO
-                        <PokemonList detail={pokemonApi.states.nextPageDetail}/>
+                        <PokemonList detail={pokemonApi.states.currentPage === 1 ? pokemonApi.states.pokemonDetail : pokemonApi.states.nextPageDetail}/>
                     }
                   />
                   <Route

@@ -15,7 +15,7 @@ export function usePokemonApi() {
     stats: [],
   });
 
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(0)
   const [genericData, setGenericData] = useState(0);
   const [moveData, setMoveData] = useState([]);
   const [typeData, setTypeData] = useState([]);
@@ -83,7 +83,7 @@ export function usePokemonApi() {
 
   async function getNextPage(){
     
-    setCurrentPage(1)
+    //setCurrentPage(1)
     console.log(currentPage);
     offset = (currentPage) * 40
     const resp = await axiosService("pokemon/?offset=" + offset + "&limit=40");
