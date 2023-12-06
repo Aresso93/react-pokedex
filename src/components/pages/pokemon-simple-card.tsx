@@ -39,7 +39,7 @@ export function PokemonSimpleCard(props: PokemonSimpleCard){
         <Card className="mon-card">
           <div className="mon-name">
 
-          <CardHeader title={capitaliseFirstLetter(props.name)}/>
+          <CardHeader title={capitaliseFirstLetter(props.name)+` (ID ${singlePokemon.id})`}/>
           </div>
           <CardMedia
             component="img"

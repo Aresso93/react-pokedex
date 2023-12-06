@@ -134,12 +134,12 @@ function App() {
                     
                     }
                   />
-                  {/* <Route
+                  <Route
                     path="page/:currentPage"
                     element={
-                      <PokemonList detail={pokemonApi.states.pokemonDetail} />
+                      <PokemonList detail={pokemonApi.states.pokemonByPage} />
                     }
-                  /> */}
+                  /> 
                   <Route path="*" element={<Navigate to="/home" />} />
                 </Routes>
               </div>

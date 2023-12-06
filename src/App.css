@@ -78,6 +78,7 @@ html, body{
 .mon-card{
   margin: 16px;
   padding: 8px;
+  border: 1px solid black;
 }
 
 .page-controls{
