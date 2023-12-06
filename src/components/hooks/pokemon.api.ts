@@ -15,7 +15,7 @@ export function usePokemonApi() {
     stats: [],
   });
 
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(-1);
   const [genericData, setGenericData] = useState(0);
   const [moveData, setMoveData] = useState([]);
   const [typeData, setTypeData] = useState([]);
@@ -75,6 +75,7 @@ export function usePokemonApi() {
   }
 
   function goToPreviousPage(){
+    if(currentPage > 0)
     setCurrentPage(currentPage-1)
   }
 

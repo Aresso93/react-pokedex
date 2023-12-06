@@ -96,7 +96,7 @@ function App() {
                 Back
                 </Button>
                 <div>
-                  {pokemonApi.states.currentPage}
+                  {pokemonApi.states.currentPage+1}
                 </div>
                 <Button
                 variant="contained"
