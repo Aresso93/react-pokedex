@@ -24,6 +24,7 @@ export const lightThemeOptions: ThemeOptions = {
     },
     background: {
       default: "#ececec",
+      paper: "#F28345"
     },
   },
 };
@@ -39,6 +40,7 @@ export const darkThemeOptions: ThemeOptions = {
     },
     background: {
       default: "#2b2929",
+      paper: "#7130ca"
     },
   },
 };
