@@ -2,13 +2,8 @@ import { PropsWithChildren, createContext, useContext } from "react";
 import { usePokemonApi } from "../components/hooks/pokemon.api";
 
 export const PokemonContext = createContext({
-    actions:{
-        getSinglePokemon: (pokemonID: number) => {},
-        getData: () => 0,
-    },
     states: {
-        currentPage: 1,
-        genericData: 0
+        
     }
 })
 
