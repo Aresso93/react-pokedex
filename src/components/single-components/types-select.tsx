@@ -11,6 +11,7 @@ import { capitaliseFirstLetter } from "../pages/pokemon-card";
 import { useAxios } from "../../services/axios-api";
 import { Pokemon } from "../../model/pokemon";
 import { PokemonSimpleCard } from "../pages/pokemon-simple-card";
+import { usePokemonContext } from "../../contexts/PokemonContext";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -28,6 +29,7 @@ export default function TypesSelect() {
   const [filteredMon, setFilteredMon] = useState<Pokemon[]>([]);
   const pokemonApi = usePokemonApi();
   const axiosService = useAxios();
+  const pokemonContext = usePokemonContext()
   const [open, setOpen] = useState(false);
 
   const multipleCall = async (typeArray: string[]) => {
@@ -49,10 +51,11 @@ export default function TypesSelect() {
       setFilteredMon([])
     }
   };
-
+  
   const handleClose = () => {
     setOpen(false);
     multipleCall(pokemonType);
+  
   };
 
   const handleOpen = () => {
@@ -68,7 +71,6 @@ export default function TypesSelect() {
       target: { value },
     } = event;
     setPokemonType(typeof value === "string" ? value.split(",") : value);
-
   };
 
   console.log(pokemonType);

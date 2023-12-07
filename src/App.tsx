@@ -8,7 +8,7 @@ import { usePokemonApi } from "./components/hooks/pokemon.api";
 import { Routes, Route, Navigate, BrowserRouter, useNavigate } from "react-router-dom";
 import { PokemonCard } from "./components/pages/pokemon-card";
 import {
-  PokemonContextProvider,
+  PokemonContextProvider, usePokemonContext,
 } from "./contexts/PokemonContext";
 import TypesSelect from "./components/single-components/types-select";
 
@@ -49,6 +49,7 @@ let darkTheme = createTheme(darkThemeOptions);
 function App() {
   const [light, setLight] = useState(true);
   const pokemonApi = usePokemonApi();
+  const pokemonContext = usePokemonContext()
   const currentPage = pokemonApi.states.currentPage
   //const pokemonContext = usePokemonContext();
   
@@ -69,6 +70,8 @@ function App() {
  }, [pokemonApi.states.currentPage]);
   
   console.log('Pagina corrente', currentPage);
+  console.log(pokemonContext);
+  
 
   return (
     <>
@@ -84,8 +87,7 @@ function App() {
             <ThemeProvider theme={light ? lightTheme : darkTheme}>
               <PokedexHeader themeSwitch={() => setLight((prev) => !prev)} />
               
-              <TypesSelect
-              />
+              <TypesSelect/>
               <div className="page-controls">
 
               <Button
@@ -127,11 +129,7 @@ function App() {
                   <Route
                     path="home"
                     element={
-                        //pokemonApi.states.currentPage === 1 ?
-                        //<PokemonList detail={pokemonApi.states.pokemonDetail}/>
-                        //:
-                        <PokemonList detail={pokemonApi.states.pokemonByPage}/>
-                    
+                        <PokemonList detail={pokemonContext ? [] : pokemonApi.states.pokemonByPage}/>
                     }
                   />
                   <Route

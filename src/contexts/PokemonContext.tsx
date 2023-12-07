@@ -1,16 +1,14 @@
-import { PropsWithChildren, createContext, useContext } from "react";
-import { usePokemonApi } from "../components/hooks/pokemon.api";
+import { PropsWithChildren, createContext, useContext, useState } from "react";
 
 export const PokemonContext = createContext({
-    states: {
-        
-    }
+  
 })
 
 export const PokemonContextProvider = ({children}: PropsWithChildren) => {
-    const pokemonApi = usePokemonApi()
+    const [isSelectActive, setIsSelectActive] = useState(true||false)
+
     return (
-        <PokemonContext.Provider value={pokemonApi}>
+        <PokemonContext.Provider value={{isSelectActive, setIsSelectActive}}>
             {children}
         </PokemonContext.Provider>
     )
