@@ -126,3 +126,9 @@ html, body{
 /* .css-bhp9pd-MuiPaper-root-MuiCard-root{
   background-color: #d95838;
 } */
+
+.link-div{
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}

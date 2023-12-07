@@ -60,8 +60,10 @@ export default function PokedexHeader(props: HeaderProps) {
             component="div"
             sx={{ flexGrow: 0, display: { xs: "none", sm: "block" } }}
           >
-            <div className="outer-div">
-              <TypesSelect />
+            <div className="link-div">
+              <a href="https://www.pokemon.com/uk" target="blank" >Visit the official website </a>
+              
+              <img src="./public/pokeball.png" alt="pokemon" width={24} height={24}/>
             </div>
           </Typography>
         </Toolbar>
