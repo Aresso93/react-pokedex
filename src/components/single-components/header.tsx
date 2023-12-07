@@ -6,14 +6,13 @@ import Typography from "@mui/material/Typography";
 import HomeIcon from "@mui/icons-material/Home";
 import { usePokemonApi } from "../hooks/pokemon.api";
 import { useEffect } from "react";
-import { Button } from "@mui/material";
 import { usePokemonContext } from "../../contexts/PokemonContext";
 import { useNavigate } from "react-router-dom";
 import TypesSelect from "./types-select";
 import ThemeSwitch from "./theme-switch";
 
 interface HeaderProps {
-  themeSwitch;
+  themeSwitch: VoidFunction
 }
 
 export default function PokedexHeader(props: HeaderProps) {
@@ -65,30 +64,6 @@ export default function PokedexHeader(props: HeaderProps) {
               <TypesSelect />
             </div>
           </Typography>
-          {/* <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 0, display: { xs: "none", sm: "block" } }}
-          >
-            <div className="page-div">
-              <Button 
-              variant="contained" 
-              color="secondary"
-              onClick={pokemonApi.actions.getPreviousPage}
-              >
-                Back
-              </Button>
-              Page {(pokemonApi.states.currentPage).toString()}
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={pokemonApi.actions.getNextPage}
-              >
-                Next
-              </Button>
-            </div>
-          </Typography> */}
         </Toolbar>
       </AppBar>
     </Box>

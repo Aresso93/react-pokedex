@@ -15,7 +15,7 @@ export function usePokemonApi() {
     stats: [],
   });
 
-  const [currentPage, setCurrentPage] = useState(-1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [genericData, setGenericData] = useState(0);
   const [moveData, setMoveData] = useState([]);
   const [typeData, setTypeData] = useState([]);
@@ -39,11 +39,6 @@ export function usePokemonApi() {
     const response = await axiosService("pokemon");
     setGenericData(response.data.count);
   }
-
-  // async function getOnlyData() {
-  //   const resp = await axiosService("pokemon/?offset=0&limit=40");
-  //   return resp.data.results;
-  // }
 
   async function getTypeData() {
     const typesResp = await axiosService("type/");
@@ -92,7 +87,7 @@ export function usePokemonApi() {
     const resp = await axiosService("pokemon/?offset=" + offset + "&limit=40");
     setPokemonByPage(resp.data.results)
     console.log('GGGGGGG', resp.data.results);
-    //setCurrentPage(currentPage)
+    setCurrentPage(currentPage)
     return resp.data.results
   }
 
@@ -108,7 +103,6 @@ export function usePokemonApi() {
 
   async function getPreviousPage() {
     offset = currentPage * 40;
-    
     const resp = await axiosService("pokemon/?offset=" + offset + "&limit=40");
     setPreviousPageDetail(resp.data.results);
     console.log("KKKKK", previousPageDetail);

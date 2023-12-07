@@ -23,7 +23,6 @@ const MenuProps = {
   },
 };
 
-
 export default function TypesSelect() {
   const [pokemonType, setPokemonType] = useState<string[]>([]);
   const [filteredMon, setFilteredMon] = useState<Pokemon[]>([]);
@@ -64,14 +63,6 @@ export default function TypesSelect() {
     pokemonApi.actions.getTypeData();
   }, []);
 
-  //useEffect(() => {
-  //  pokemonApi.actions.getAllPokemon()
-  //},[])
-
-  useEffect(() => {
-    multipleCall
-  }, []);
-
   const handleChange = (event: SelectChangeEvent<typeof pokemonType>) => {
     const {
       target: { value },
@@ -79,10 +70,6 @@ export default function TypesSelect() {
     setPokemonType(typeof value === "string" ? value.split(",") : value);
 
   };
-
-  useEffect(() => {
-    multipleCall(pokemonType);
-  }, []);
 
   console.log(pokemonType);
 

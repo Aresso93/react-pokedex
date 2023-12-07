@@ -9,7 +9,6 @@ import { Routes, Route, Navigate, BrowserRouter, useNavigate } from "react-route
 import { PokemonCard } from "./components/pages/pokemon-card";
 import {
   PokemonContextProvider,
-  usePokemonContext,
 } from "./contexts/PokemonContext";
 import TypesSelect from "./components/single-components/types-select";
 
@@ -66,10 +65,10 @@ function App() {
  }, []);
 
  useEffect(() => {
-  pokemonApi.actions.getPokemonByPage(pokemonApi.states.currentPage);
+  pokemonApi.actions.getPokemonByPage(currentPage);
  }, [pokemonApi.states.currentPage]);
   
-  console.log('Pagina corrente', pokemonApi.states.currentPage);
+  console.log('Pagina corrente', currentPage);
 
   return (
     <>
@@ -85,7 +84,8 @@ function App() {
             <ThemeProvider theme={light ? lightTheme : darkTheme}>
               <PokedexHeader themeSwitch={() => setLight((prev) => !prev)} />
               
-              <TypesSelect />
+              <TypesSelect
+              />
               <div className="page-controls">
 
               <Button
@@ -96,7 +96,7 @@ function App() {
                 Back
                 </Button>
                 <div>
-                  {pokemonApi.states.currentPage+1}
+                  {currentPage+1}
                 </div>
                 <Button
                 variant="contained"
