@@ -19,7 +19,7 @@ import {
 } from "./contexts/PokemonContext";
 import TypesSelect from "./components/single-components/types-select";
 
-export const lightThemeOptions: ThemeOptions = {
+const lightThemeOptions: ThemeOptions = {
   palette: {
     mode: "light",
     primary: {
@@ -35,7 +35,7 @@ export const lightThemeOptions: ThemeOptions = {
   },
 };
 
-export const darkThemeOptions: ThemeOptions = {
+const darkThemeOptions: ThemeOptions = {
   palette: {
     mode: "dark",
     primary: {
